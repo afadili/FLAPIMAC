@@ -17,7 +17,7 @@ OBJ_FILES = $(patsubst $(SRC_PATH)/%.c,$(OBJ_PATH)/%.o, $(SRC_FILES))
 all: $(APP_BIN)
 	@echo "--------------------------------------------------------------"
 	@echo "                      Flapimac Project"
-	@echo "                Marti Emilie & Sajdak Laurine"
+	@echo "                FADILI Amina & Sajdak Laurine"
 	@echo ""
 	@echo "                 to execute type: ./bin/$(BIN) &"
 	@echo ""

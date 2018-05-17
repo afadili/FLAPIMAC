@@ -4,12 +4,12 @@
 #include "entite.h"
 
 /* structure game comprenant le joueur, les obstacles, les ennemis, les missiles */
-typedef struct Entite *listEntite;
+
 typedef struct game
 {
   listEntite player, listObsctacle, listEnnemi, listMissiles;
 }Game;
-
+//typedef struct Entite *listEntite;
 /* fonctions de gestion du game */
 
 // fonction qui initialise les listes du game
