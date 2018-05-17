@@ -24,13 +24,6 @@
    }
  // à debuger et à tester et rajouter x et y dans une autre fonction qui s'en occupe plus tard
 
-
- void deleteEntite(Entite entite)
- {
-   /* code */
-
- }
-
 void addObstacleToList(Entite* entite, Obstacle *liste)
 {
   Obstacle tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
