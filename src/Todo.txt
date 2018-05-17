@@ -1,0 +1,6 @@
+* Gestion des collisions
+* Gestion de la PPM
+* Gestion du texturing
+* Les fonctions de Game.h
+* les Fonctions des actions et déplacements du player
+* Les fonctions d'affichage OpenGL
