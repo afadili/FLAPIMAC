@@ -4,7 +4,7 @@
  // TODO : les fonctions de texturing et de chargement du PPM
  // fonction qui dessine un carré
 
- void drawSquare(int full) {
+ void drawSquare(int full, float x, float y) {
      GLenum primitive;
      if (full == 1)
      {
@@ -14,12 +14,15 @@
      {
        primitive = GL_LINE_LOOP;
      }
-     glBegin(primitive);
-         glVertex2f(-0.1, -0.1);
-         glVertex2f(-0.1,  0.1);
-         glVertex2f( 0.1,  0.1);
-         glVertex2f( 0.1, -0.1);
-     glEnd();
+      glPushMatrix();
+        glTranslatef(x,y, 0);
+            glBegin(primitive);
+                glVertex2f(-0.5, -0.5);
+                glVertex2f(-0.5,  0.5);
+                glVertex2f( 0.5,  0.5);
+                glVertex2f( 0.5, -0.5);
+            glEnd();
+    glPopMatrix();
  }
 
  void resizeViewport()
@@ -27,7 +30,7 @@
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(-1., 1., -1.,1.);
+	gluOrtho2D(-10., 10., -10.,10.);
 	SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL, SDL_OPENGL | SDL_RESIZABLE);
 }
 
@@ -40,23 +43,23 @@ void drawEntite(listEntite entite)
    while (entite != NULL)
     {
        switch (entite->type){
-           case 0:
-               b = 255;
-               r = 255;
-               g = 255;
-               break;
            case 1:
+               b = 255;
+               r = 0;
+               g = 0;
                break;
            case 2:
-               r = 255;
+               b = 0;
+               r = 0;
+               g = 255;
                break;
            case 3:
-               g = 255;
+               r = 255;
+               b = 0;
+               r = 0;
                break;
            case 4:
                b = 255;
-               break;
-           case 5:
                r = 255;
                g = 255;
                break;
@@ -64,12 +67,16 @@ void drawEntite(listEntite entite)
                break;
        }
        glColor3ub(r, g, b);
-       glPushMatrix();
-           glTranslatef(0.5 + entite->x, 0.5 + entite->y, 0);
-           if (entite->type == 0)
+      /* glPushMatrix();
+       printf("entite %f \n",entite->y);
+           glTranslatef(1 + entite->x, 1 + entite->y, 0);
+          /* if (entite->type == 0)
+           {
                glRotatef(entite->vitesseY* 60, 0, 0, 1);
-           drawSquare(1);
-       glPopMatrix();
+               printf("drawsquare !!!!!!! \n");
+          }*/
+           drawSquare(1,entite->x,entite->y);
+       //glPopMatrix();
        entite = entite->nextEntite;
    }
 }

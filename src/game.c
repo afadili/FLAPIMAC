@@ -66,6 +66,8 @@ int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missi
 				    {
 				    	if (r == 0 && g == 0 && b == 255) /* si c'est bleu crée un joueur */
 				    	{
+                allocEntite(3,1,0,400,0,0);
+              }
 
 				    	if (r == 255 && g == 0 && b == 0) /* si c'est rouge crée un obstacle */
 				    	{
@@ -84,7 +86,6 @@ int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missi
       fclose(inputFile);
     }
 	}
-}
 
   else
     {

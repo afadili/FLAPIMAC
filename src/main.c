@@ -11,6 +11,19 @@
 
  int main ()
  {
+   /* Initialisation des entités */
+   Game game;
+   initializeGame(&game);
+   game.player = allocEntite(3,1,0,0,0,0); // je crée un player et je le mets dans le Game
+   game.listObsctacle = allocEntite(10,3,40,0,0,0); // je crée un obstacle et je le mets dans le GAME
+   game.listEnnemi = allocEntite(2,2,100,400,0,0); // ennemi
+   game.listMissiles = allocEntite(10,4,120,400,0,0);// missiles
+   /* test de chargement de la ppm */
+   ReadPPM("map.ppm", &game.listObsctacle, &game.listEnnemi, &game.listMissiles);
+   printf("entite de type : %d\n",game.listObsctacle->type);
+   printf("entite de type : %d\n",game.listEnnemi->type);
+   printf("entite de type : %d\n",game.listMissiles->type);
+   printf("entite de type : %d\n",game.player->type);
    /* Initialisation de la SDL */
 	if (-1 == SDL_Init(SDL_INIT_VIDEO))
     {
@@ -28,27 +41,36 @@
 	SDL_WM_SetCaption("Flapimac", NULL);
 	resizeViewport();
 
-	glClearColor(0.5, 0.5, 0.5, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0., 0., 0., 0);
   /* Initialisation des entités du jeu */
 
   /* code */
 
   /* Boucle d'affichage */
   	int loop = 1;
+    float i = 0;
 	while(loop) {
 
 		/* Récupération du temps au début de la boucle */
 		Uint32 startTime = SDL_GetTicks();
 
-		/* Code de dessin */
-
 		glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
+    /* Code de dessin */
+    glTranslatef(-i,0,0);
+    drawEntite(game.player); // bleu
+    drawEntite(game.listObsctacle); // rouge
+    drawEntite(game.listEnnemi); // vert
+    drawEntite(game.listMissiles); //noir
 
-		drawSquare(1); // Dessin d'un carré pour tester
+    //glClear(GL_COLOR_BUFFER_BIT);
+    //glPushMatrix();
+		//drawSquare(1,0,0); // Dessin d'un carré pour tester
+    //glPopMatrix();
 
 		/* Déplacement du joueur */
     /* Boucle traitant les evenements */
+    i+=0.001;
+
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
 
@@ -72,11 +94,14 @@
             break;
 
           case SDLK_UP:
-            /* le player bouge en haut  */
+            /* le player bouge en haut */
+            game.player->y+=0.1;
+            printf("posY : %f\n",  game.player->y );
             break;
-
           case SDLK_DOWN:
             /* le player bouge en bas  */
+            game.player->y-=0.1;
+            printf("posY : %f\n",  game.player->y );
             break;
 
           case SDLK_SPACE:
