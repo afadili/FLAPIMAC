@@ -43,25 +43,25 @@ void drawEntite(listEntite entite)
    while (entite != NULL)
     {
        switch (entite->type){
-           case 1:
-               b = 255;
+           case 'H': // hero
                r = 0;
                g = 0;
-               break;
-           case 2:
-               b = 0;
-               r = 0;
-               g = 255;
-               break;
-           case 3:
-               r = 255;
-               b = 0;
-               r = 0;
-               break;
-           case 4:
                b = 255;
-               r = 255;
+               break;
+           case 'E': //ennemi
+               r = 0;
                g = 255;
+               b = 0;
+               break;
+           case 'O': // obstacle
+               r = 255;
+               g = 0;
+               b = 0;
+               break;
+           case 'P': //projectile
+               r = 0;
+               g = 0;
+               b = 0;
                break;
            default:
                break;

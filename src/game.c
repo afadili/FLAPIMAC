@@ -7,18 +7,18 @@
 void initializeGame(Game *game)
 {
   game->player = NULL;
-  game->listObsctacle = NULL;
+  game->listObstacle = NULL;
   game->listEnnemi = NULL;
-  game->listMissiles = NULL;
+  game->listProjectiles = NULL;
 }
 
 // fonction qui libère le Game
 void freeGame(Game *game)
 {
   free((*game).player);
-  freeObstacleList(&(*game).listObsctacle);
+  freeObstacleList(&(*game).listObstacle);
   freeEnnemiList(&(*game).listEnnemi);
-  freeMissilesList(&(*game).listMissiles);
+  freeProjectilesList(&(*game).listProjectiles);
 }
 
 // fonction qui ajoute une entité au Game
@@ -34,7 +34,7 @@ void removeEntiteFromGame(Game *game, Entite *entite)
 }
 
 // fonction de chargement du level avec la PPM
-int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missiles)
+int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Projectiles* Projectile)
 {
   printf("Lecture du fichier PPM ! \n");
   FILE *inputFile = NULL;
@@ -64,22 +64,22 @@ int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missi
 				    if (fscanf(inputFile,"%d", &b) == EOF) return 0;
 				    if (r != 255 || g!= 255 || b!= 255)
 				    {
-				    	if (r == 0 && g == 0 && b == 255) /* si c'est bleu crée un joueur */
+				    	if (r == 0 && g == 0 && b == 255) /* si c'est bleu on crée un joueur */
 				    	{
-                allocEntite(3,1,0,400,0,0);
+                allocEntite(3,'H',0,400,0,0);
               }
 
-				    	if (r == 255 && g == 0 && b == 0) /* si c'est rouge crée un obstacle */
+				    	if (r == 255 && g == 0 && b == 0) /* si c'est rouge on crée un obstacle */
 				    	{
-				    	       addObstacleToList(allocEntite(1,3,10,10,0,0), Obstacle);
+				    	       addObstacleToList(allocEntite(1,'O',10,10,0,0), Obstacle);
 				    	}
-				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert crée un ennemi*/
+				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert on crée un ennemi*/
 				    	{
-				    	        addEnnemiToList(allocEntite(3,2,10,10,0,0), Ennemi);
+				    	        addEnnemiToList(allocEntite(3,'E',10,10,0,0), Ennemi);
 				    	}
-              if (r == 0 && g == 0 && b == 0) /* si c'est noir crée un missile */
+              if (r == 0 && g == 0 && b == 0) /* si c'est noir on crée un projectile */
               {
-                    addMissilesToList(allocEntite(1,4,20,20,0,0), Missiles);
+                    addProjectilesToList(allocEntite(1,'P',20,20,0,0), Projectile);
               }
         }
       }

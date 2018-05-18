@@ -9,7 +9,7 @@
 
 typedef struct game
 {
-  listEntite player, listObsctacle, listEnnemi, listMissiles;
+  listEntite player, listObstacle, listEnnemi, listProjectiles;
 }Game;
 
 /* fonctions de gestion du game */
@@ -27,6 +27,6 @@ void addEntiteToGame(Game *game, Entite entite);
 void removeEntiteFromGame(Game *game, Entite *entite);
 
 // fonction de chargement du level avec la PPM
-int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missiles);
+int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Projectiles* Projectiles);
 
 #endif
