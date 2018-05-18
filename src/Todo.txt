@@ -1,6 +1,6 @@
-* Gestion des collisions
-* Gestion de la PPM
-* Gestion du texturing
-* Les fonctions de Game.h
-* les Fonctions des actions et déplacements du player
-* Les fonctions d'affichage OpenGL
+* Gestion des collisions (Laurine s'en occupe)
+* Gestion de la PPM (presque fait faut tester)
+* Gestion du texturing (faut le faire mais ça prend deux minutes, j'ai déjà les fonctions)
+* Les fonctions de Game.h (fait presque terminé)
+* les Fonctions des actions et déplacements du player (Laurine s'en occupe, j'adore ce qu'elle fait)
+* Les fonctions d'affichage OpenGL (commencé mais pas encore fini)

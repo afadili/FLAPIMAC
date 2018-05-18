@@ -27,4 +27,7 @@ void resizeViewport();
 /* Fonctions qui dessinent les entites d'une liste */
 void drawEntite(listEntite entite);
 
+/* Fonction qui dessine le backgroud du jeu */
+void drawBG();
+
 #endif
