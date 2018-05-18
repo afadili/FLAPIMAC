@@ -9,8 +9,6 @@
 
 
 
-
-
  int main ()
  {
    /* Initialisation de la SDL */

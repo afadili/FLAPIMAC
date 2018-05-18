@@ -7,7 +7,7 @@
 // initialise les champs avec les valeurs x,y,type,life,bBox passées en paramètre
 // et renvoie le pointeur vers cet espace mémoire
 
- Entite* allocEntite(int life, int type, float x, float y /*, bBox box*/)
+ Entite* allocEntite(int life, int type, float x, float y, float vitesseY, float vitesseX/*, bBox box*/)
  {
    Entite* entite;
    entite = malloc(sizeof(Entite));
@@ -20,6 +20,8 @@
      entite->x = x;
      entite->y = y;
      //entite->box = NULL;
+     entite->vitesseX = vitesseX;
+     entite->vitesseY = vitesseY;
      return entite;
    }
  // à debuger et à tester et rajouter x et y dans une autre fonction qui s'en occupe plus tard

@@ -2,6 +2,8 @@
 #define GAME__H
 
 #include "entite.h"
+#include "display.h"
+#include "player.h"
 
 /* structure game comprenant le joueur, les obstacles, les ennemis, les missiles */
 
@@ -20,5 +22,11 @@ void freeGame(Game *game);
 
 // fonction qui ajoute une entité au Game
 void addEntiteToGame(Game *game, Entite entite);
+
+// fonction qui supprime une entite du game
+void removeEntiteFromGame(Game *game, Entite *entite);
+
+// fonction de chargement du level avec la PPM
+int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missiles);
 
 #endif

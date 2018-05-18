@@ -3,6 +3,10 @@
 #include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include "game.h"
+#include "entite.h"
+#include "display.h"
+#include "player.h"
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 800
 
@@ -19,5 +23,8 @@ void drawSquare(int full);
 
 /* Fonction qui sert à redimensionner la fenêtre */
 void resizeViewport();
+
+/* Fonctions qui dessinent les entites d'une liste */
+void drawEntite(listEntite entite);
 
 #endif
