@@ -44,20 +44,20 @@ int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Projectiles* Pr
       int r, g, b;
       int Nbcolors;
       char codePPM;
-      int Image_width, Image_height;
+      int img_width, img_height;
       if (fscanf(inputFile,"%c",&codePPM)== EOF) return 0; // Lecture du permier caractère du fichier PPM qui est un code P6 ou P5
       if (fscanf(inputFile,"%c",&codePPM)== EOF) return 0;
       printf("%c\n",codePPM );
-      if (fscanf(inputFile,"%d",&Image_height)== EOF) return 0; // récupération du height de l'image du fichier PPM
-      printf("HEIGHT : %d\n",Image_height );
-      if (fscanf(inputFile,"%d",&Image_width)== EOF) return 0; // récupération du width de l'image du fichier PPM
-      printf("WIDTH : %d\n",Image_width );
+      if (fscanf(inputFile,"%d",&img_height)== EOF) return 0; // récupération du height de l'image du fichier PPM
+      printf("HEIGHT : %d\n",img_height );
+      if (fscanf(inputFile,"%d",&img_width)== EOF) return 0; // récupération du width de l'image du fichier PPM
+      printf("WIDTH : %d\n",img_width );
       if (fscanf(inputFile,"%d",&Nbcolors)== EOF) return 0; // récupération du nombre de couleurs du fichier PPM
       printf("Nombre de couleurs : %d\n",Nbcolors );
       int x=0, y=0;
-      for (x=0; x<Image_width; x++)
+      for (x=0; x<img_width; x++)
       {
-        for (y=0; y<Image_height; y++)
+        for (y=0; y<img_height; y++)
         {
             if (fscanf(inputFile,"%d", &r) == EOF) return 0;// récupération des couleurs et on les mets dans les variables r, g et b
 				    if (fscanf(inputFile,"%d", &g) == EOF) return 0;
