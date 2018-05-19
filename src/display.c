@@ -58,17 +58,14 @@ void drawEntite(listEntite entite)
                g = 0;
                b = 0;
                break;
-<<<<<<< HEAD
            case 4:
                b = 255;
                r = 255;
                g = 0;
-=======
-           case 'P': //projectile
+          case 'P': //projectile
                r = 0;
                g = 0;
                b = 0;
->>>>>>> 150836d5f05326c4cc48986fb55b10bad0d39a59
                break;
            default:
                break;
