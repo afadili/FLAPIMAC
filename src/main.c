@@ -14,6 +14,7 @@
    /* Initialisation des entités */
    Game game;
    initializeGame(&game);
+<<<<<<< HEAD
    game.player = allocEntite(3,1,0,0,0,0); // je crée un player et je le mets dans le Game
    game.listObsctacle = allocEntite(10,3,-0.5,0.5,0,0); // je crée un obstacle et je le mets dans le GAME
    game.listEnnemi = allocEntite(2,2,0,0.5,0,0); // ennemi
@@ -24,6 +25,18 @@
    printf("entite de type : %d\n",game.listEnnemi->type);
    printf("entite de type : %d\n",game.listMissiles->type);
    printf("entite de type : %d\n",game.player->type);
+=======
+   game.player = allocEntite(3,'H',0,0,0,0); // je crée un player et je le mets dans le Game
+   game.listObstacle = allocEntite(10,'O',40,0,0,0); // je crée un obstacle et je le mets dans le GAME
+   game.listEnnemi = allocEntite(2,'E',100,400,0,0); // ennemi
+   game.listProjectiles = allocEntite(10,'P',120,400,0,0);// projectiles
+   /* test de chargement de la ppm */
+   ReadPPM("map.ppm", &game.listObstacle, &game.listEnnemi, &game.listProjectiles);
+   printf("entite de type : %c\n",game.player->type);
+   printf("entite de type : %c\n",game.listObstacle->type);
+   printf("entite de type : %c\n",game.listEnnemi->type);
+   printf("entite de type : %c\n",game.listProjectiles->type);
+>>>>>>> 150836d5f05326c4cc48986fb55b10bad0d39a59
    /* Initialisation de la SDL */
 	if (-1 == SDL_Init(SDL_INIT_VIDEO))
     {
@@ -61,10 +74,15 @@
     //glPushMatrix();
     //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
     drawEntite(game.player); // bleu
-    drawEntite(game.listObsctacle); // rouge
+    drawEntite(game.listObstacle); // rouge
     drawEntite(game.listEnnemi); // vert
+<<<<<<< HEAD
     drawEntite(game.listMissiles); //noir
     //glPopMatrix();
+=======
+    drawEntite(game.listProjectiles); //noir
+
+>>>>>>> 150836d5f05326c4cc48986fb55b10bad0d39a59
     //glClear(GL_COLOR_BUFFER_BIT);
     //glPushMatrix();
 		//drawSquare(1,0,0); // Dessin d'un carré pour tester

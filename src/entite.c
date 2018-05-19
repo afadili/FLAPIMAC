@@ -3,17 +3,17 @@
 /* Fichier de gestion du jeu dans la mémoire */
 
 // fonctions de gestion de l'entité
-// Fonction qui alloue la mémoire nécessaire pour une Entité,
-// initialise les champs avec les valeurs x,y,type,life,bBox passées en paramètre
-// et renvoie le pointeur vers cet espace mémoire
+// Fonction qui alloue la mémoire nécessaire d'une entité,
+// on initialise les champs avec les valeurs x,y,type,life,bBox passées en paramètre
 
- Entite* allocEntite(int life, int type, float x, float y, float vitesseY, float vitesseX/*, bBox box*/)
+
+ Entite* allocEntite(int life, char type, float x, float y, float vitesseY, float vitesseX/*, bBox box*/)
  {
    Entite* entite;
    entite = malloc(sizeof(Entite));
      if (entite == NULL)
      {
-       printf("Erreur d'allocation !\n");
+       printf("Allocation error !\n");
      }
      entite->life = life;
      entite->type = type;
@@ -22,6 +22,7 @@
      //entite->box = NULL;
      entite->vitesseX = vitesseX;
      entite->vitesseY = vitesseY;
+     entite->nextEntite=NULL;
      return entite;
    }
  // à debuger et à tester et rajouter x et y dans une autre fonction qui s'en occupe plus tard
@@ -58,9 +59,9 @@ void addEnnemiToList(Entite* entite, Ennemi *liste)
   	*liste = tmp;
 }
 
-void addMissilesToList(Entite* entite, Missiles *liste)
+void addProjectilesToList(Entite* entite, Projectiles *liste)
 {
-  Missiles tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
+ 	Projectiles tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
 	tmp = *liste; // le début de la chaine est gardé dans tmp
 	if (tmp == NULL) // si la chaine est vide on ajoute l'entité
     {
@@ -76,7 +77,7 @@ void addMissilesToList(Entite* entite, Missiles *liste)
 
 // faire les mêmes fonctions avec RemoveEntiteFromList
 
-void removeObstacleFromList(Entite* entite, Obstacle *liste)
+void removeObstacleFromList(Entite* entite, Obstacle* liste)
 {
     if (liste != NULL) // si la liste n'est pas déjà vide
     {
@@ -126,7 +127,7 @@ void removeEnnemiFromList(Entite* entite, Ennemi *liste)
     }
 }
 
-void removeMissilesFromList(Entite* entite, Missiles *liste)
+void removeProjectilesFromList(Entite* entite, Projectiles *liste)
 {
       if (liste != NULL) // si la liste n'est pas déjà vide
       {
@@ -171,11 +172,11 @@ void freeEnnemiList(Ennemi *liste)
 		}
 }
 
-void freeMissilesList(Missiles *liste)
+void freeProjectilesList(Projectiles *liste)
 {
 		while (*liste) // tant que la liste n'est pas vide
     {
-			Missiles next = (*liste)->nextEntite; // on garde l'élement suivant de la chaine dans un tmp
+			Projectiles next = (*liste)->nextEntite; // on garde l'élement suivant de la chaine dans un tmp
 			free(*liste); // on libère le premier élement
 			*liste = next; // on passe à l'élement suivant
 		}
