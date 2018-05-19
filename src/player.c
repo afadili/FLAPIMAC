@@ -9,7 +9,7 @@ void moveUp(listEntite* player);
 void moveDown(listEntite* player);
 
 // Déplacement des projectiles
-void moveProjectile(listProjectiles* projectile);
+void moveProjectile(Projectiles* projectile);
 
 // Déplacement des Bonus ( à rajouter plus tard)
 void moveBonus(listEntite* Bonus);
@@ -20,4 +20,4 @@ void updateBonus(listEntite* player);
 // vérifie que la player ne sort pas de la fenetre, sinon le remet à sa place
 void positionPlayer(listEntite* player);
 
-// vitesse du player à gérer 
+// vitesse du player à gérer

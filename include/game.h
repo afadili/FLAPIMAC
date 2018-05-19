@@ -13,7 +13,8 @@ typedef struct game
 }Game;
 
 /* fonctions de gestion du game */
-
+// fonction qui dessine le game
+void drawGame(Game game);
 // fonction qui initialise les listes du game
 void initializeGame(Game *game);
 

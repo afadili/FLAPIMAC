@@ -27,8 +27,26 @@
    }
  // à debuger et à tester et rajouter x et y dans une autre fonction qui s'en occupe plus tard
 
+ // Fonction qui ajoute une entité player à la liste
+ void addPlayerTolist(Entite* entite, Hero* liste)
+ {
+   printf("entre dans la fonction add player to list\n");
+   Hero tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
+  tmp = *liste; // le début de la chaine est gardé dans tmp
+  if (tmp == NULL) // si la chaine est vide on ajoute l'entité
+     {
+      tmp = entite;
+    }
+   else // sinon on ajoute l'entite au début de la chaine
+     {
+      entite->nextEntite = tmp;
+      tmp = entite;
+    }
+    *liste = tmp;
+ }
 void addObstacleToList(Entite* entite, Obstacle *liste)
 {
+
   Obstacle tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
 	tmp = *liste; // le début de la chaine est gardé dans tmp
 	if (tmp == NULL) // si la chaine est vide on ajoute l'entité

@@ -58,10 +58,6 @@ void drawEntite(listEntite entite)
                g = 0;
                b = 0;
                break;
-           case 4:
-               b = 255;
-               r = 255;
-               g = 0;
           case 'P': //projectile
                r = 0;
                g = 0;
@@ -70,6 +66,7 @@ void drawEntite(listEntite entite)
            default:
                break;
        }
+      //printf("%d,%d,%d\n",r,g,b );
        glColor3ub(r, g, b);
       /* glPushMatrix();
        printf("entite %f \n",entite->y);

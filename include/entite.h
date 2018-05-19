@@ -37,6 +37,9 @@ void addEnnemiToList(Entite* entite, Ennemi *liste);
 // Fonction qui ajoute une entité de type missiles à la liste de Missiles
 void addProjectilesToList(Entite* entite, Projectiles *liste);
 
+// Fonction qui ajoute une entité player à la liste
+void addPlayerTolist(Entite* entite, Hero* liste);
+
 // Fonction qui supprime une entité de type obstacle de la liste d'obstacles
 void removeObstacleFromList(Entite* entite, Obstacle *liste);
 
