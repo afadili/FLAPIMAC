@@ -9,6 +9,9 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 800
 
+#define MAX_SPEEDMOVE 2
+
+
 typedef struct boundingBox{
 	float pMinx, pMaxx, pMiny, pMaxy;
 }bBox;
@@ -19,13 +22,13 @@ typedef struct entite
   int life; // nombre de vies
   char type; // (H pour hero, E pour ennemi, O pour obstacle, P pour projectile)
   float x,y; // position de l'entité
-  float vitesseX, vitesseY; // vitesse de l'entité par rapport à l'axe des x et celui des y
+  float speedMove_y, speedMove_y; // vitesse de l'entité par rapport à l'axe des x et celui des y
   //bBox box; // la boundingBox pour gérer les collisions de l'entité
   struct entite *nextEntite; // liste chainée d'entitée pour la gestion du Jeu
 }Entite, *listEntite, *Hero, *Obstacle, *Ennemi, *Projectiles;
 
 // fonctions de gestion de l'entité
- Entite* allocEntite(int life, char type, float x, float y, float vitesseX, float vitesseY/*, bBox box*/);
+ Entite* allocEntite(int life, char type, float x, float y, float speedMove_x, float speedMove_y/*, bBox box*/);
 
 
 // Fonction qui ajoute une entité de type obstacle à la liste d'obstacles

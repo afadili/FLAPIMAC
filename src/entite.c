@@ -7,7 +7,7 @@
 // on initialise les champs avec les valeurs x,y,type,life,bBox passées en paramètre
 
 
- Entite* allocEntite(int life, char type, float x, float y, float vitesseY, float vitesseX/*, bBox box*/)
+ Entite* allocEntite(int life, char type, float x, float y, float speedMove_y, float speedMove_x/*, bBox box*/)
  {
    Entite* entite;
    entite = malloc(sizeof(Entite));
@@ -20,8 +20,8 @@
      entite->x = x;
      entite->y = y;
      //entite->box = NULL;
-     entite->vitesseX = vitesseX;
-     entite->vitesseY = vitesseY;
+     entite->speedMove_x = speedMove_x;
+     entite->speedMove_y = speedMove_y;
      entite->nextEntite=NULL;
      return entite;
    }
