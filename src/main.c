@@ -111,12 +111,14 @@ int img_width, img_height;
 
           case SDLK_UP:
             /* le player bouge en haut*/
-            game.player->y+=0.1;
+           // game.player->y+=0.1;
+          	moveUp(&game.player);
             printf("posY : %f\n",  game.player->y );
             break;
           case SDLK_DOWN:
             /* le player bouge en bas*/
-            game.player->y-=0.1;
+          moveDown(&game.player);
+           // game.player->y-=0.1;
             printf("posY : %f\n",  game.player->y );
             break;
 

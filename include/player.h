@@ -19,10 +19,10 @@ void moveUp(listEntite* hero);
 void moveDown(listEntite* hero);
 
 // Déplacement des projectiles
-void moveProjectile(listProjectiles* projectile);
+void moveProjectile(listEntite* projectile);
 
 // Déplacement des Bonus ( à rajouter plus tard)
-void moveBonus(listEntite* Bonus);
+void moveBonus(listEntite* bonus);
 
 // changement des proriétés du joueur selon les bonus récupérés
 void updateBonus(listEntite* hero);

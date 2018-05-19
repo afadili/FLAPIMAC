@@ -6,12 +6,12 @@
 
 // déplacement vers le bas
 void moveDown(listEntite* hero){
-	if((*hero)->y>= MIN_HEIGHT-1)// si le mouvement fait sortir le joueur en bas de la fenêtre
+	if((*hero)->y<= MIN_HEIGHT+1)// si le mouvement fait sortir le joueur en bas de la fenêtre
 	{
-		(*hero)->y=MIN_HEIGHT-1; // le joueur reste à sa position verticale minimum
+		(*hero)->y=MIN_HEIGHT+1; // le joueur reste à sa position verticale minimum
 	}
 	else {
-		(*hero)->y-=speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
+		(*hero)->y-=(*hero)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
 	}
 }
 
@@ -22,7 +22,7 @@ void moveUp(listEntite* hero){
 		(*hero)->y=MAX_HEIGHT-1; // le joueur reste à sa position verticale maximum
 	}
 	else {
-		(*hero)->y+=speedMove_y; //sinon on bouge vers le haut le joueur de sa vitesse
+		(*hero)->y+=(*hero)->speedMove_y; //sinon on bouge vers le haut le joueur de sa vitesse
 	}
 }
 
@@ -31,7 +31,7 @@ void moveUp(listEntite* hero){
 void moveProjectile(Projectiles* projectile);
 
 // Déplacement des Bonus ( à rajouter plus tard)
-void moveBonus(listEntite* Bonus){
+/*void moveBonus(listEntite* Bonus){
 	listEntite tmpBonus = Bonus;
 	while(tmpBonus){ // tant qu'on a un bonus
 		if(tmpBonus->y<=MIN_HEIGHT || tmpBonus>=MIN_HEIGHT-1) // on veut vérifier que notre bonus se déplace bien au sein de la fenêtre
@@ -41,7 +41,7 @@ void moveBonus(listEntite* Bonus){
 		tmpBonus->y+=tmpBonus->speedMove_y; // on fait bouger notre bonus
 		tmpBonus=tmpBonus->next; // on passe au bonus suivant
 	}
-}
+}*/
 
 // changement des proriétés du joueur selon les bonus récupérés
 void updateBonus(listEntite* hero);
