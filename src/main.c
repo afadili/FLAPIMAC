@@ -15,11 +15,11 @@
    Game game;
    initializeGame(&game);
    game.player = allocEntite(3,1,0,0,0,0); // je crée un player et je le mets dans le Game
-   game.listObsctacle = allocEntite(10,3,40,0,0,0); // je crée un obstacle et je le mets dans le GAME
-   game.listEnnemi = allocEntite(2,2,100,400,0,0); // ennemi
-   game.listMissiles = allocEntite(10,4,120,400,0,0);// missiles
+   game.listObsctacle = allocEntite(10,3,-0.5,0.5,0,0); // je crée un obstacle et je le mets dans le GAME
+   game.listEnnemi = allocEntite(2,2,0,0.5,0,0); // ennemi
+   game.listMissiles = allocEntite(10,4,-0.1,0.3,0,0);// missiles
    /* test de chargement de la ppm */
-   ReadPPM("map.ppm", &game.listObsctacle, &game.listEnnemi, &game.listMissiles);
+   ReadPPM("map.ppm", &game);
    printf("entite de type : %d\n",game.listObsctacle->type);
    printf("entite de type : %d\n",game.listEnnemi->type);
    printf("entite de type : %d\n",game.listMissiles->type);
@@ -57,11 +57,14 @@
 		glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     /* Code de dessin */
     glTranslatef(-i,0,0);
+
+    //glPushMatrix();
+    //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
     drawEntite(game.player); // bleu
     drawEntite(game.listObsctacle); // rouge
     drawEntite(game.listEnnemi); // vert
     drawEntite(game.listMissiles); //noir
-
+    //glPopMatrix();
     //glClear(GL_COLOR_BUFFER_BIT);
     //glPushMatrix();
 		//drawSquare(1,0,0); // Dessin d'un carré pour tester
@@ -95,18 +98,18 @@
 
           case SDLK_UP:
             /* le player bouge en haut */
-            game.player->y+=0.1;
+          //  game.player->y+=0.1;
             printf("posY : %f\n",  game.player->y );
             break;
           case SDLK_DOWN:
             /* le player bouge en bas  */
-            game.player->y-=0.1;
+      //      game.player->y-=0.1;
             printf("posY : %f\n",  game.player->y );
             break;
 
-          case SDLK_SPACE:
+          //case SDLK_SPACE:
             // Déclenchement du tir
-            break;
+          //  break;
 
           default:
             break;

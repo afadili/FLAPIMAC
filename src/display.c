@@ -61,7 +61,7 @@ void drawEntite(listEntite entite)
            case 4:
                b = 255;
                r = 255;
-               g = 255;
+               g = 0;
                break;
            default:
                break;

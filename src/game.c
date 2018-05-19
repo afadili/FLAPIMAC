@@ -34,7 +34,7 @@ void removeEntiteFromGame(Game *game, Entite *entite)
 }
 
 // fonction de chargement du level avec la PPM
-int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missiles)
+int ReadPPM(char * filename,Game *game)
 {
   printf("Lecture du fichier PPM ! \n");
   FILE *inputFile = NULL;
@@ -71,15 +71,15 @@ int ReadPPM(char * filename, Obstacle* Obstacle, Ennemi* Ennemi, Missiles* Missi
 
 				    	if (r == 255 && g == 0 && b == 0) /* si c'est rouge crée un obstacle */
 				    	{
-				    	       addObstacleToList(allocEntite(1,3,10,10,0,0), Obstacle);
+				    	       addObstacleToList(allocEntite(1,3,10,10,0,0), game->listObsctacle);
 				    	}
 				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert crée un ennemi*/
 				    	{
-				    	        addEnnemiToList(allocEntite(3,2,10,10,0,0), Ennemi);
+				    	        addEnnemiToList(allocEntite(3,2,10,10,0,0), game->listEnnemi);
 				    	}
               if (r == 0 && g == 0 && b == 0) /* si c'est noir crée un missile */
               {
-                    addMissilesToList(allocEntite(1,4,20,20,0,0), Missiles);
+                    addMissilesToList(allocEntite(1,4,20,20,0,0), game->listMissiles);
               }
         }
       }
