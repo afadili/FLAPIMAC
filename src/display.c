@@ -71,7 +71,7 @@ void drawEntite(listEntite entite)
       /* glPushMatrix();
        printf("entite %f \n",entite->y);
            glTranslatef(1 + entite->x, 1 + entite->y, 0);
-          /* if (entite->type == 0)
+           if (entite->type == 0)
            {
                glRotatef(entite->vitesseY* 60, 0, 0, 1);
                printf("drawsquare !!!!!!! \n");
