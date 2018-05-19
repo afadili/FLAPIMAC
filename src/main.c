@@ -56,13 +56,14 @@ int img_width, img_height;
 
   /* code */
 
+  /* Récupération du temps au début de la boucle */
+  Uint32 startTime = SDL_GetTicks();
   /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
 	while(loop) {
 
-		/* Récupération du temps au début de la boucle */
-		Uint32 startTime = SDL_GetTicks();
+    game.player->x=i;
 
 		glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     /* Code de dessin */
@@ -72,11 +73,11 @@ int img_width, img_height;
       glScalef(20/(float)img_height, 20/(float)img_height,0);
       glTranslatef(-i,-img_height/2,0);
       //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-      drawEntite(game.player); // bleu
+
       drawEntite(game.listObstacle); // rouge
       drawEntite(game.listEnnemi); // vert
       drawEntite(game.listProjectiles); //noir
-
+      drawEntite(game.player); // bleu
 
       //glClear(GL_COLOR_BUFFER_BIT);
       //glPushMatrix();
@@ -95,11 +96,10 @@ int img_width, img_height;
       loop = 0;
       break;
     }
-}
-    /* Traitement d'evenements :
+    /* Traitement d'evenements :*/
     switch(e.type) {
 
-      /* Touche clavier
+       /*Touche clavier*/
       case SDL_KEYDOWN:
         // printf("touche pressée (code = %d)\n", e.key.keysym.sym);
         switch(e.key.keysym.sym)
@@ -110,13 +110,13 @@ int img_width, img_height;
             break;
 
           case SDLK_UP:
-            /* le player bouge en haut
-          //  game.player->y+=0.1;
+            /* le player bouge en haut*/
+            game.player->y+=0.1;
             printf("posY : %f\n",  game.player->y );
             break;
           case SDLK_DOWN:
-            /* le player bouge en bas
-      //      game.player->y-=0.1;
+            /* le player bouge en bas*/
+            game.player->y-=0.1;
             printf("posY : %f\n",  game.player->y );
             break;
 
@@ -136,7 +136,7 @@ int img_width, img_height;
       default:
         break;
     }
-  }*/
+  }
     /* Echange du front et du back buffer : mise à jour de la fenêtre */
   SDL_GL_SwapBuffers();
 
