@@ -1,6 +1,5 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -11,6 +10,7 @@
 #include <assert.h>
 
 int img_width, img_height;
+int mode =0;
 
  int main ()
  {
@@ -51,25 +51,22 @@ int img_width, img_height;
   		fprintf(stderr, "Impossible d'ouvrir la fenetre. Fin du programme.\n");
   		return EXIT_FAILURE;
   	}
+
 	SDL_WM_SetCaption("Flapimac", NULL);
 	resizeViewport();
-
 	glClearColor(1., 1., 1., 1);
   /* Initialisation des entités du jeu */
-
   /* code */
-
   /* Récupération du temps au début de la boucle */
   Uint32 startTime = SDL_GetTicks();
   /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
     //int playerMove =0;
-    int mode =0;
+
     GLuint textureID=0;
     const char* filename = "background.png";
-
-
+    int move = 0;
     /* chargement de l'image d'après le fichier */
     SDL_Surface* image = IMG_Load(filename);
     if (image == NULL)
@@ -78,49 +75,40 @@ int img_width, img_height;
       return 0;
     }
     loadPictures(textureID, image);
-	while(loop) {
-    	glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
 
-    moveProjectile((game.listProjectiles));
-    if (mode == 0)
+  while(loop) {
+
+    glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
+    if (mode==0)
     {
       printf("MENU PRINCIPAL\n");
       texturedMenu(textureID, image);
     }
-    else
+    else if (mode==1)
     {
-
-            printf("DEBUT JEU \n");
-
+      moveProjectile((game.listProjectiles));
+        printf("DEBUT JEU \n");
         /////////////////////////////////////////////////////////////////////////
         game.player->x=i;
-
-
-
         /* Code de dessin */
-
         glDisable(GL_TEXTURE_2D);
-
-          glPushMatrix();
-          glScalef(20/(float)img_height, 20/(float)img_height,0);
-          glTranslatef(-i,-img_height/2+0.5,0);
+        glPushMatrix();
+        glScalef(20/(float)img_height, 20/(float)img_height,0);
+        glTranslatef(-i,-img_height/2+0.5,0);
           //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
           /*
-
-
           Backgound texturing code
-
-*/
-          glColor3ub(255,255,255);
-          drawEntite(game.listObstacle); // rouge
-          drawEntite(game.listEnnemi); // vert
-          drawEntite(game.listProjectiles); //noir
-          drawEntite(game.player); // bleu
-
+          */
+        glColor3ub(255,255,255);
+        drawEntite(game.listObstacle); // rouge
+        drawEntite(game.listEnnemi); // vert
+        drawEntite(game.listProjectiles); //noir
+        drawEntite(game.player); // bleu
           //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
       		//drawSquare(1,0,0); // Dessin d'un carré pour tester
         glPopMatrix();
+        i+=0.05;
         //////////////////////////////////////////////////////////////////////////
     }
 
@@ -131,8 +119,8 @@ int img_width, img_height;
 		else if (playerMove == -1)
 			moveDown(&game.player);
 
-    /* Boucle traitant les evenements */
-    i+=0.05;
+      /* Boucle traitant les evenements */
+
 
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
