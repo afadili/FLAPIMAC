@@ -84,9 +84,10 @@ int img_width, img_height;
     {
       printf("MENU PRINCIPAL\n");
       texturedMenu(textureID, image);
-                }
+    }
     else
     {
+
             printf("DEBUT JEU \n");
 
         /////////////////////////////////////////////////////////////////////////
@@ -95,16 +96,25 @@ int img_width, img_height;
 
         /* Code de dessin */
 
-
+        glDisable(GL_TEXTURE_2D);
+        
           glPushMatrix();
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
           //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-          /*  Backgound texturing code */
+          /*
+
+
+          Backgound texturing code
+
+*/
+          glColor3ub(255,255,255);
           drawEntite(game.listObstacle); // rouge
           drawEntite(game.listEnnemi); // vert
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
+
+          //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
       		//drawSquare(1,0,0); // Dessin d'un carré pour tester
         glPopMatrix();
