@@ -10,7 +10,7 @@ void moveDown(listEntite* hero){
 		(*hero)->y=MIN_HEIGHT+1; // le joueur reste à sa position verticale minimum
 	}
 	else {
-		(*hero)->y-=(*hero)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
+		(*hero)->y-=((*hero)->speedMove_y); //sinon on bouge vers le bas le joueur de sa vitesse
 	}
 }
 
@@ -21,7 +21,7 @@ void moveUp(listEntite* hero){
 		(*hero)->y=MAX_HEIGHT-1; // le joueur reste à sa position verticale maximum
 	}
 	else {
-		(*hero)->y+=(*hero)->speedMove_y; //sinon on bouge vers le haut le joueur de sa vitesse
+		(*hero)->y+=((*hero)->speedMove_y); //sinon on bouge vers le haut le joueur de sa vitesse
 	}
 }
 
@@ -52,7 +52,7 @@ void moveProjectile(Projectiles projectile)
 {
   while (projectile != NULL)
   {
-    projectile->x+=1;
+    projectile->x+=0.5;
     projectile = projectile->nextEntite;
   }
 
