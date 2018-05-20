@@ -80,6 +80,8 @@ int img_width, img_height;
     loadPictures(textureID, image);
 	while(loop) {
     	glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
+
+    moveProjectile((game.listProjectiles));
     if (mode == 0)
     {
       printf("MENU PRINCIPAL\n");
@@ -94,10 +96,11 @@ int img_width, img_height;
         game.player->x=i;
 
 
+
         /* Code de dessin */
 
         glDisable(GL_TEXTURE_2D);
-        
+
           glPushMatrix();
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
@@ -122,7 +125,7 @@ int img_width, img_height;
     }
 
 
-    /* Déplacement du joueur 
+    /* Déplacement du joueur
 		if (playerMove == 1)
 			moveUp(&game.player);
 		else if (playerMove == -1)
@@ -165,9 +168,15 @@ int img_width, img_height;
             printf("posY : %f\n",  game.player->y );
             break;
 
-          //case SDLK_SPACE:
+          case SDLK_SPACE:
+          printf("Déclenchement des tirs !!! \n");
+          addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
+          game.listProjectiles->x++;
+
             // Déclenchement du tir
-          //  break;
+            break;
+
+            //game.listProjectiles->x+=10;
           case SDLK_ESCAPE:
           mode = 1;
           break;
@@ -184,6 +193,7 @@ int img_width, img_height;
       default:
         break;
     }
+      //game.listProjectiles->x++;
   }
     /* Echange du front et du back buffer : mise à jour de la fenêtre */
   SDL_GL_SwapBuffers();

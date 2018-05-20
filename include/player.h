@@ -19,7 +19,7 @@ void moveUp(listEntite* hero);
 void moveDown(listEntite* hero);
 
 // Déplacement des projectiles
-void moveProjectile(Projectiles* projectile);
+void moveProjectile(Projectiles projectile);
 
 // Déplacement des Bonus ( à rajouter plus tard)
 void moveBonus(listEntite* Bonus);
