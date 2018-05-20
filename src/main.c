@@ -17,12 +17,12 @@ int img_width, img_height;
 
    //game.player = allocEntite(3,'H',0,0,0,0); // je crée un player et je le mets dans le Game
    //game.listObstacle = allocEntite(10,'o',9,9,0,0); // je crée un obstacle et je le mets dans le GAME
-   game.listEnnemi = allocEntite(2,'E',5,5,0,0); // ennemi
-   game.listProjectiles = allocEntite(10,'P',5.30,5,0,0);// projectiles
+   //game.listEnnemi = allocEntite(2,'E',5,5,0,0); // ennemi
+   //game.listProjectiles = allocEntite(10,'P',5.30,5,0,0);// projectiles
    /* test de chargement de la ppm */
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
-   addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
+   //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
     if (!ReadPPM("map.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
@@ -31,8 +31,8 @@ int img_width, img_height;
    // width 24
    //printf("entite de type : %c\n",game.player->type);
    //printf("entite de type : %c\n",game.listObstacle->type);
-   printf("entite de type : %c\n",game.listEnnemi->type);
-   printf("entite de type : %c\n",game.listProjectiles->type);
+   //printf("entite de type : %c\n",game.listEnnemi->type);
+   //printf("entite de type : %c\n",game.listProjectiles->type);
 
    /* Initialisation de la SDL */
 	if (-1 == SDL_Init(SDL_INIT_VIDEO))
@@ -61,6 +61,7 @@ int img_width, img_height;
   /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
+    int playerMove =0;
 	while(loop) {
 
     game.player->x=i;
@@ -71,9 +72,15 @@ int img_width, img_height;
 
     glPushMatrix();
       glScalef(20/(float)img_height, 20/(float)img_height,0);
-      glTranslatef(-i,-img_height/2,0);
+      glTranslatef(-i,-img_height/2+0.5,0);
       //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
+      /*
 
+
+      Backgound texturing code
+
+
+      */
       drawEntite(game.listObstacle); // rouge
       drawEntite(game.listEnnemi); // vert
       drawEntite(game.listProjectiles); //noir
@@ -85,6 +92,12 @@ int img_width, img_height;
     glPopMatrix();
 
 		/* Déplacement du joueur */
+
+		if (playerMove == 1)
+			moveUp(&game.player);
+		else if (playerMove == -1)
+			moveDown(&game.player);
+
     /* Boucle traitant les evenements */
     i+=0.05;
 
@@ -111,12 +124,14 @@ int img_width, img_height;
 
           case SDLK_UP:
             /* le player bouge en haut*/
-            game.player->y+=0.1;
+            //game.player->y+=0.1;
+            playerMove = 1;
             printf("posY : %f\n",  game.player->y );
             break;
           case SDLK_DOWN:
             /* le player bouge en bas*/
-            game.player->y-=0.1;
+            //game.player->y-=0.1;
+            playerMove = -1;
             printf("posY : %f\n",  game.player->y );
             break;
 

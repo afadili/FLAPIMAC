@@ -22,7 +22,7 @@ typedef struct entite
   int life; // nombre de vies
   char type; // (H pour hero, E pour ennemi, O pour obstacle, P pour projectile)
   float x,y; // position de l'entité
-  float speedMove_y, speedMove_y; // vitesse de l'entité par rapport à l'axe des x et celui des y
+  float speedMove_x, speedMove_y; // vitesse de l'entité par rapport à l'axe des x et celui des y
   //bBox box; // la boundingBox pour gérer les collisions de l'entité
   struct entite *nextEntite; // liste chainée d'entitée pour la gestion du Jeu
 }Entite, *listEntite, *Hero, *Obstacle, *Ennemi, *Projectiles;

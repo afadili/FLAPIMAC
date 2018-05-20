@@ -78,7 +78,7 @@ int ReadPPM(char * filename, Game *game)
 				    	if (r == 0 && g == 0 && b == 255) /* si c'est bleu on crée un joueur */
 				    	{
                 printf("adding player from ppm !!!!!! \n");
-                    addPlayerTolist(allocEntite(3,'H',x,y,0,0),&(game->player));;
+                    addPlayerTolist(allocEntite(3,'H',x,y,0.03,0.03),&(game->player));;
               }
 
 				    	if (r == 255 && g == 0 && b == 0) /* si c'est rouge on crée un obstacle */
