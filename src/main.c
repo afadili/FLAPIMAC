@@ -84,17 +84,18 @@ int img_width, img_height;
     moveProjectile((game.listProjectiles));
     if (mode == 0)
     {
-      printf("MENU PRINCIPAL\n");
+      //printf("MENU PRINCIPAL\n");
       texturedMenu(textureID, image);
     }
     else
     {
 
-            printf("DEBUT JEU \n");
+            //printf("DEBUT JEU \n");
 
         /////////////////////////////////////////////////////////////////////////
-        game.player->x=i;
+       // game.player->x=i;
 
+         // moveRight(&game.player);
 
 
         /* Code de dessin */
@@ -132,7 +133,19 @@ int img_width, img_height;
 			moveDown(&game.player);
 
     /* Boucle traitant les evenements */
-    i+=0.05;
+    i+=0.04;
+/* Gestion des collisions */
+		
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
+			printf("GAME OVER\n");
+			break;
+		}
+
+  /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
+			printf("Niveau terminé !\n");
+			loop=0;
+			break;
+		}*/
 
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
@@ -168,10 +181,24 @@ int img_width, img_height;
             printf("posY : %f\n",  game.player->y );
             break;
 
+            case SDLK_LEFT:
+            /* le player bouge en bas*/
+            moveLeft(&game.player);
+            //playerMove = -1;
+            printf("posX : %f\n",  game.player->x );
+            break;
+
+            case SDLK_RIGHT:
+            /* le player bouge en bas*/
+            moveRight(&game.player);
+            //playerMove = -1;
+            printf("posX : %f\n",  game.player->x );
+            break;
+
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
           addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
-          game.listProjectiles->x++;
+          //game.listProjectiles->x++;
 
             // Déclenchement du tir
             break;

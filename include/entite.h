@@ -64,6 +64,8 @@ void freeProjectilesList(Projectiles *liste);
 // fonction de gestion des collisions
 int intersection(Entite a, Entite b);
 
-int collision(listEntite a, listEntite* b);
+int checkCollision(listEntite e1, listEntite* e2);
+
+int collision(Entite a, Entite b) ;
 
 #endif

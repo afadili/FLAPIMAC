@@ -18,6 +18,11 @@ void moveUp(listEntite* hero);
 // Déplacement du joueur vers le bas
 void moveDown(listEntite* hero);
 
+// Déplacement du joueur à gauche et à droite
+void moveLeft(listEntite* hero);
+
+void moveRight(listEntite* hero);
+
 // Déplacement des projectiles
 void moveProjectile(Projectiles projectile);
 

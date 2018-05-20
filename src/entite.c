@@ -93,6 +93,56 @@ void addProjectilesToList(Entite* entite, Projectiles *liste)
   	*liste = tmp;
 }
 
+
+
+/* fonction de gestion des collisions
+int checkCollision(listEntite entityOne, listEntite entityTwo)
+{
+
+   if((entityOne->x >= entityTwo->x + 1)      // trop à droite
+	|| (entityOne->x + 1<= entityTwo->x) // trop à gauche
+	|| (entityOne->y >= entityTwo->y + 1) // trop en bas
+	|| (entityOne->y + 1 <= entityTwo->y))  // trop en haut
+          return 0; 
+   else
+          return 1; // collision
+}*/
+/* Vérifie si il n'y a pas de collisions entre les élémentsde deux listes différentes, si oui supprime l'élément de la 2ème liste */
+int checkCollision(listEntite e1, listEntite* e2) {
+	listEntite tmp1 = e1;
+	listEntite tmp2 = *e2;
+	while (tmp2) {
+		while (e1) {
+			if (collision(*e1, *tmp2) == 1) {
+				//une fois les bonus ajoutés : on les supprimes à la collision removeBonusFromList(tmp2, list2);
+				return 1;
+			}
+			e1 = e1->nextEntite;
+		}
+		e1 = tmp1;
+		tmp2 = tmp2->nextEntite;
+	}
+	return 0;
+}
+
+/* Renvoie 1 si les deux éléments entrent en collision, 0 sinon */
+int collision(Entite e1, Entite e2) {
+
+	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2)) 
+	// étant donné qu'on a des carrés de 1x1, on vérifie que les deux carrés passés en paramètre ne se chevauchent pas
+	// si le résultat est inférieur à 2, cela signife que les deux carrés se partagent au moins une coordonnée, et donc qu'il y a collision
+	{
+		return 1;
+	}
+	else 
+		return 0;
+	
+}
+
+// on supprime le bonus une fois que le joueur l'a touché
+//void collidedElements(Entite* entite, Bonus *liste);
+
+
 // faire les mêmes fonctions avec RemoveEntiteFromList
 
 void removeObstacleFromList(Entite* entite, Obstacle* liste)
