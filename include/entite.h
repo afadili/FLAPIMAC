@@ -66,4 +66,6 @@ int intersection(Entite a, Entite b);
 
 int collision(listEntite a, listEntite* b);
 
+int checkCollision(listEntite entityOne, listEntite entityTwo);
+
 #endif

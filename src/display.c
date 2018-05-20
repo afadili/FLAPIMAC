@@ -36,10 +36,8 @@
 
 void drawEntite(listEntite entite)
 {
-   int r, g, b;
-   r = 0;
-   g = 0;
-   b = 0;
+   int r=0, g=0, b=0;
+
    while (entite != NULL)
     {
        switch (entite->type){

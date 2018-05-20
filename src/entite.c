@@ -170,6 +170,23 @@ void removeProjectilesFromList(Entite* entite, Projectiles *liste)
       }
 }
 
+
+// fonction de gestion des collisions
+int checkCollision(listEntite entityOne, listEntite entityTwo)
+{
+
+   if((entityOne->x >= entityTwo->x + 1)      // trop à droite
+	|| (entityOne->x + 1<= entityTwo->x) // trop à gauche
+	|| (entityOne->y >= entityTwo->y + 1) // trop en bas
+	|| (entityOne->y + 1 <= entityTwo->y))  // trop en haut
+          return 0; 
+   else
+          return 1; // collision
+}
+
+// on supprime le bonus une fois que le joueur l'a touché
+//void collidedElements(Entite* entite, Bonus *liste);
+
 void freeObstacleList(Obstacle *liste)
 {
 		while (*liste) // tant que la liste n'est pas vide
@@ -199,4 +216,3 @@ void freeProjectilesList(Projectiles *liste)
 			*liste = next; // on passe à l'élement suivant
 		}
 }
-// fonction de gestion des collisions

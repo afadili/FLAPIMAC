@@ -67,7 +67,7 @@ int img_width, img_height;
 
 		glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     /* Code de dessin */
-
+		
 
     glPushMatrix();
       glScalef(20/(float)img_height, 20/(float)img_height,0);
@@ -87,6 +87,11 @@ int img_width, img_height;
 		/* Déplacement du joueur */
     /* Boucle traitant les evenements */
     i+=0.05;
+    if (checkCollision(game.player, game.listEnnemi)==1) { 
+			printf("Niveau terminé !\n");
+			loop=0;
+			break;
+		}
 
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
