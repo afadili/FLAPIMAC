@@ -1,3 +1,6 @@
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -62,37 +65,54 @@ int img_width, img_height;
   	int loop = 1;
     float i = 0;
     int playerMove =0;
+    int mode =0;
+    GLuint textureID=0;
+    const char* filename = "background.png";
+
+
+    /* chargement de l'image d'après le fichier */
+    SDL_Surface* image = IMG_Load(filename);
+    if (image == NULL)
+    {
+      printf("Erreur de chargement de l'image\n");
+      return 0;
+    }
+    loadPictures(textureID, image);
 	while(loop) {
+    	glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
+    if (mode == 0)
+    {
+      printf("MENU PRINCIPAL\n");
+      texturedMenu(textureID, image);
+                }
+    else
+    {
+            printf("DEBUT JEU \n");
 
-    game.player->x=i;
-
-		glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
-    /* Code de dessin */
-
-
-    glPushMatrix();
-      glScalef(20/(float)img_height, 20/(float)img_height,0);
-      glTranslatef(-i,-img_height/2+0.5,0);
-      //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-      /*
-
-
-      Backgound texturing code
+        /////////////////////////////////////////////////////////////////////////
+        game.player->x=i;
 
 
-      */
-      drawEntite(game.listObstacle); // rouge
-      drawEntite(game.listEnnemi); // vert
-      drawEntite(game.listProjectiles); //noir
-      drawEntite(game.player); // bleu
+        /* Code de dessin */
 
-      //glClear(GL_COLOR_BUFFER_BIT);
-      //glPushMatrix();
-  		//drawSquare(1,0,0); // Dessin d'un carré pour tester
-    glPopMatrix();
 
-		/* Déplacement du joueur */
+          glPushMatrix();
+          glScalef(20/(float)img_height, 20/(float)img_height,0);
+          glTranslatef(-i,-img_height/2+0.5,0);
+          //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
+          /*  Backgound texturing code */
+          drawEntite(game.listObstacle); // rouge
+          drawEntite(game.listEnnemi); // vert
+          drawEntite(game.listProjectiles); //noir
+          drawEntite(game.player); // bleu
+          //glPushMatrix();
+      		//drawSquare(1,0,0); // Dessin d'un carré pour tester
+        glPopMatrix();
+        //////////////////////////////////////////////////////////////////////////
+    }
 
+
+    /* Déplacement du joueur */
 		if (playerMove == 1)
 			moveUp(&game.player);
 		else if (playerMove == -1)
@@ -138,6 +158,9 @@ int img_width, img_height;
           //case SDLK_SPACE:
             // Déclenchement du tir
           //  break;
+          case SDLK_ESCAPE:
+          mode = 1;
+          break;
 
           default:
             break;

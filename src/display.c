@@ -1,7 +1,56 @@
 #include "display.h"
 
 /* Fichier de gestion de l'affichage avec OpenGL */
- // TODO : les fonctions de texturing et de chargement du PPM
+ // les fonctions de texturing
+
+ void loadPictures(GLuint textureID, SDL_Surface* image)
+ {
+   // TODO: Chargement et traitement de la texture
+   // charger toutes les images
+   glGenTextures(1,&textureID);
+   glBindTexture(GL_TEXTURE_2D,textureID);
+   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   // Envoi des données à la carte graphique
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,image->w,image->h,0,GL_RGBA,GL_UNSIGNED_BYTE,image->pixels);
+   // Détachement de la texture de son point de bind
+   glBindTexture(GL_TEXTURE_2D,0);
+
+
+
+       SDL_FreeSurface(image);
+
+           glClear(GL_COLOR_BUFFER_BIT);
+
+
+                   glEnable(GL_TEXTURE_2D);
+                   glBindTexture(GL_TEXTURE_2D,textureID);
+ }
+
+ void texturedMenu(GLuint textureID, SDL_Surface* image)
+ {
+   // Code de dessin
+   glPushMatrix();
+   glScalef(10,10,1);
+   glBegin(GL_QUADS);
+       glTexCoord2f(0,0);
+       glVertex2f(-1,1);
+       glTexCoord2f(1,0);
+       glVertex2f(1,1);
+       glTexCoord2f(1,1);
+       glVertex2f(1,-1);
+       glTexCoord2f(0,1);
+       glVertex2f(-1,-1);
+   glEnd();
+   glPopMatrix();
+   // Fin du code de dessin
+
+   //glDisable(GL_TEXTURE_2D);
+   //glBindTexture(GL_TEXTURE_2D,0);
+   glDeleteTextures(1,&textureID);
+
+ }
+
+
  // fonction qui dessine un carré
 
  void drawSquare(int full, float x, float y) {
@@ -68,16 +117,17 @@ void drawEntite(listEntite entite)
        }
       //printf("%d,%d,%d\n",r,g,b );
        glColor3ub(r, g, b);
-      /* glPushMatrix();
-       printf("entite %f \n",entite->y);
-           glTranslatef(1 + entite->x, 1 + entite->y, 0);
-          /* if (entite->type == 0)
-           {
-               glRotatef(entite->vitesseY* 60, 0, 0, 1);
-               printf("drawsquare !!!!!!! \n");
-          }*/
-           drawSquare(1,entite->x,entite->y);
+       drawSquare(1,entite->x,entite->y);
        //glPopMatrix();
        entite = entite->nextEntite;
    }
 }
+
+/* glPushMatrix();
+ printf("entite %f \n",entite->y);
+     glTranslatef(1 + entite->x, 1 + entite->y, 0);
+    /*z if (entite->type == 0)
+     {
+         glRotatef(entite->vitesseY* 60, 0, 0, 1);
+         printf("drawsquare !!!!!!! \n");
+    }*/

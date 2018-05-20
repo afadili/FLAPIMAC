@@ -30,4 +30,8 @@ void drawEntite(listEntite entite);
 /* Fonction qui dessine le backgroud du jeu */
 void drawBG();
 
+ void loadPictures(GLuint textureID, SDL_Surface* image);
+
+  void texturedMenu(GLuint textureID, SDL_Surface* image);
+
 #endif
