@@ -7,7 +7,7 @@
 #include "game.h"
 
 //empêcher le joueur de quitter le terrain, valeurs à modifier en fonction de la taille de la fenêtre
-#define MAX_HEIGHT 20
+#define MAX_HEIGHT 24
 #define MIN_HEIGHT 0
 
 /* Fichier de gestion du joueur (déplacements et actions) */
