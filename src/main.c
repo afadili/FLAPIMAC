@@ -64,7 +64,7 @@ int img_width, img_height;
   /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
-    int playerMove =0;
+    //int playerMove =0;
     int mode =0;
     GLuint textureID=0;
     const char* filename = "background.png";
@@ -122,7 +122,7 @@ int img_width, img_height;
     }
 
 
-    /* Déplacement du joueur */
+    /* Déplacement du joueur 
 		if (playerMove == 1)
 			moveUp(&game.player);
 		else if (playerMove == -1)
@@ -154,14 +154,14 @@ int img_width, img_height;
 
           case SDLK_UP:
             /* le player bouge en haut*/
-            //game.player->y+=0.1;
-            playerMove = 1;
+            moveUp(&game.player);
+           // playerMove = 1;
             printf("posY : %f\n",  game.player->y );
             break;
           case SDLK_DOWN:
             /* le player bouge en bas*/
-            //game.player->y-=0.1;
-            playerMove = -1;
+            moveDown(&game.player);
+            //playerMove = -1;
             printf("posY : %f\n",  game.player->y );
             break;
 
