@@ -1,3 +1,6 @@
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -17,12 +20,12 @@ int img_width, img_height;
 
    //game.player = allocEntite(3,'H',0,0,0,0); // je crée un player et je le mets dans le Game
    //game.listObstacle = allocEntite(10,'o',9,9,0,0); // je crée un obstacle et je le mets dans le GAME
-   game.listEnnemi = allocEntite(2,'E',5,5,0,0); // ennemi
-   game.listProjectiles = allocEntite(10,'P',5.30,5,0,0);// projectiles
+   //game.listEnnemi = allocEntite(2,'E',5,5,0,0); // ennemi
+   //game.listProjectiles = allocEntite(10,'P',5.30,5,0,0);// projectiles
    /* test de chargement de la ppm */
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
-   addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
+   //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
     if (!ReadPPM("map.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
@@ -31,8 +34,8 @@ int img_width, img_height;
    // width 24
    //printf("entite de type : %c\n",game.player->type);
    //printf("entite de type : %c\n",game.listObstacle->type);
-   printf("entite de type : %c\n",game.listEnnemi->type);
-   printf("entite de type : %c\n",game.listProjectiles->type);
+   //printf("entite de type : %c\n",game.listEnnemi->type);
+   //printf("entite de type : %c\n",game.listProjectiles->type);
 
    /* Initialisation de la SDL */
 	if (-1 == SDL_Init(SDL_INIT_VIDEO))
@@ -61,37 +64,88 @@ int img_width, img_height;
   /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
+    //int playerMove =0;
+    int mode =0;
+    GLuint textureID=0;
+    const char* filename = "background.png";
+
+
+    /* chargement de l'image d'après le fichier */
+    SDL_Surface* image = IMG_Load(filename);
+    if (image == NULL)
+    {
+      printf("Erreur de chargement de l'image\n");
+      return 0;
+    }
+    loadPictures(textureID, image);
 	while(loop) {
+    	glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
 
-    game.player->x=i;
+    moveProjectile((game.listProjectiles));
+    if (mode == 0)
+    {
+      //printf("MENU PRINCIPAL\n");
+      texturedMenu(textureID, image);
+    }
+    else
+    {
 
-		glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
-    /* Code de dessin */
-		
+            //printf("DEBUT JEU \n");
 
-    glPushMatrix();
-      glScalef(20/(float)img_height, 20/(float)img_height,0);
-      glTranslatef(-i,-img_height/2,0);
-      //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
+        /////////////////////////////////////////////////////////////////////////
+       // game.player->x=i;
 
-      drawEntite(game.listObstacle); // rouge
-      drawEntite(game.listEnnemi); // vert
-      drawEntite(game.listProjectiles); //noir
-      drawEntite(game.player); // bleu
+         // moveRight(&game.player);
 
-      //glClear(GL_COLOR_BUFFER_BIT);
-      //glPushMatrix();
-  		//drawSquare(1,0,0); // Dessin d'un carré pour tester
-    glPopMatrix();
 
-		/* Déplacement du joueur */
+        /* Code de dessin */
+
+        glDisable(GL_TEXTURE_2D);
+
+          glPushMatrix();
+          glScalef(20/(float)img_height, 20/(float)img_height,0);
+          glTranslatef(-i,-img_height/2+0.5,0);
+          //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
+          /*
+
+
+          Backgound texturing code
+
+*/
+          glColor3ub(255,255,255);
+          drawEntite(game.listObstacle); // rouge
+          drawEntite(game.listEnnemi); // vert
+          drawEntite(game.listProjectiles); //noir
+          drawEntite(game.player); // bleu
+
+          //glClear(GL_COLOR_BUFFER_BIT);
+          //glPushMatrix();
+      		//drawSquare(1,0,0); // Dessin d'un carré pour tester
+        glPopMatrix();
+        //////////////////////////////////////////////////////////////////////////
+    }
+
+
+    /* Déplacement du joueur
+		if (playerMove == 1)
+			moveUp(&game.player);
+		else if (playerMove == -1)
+			moveDown(&game.player);
+
     /* Boucle traitant les evenements */
-    i+=0.05;
-    if (checkCollision(game.player, game.listEnnemi)==1) { 
+    i+=0.03;
+/* Gestion des collisions */
+		
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
+			printf("GAME OVER\n");
+			break;
+		}
+
+  /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
 			printf("Niveau terminé !\n");
 			loop=0;
 			break;
-		}
+		}*/
 
   SDL_Event e;
   while(SDL_PollEvent(&e)) {
@@ -116,20 +170,43 @@ int img_width, img_height;
 
           case SDLK_UP:
             /* le player bouge en haut*/
-           // game.player->y+=0.1;
-          	moveUp(&game.player);
+            moveUp(&game.player);
+           // playerMove = 1;
             printf("posY : %f\n",  game.player->y );
             break;
           case SDLK_DOWN:
             /* le player bouge en bas*/
-          moveDown(&game.player);
-           // game.player->y-=0.1;
+            moveDown(&game.player);
+            //playerMove = -1;
             printf("posY : %f\n",  game.player->y );
             break;
 
-          //case SDLK_SPACE:
+            case SDLK_LEFT:
+            /* le player bouge en bas*/
+            moveLeft(&game.player);
+            //playerMove = -1;
+            printf("posX : %f\n",  game.player->x );
+            break;
+
+            case SDLK_RIGHT:
+            /* le player bouge en bas*/
+            moveRight(&game.player);
+            //playerMove = -1;
+            printf("posX : %f\n",  game.player->x );
+            break;
+
+          case SDLK_SPACE:
+          printf("Déclenchement des tirs !!! \n");
+          addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
+          //game.listProjectiles->x++;
+
             // Déclenchement du tir
-          //  break;
+            break;
+
+            //game.listProjectiles->x+=10;
+          case SDLK_ESCAPE:
+          mode = 1;
+          break;
 
           default:
             break;
@@ -143,6 +220,7 @@ int img_width, img_height;
       default:
         break;
     }
+      //game.listProjectiles->x++;
   }
     /* Echange du front et du back buffer : mise à jour de la fenêtre */
   SDL_GL_SwapBuffers();

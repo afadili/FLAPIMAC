@@ -3,7 +3,6 @@
 /* Fichier de gestion du joueur (déplacements et actions) */
 
 
-
 // déplacement vers le bas
 void moveDown(listEntite* hero){
 	if((*hero)->y<= MIN_HEIGHT+1)// si le mouvement fait sortir le joueur en bas de la fenêtre
@@ -26,9 +25,38 @@ void moveUp(listEntite* hero){
 	}
 }
 
+void moveLeft(listEntite* hero){
+	if((*hero)->x<= 0+1)
+	{
+		(*hero)->x=0+1; 
+	}
+	else {
+		(*hero)->x-=(*hero)->speedMove_x; 
+	}
+}
+
+// déplacement vers le haut
+void moveRight(listEntite* hero){
+	if((*hero)->x>= WINDOW_WIDTH) 
+	{
+		(*hero)->x=WINDOW_WIDTH-1; 
+	}
+	else {
+		(*hero)->x+=(*hero)->speedMove_x; 
+}
+}
+
 
 // Déplacement des projectiles
-void moveProjectile(Projectiles* projectile);
+void moveProjectile(Projectiles projectile)
+{
+  while (projectile != NULL)
+  {
+    projectile->x+=1;
+    projectile = projectile->nextEntite;
+  }
+
+}
 
 // Déplacement des Bonus ( à rajouter plus tard)
 /*void moveBonus(listEntite* Bonus){

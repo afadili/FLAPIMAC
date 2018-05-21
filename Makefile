@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -O2 -g
-LDFLAGS = -lSDL -lm -lGLU -lGL -lSDL2 -lglut
+LDFLAGS = -lSDL -lm -lGLU -lGL -lSDL2 -lglut -lSDL_image
 INCLUDES = 
 
 APP_BIN = flapimac
