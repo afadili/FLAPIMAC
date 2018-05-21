@@ -103,7 +103,7 @@ int checkCollision(listEntite entityOne, listEntite entityTwo)
 	|| (entityOne->x + 1<= entityTwo->x) // trop à gauche
 	|| (entityOne->y >= entityTwo->y + 1) // trop en bas
 	|| (entityOne->y + 1 <= entityTwo->y))  // trop en haut
-          return 0; 
+          return 0;
    else
           return 1; // collision
 }*/
@@ -128,7 +128,7 @@ int checkCollision(listEntite e1, listEntite* e2) {
 /* Renvoie 1 si les deux éléments entrent en collision, 0 sinon */
 int collision(Entite e1, Entite e2) {
 
-	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2)) 
+	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2))
 	// étant donné qu'on a des carrés de 1x1, on vérifie que les deux carrés passés en paramètre ne se chevauchent pas
 	// si le résultat est inférieur à 2, cela signife que les deux carrés se partagent au moins une coordonnée, et donc qu'il y a collision
 	{
@@ -136,7 +136,7 @@ int collision(Entite e1, Entite e2) {
 	}
 	else 
 		return 0;
-	
+
 }
 
 // on supprime le bonus une fois que le joueur l'a touché
