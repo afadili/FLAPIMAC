@@ -33,7 +33,7 @@ char * textureDir="img/";
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map.ppm", &game)) {
+    if (!ReadPPM("map2.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     };
@@ -140,6 +140,7 @@ char * textureDir="img/";
           drawEntite(game.listEnnemi); // vert
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
+          drawEntite(game.listLine); // jaune
 
 =======
           */
@@ -172,6 +173,22 @@ char * textureDir="img/";
 			printf("GAME OVER\n");
 			break;
 		}
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+			printf("enemy dead\n");
+		}
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+			printf("projectile crashed\n");
+		}
+
+		if (checkCollision(game.player, &(game.listLine))) { 
+			printf("YOU WON\n");
+			break;
+		}
+
+		
+			moveEnnemiUp(game.listEnnemi);
+		
+
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
 			printf("Niveau terminé !\n");

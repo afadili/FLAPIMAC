@@ -187,26 +187,31 @@ void drawEntite(listEntite entite)
                //printf("dessin de la texture dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
-           case 'E': //ennemi
+        	case 'E': //ennemi
                r = 0;
                g = 255;
                b = 0;
                //printf("dessin de la texture ENNEMI dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
-           case 'O': // obstacle
+        	case 'O': // obstacle
                r = 255;
                g = 0;
                b = 0;
                //printf("dessin de la texture OBSTACLE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
-          case 'P': //projectile
+        	case 'P': //projectile
                r = 0;
                g = 0;
                b = 0;
                //printf("dessin de la texture PROJECTILE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
+               break;
+        	case 'L': //ligne de fin
+               r = 255;
+               g = 255;
+               b = 0;
                break;
            default:
                break;
