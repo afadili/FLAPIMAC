@@ -140,6 +140,13 @@ int img_width, img_height;
 			printf("GAME OVER\n");
 			break;
 		}
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+			printf("enemy dead\n");
+		}
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+			printf("projectile crashed\n");
+		}
+
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
 			printf("Niveau terminé !\n");
@@ -188,7 +195,7 @@ int img_width, img_height;
             printf("posX : %f\n",  game.player->x );
             break;
 
-            case SDLK_RIGHT:
+          case SDLK_RIGHT:
             /* le player bouge en bas*/
             moveRight(&game.player);
             //playerMove = -1;
