@@ -9,8 +9,15 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <assert.h>
+#include <dirent.h>
 
 int img_width, img_height;
+<<<<<<< HEAD
+=======
+int mode =0;
+char * textureDir="img/";
+ GLuint textures[NBTEXTURES];
+>>>>>>> master
 
  int main ()
  {
@@ -67,6 +74,7 @@ int img_width, img_height;
     //int playerMove =0;
     int mode =0;
     GLuint textureID=0;
+
     const char* filename = "background.png";
 
 
@@ -77,21 +85,35 @@ int img_width, img_height;
       printf("Erreur de chargement de l'image\n");
       return 0;
     }
+    loadTexture(textureDir,textures);
     loadPictures(textureID, image);
 	while(loop) {
     	glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
 
+<<<<<<< HEAD
     moveProjectile((game.listProjectiles));
     if (mode == 0)
+=======
+
+  while(loop) {
+    game.player->x=i;
+    glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
+    if (mode==0)
+>>>>>>> master
     {
       //printf("MENU PRINCIPAL\n");
       texturedMenu(textureID, image);
     }
     else
     {
+<<<<<<< HEAD
 
             //printf("DEBUT JEU \n");
 
+=======
+      moveProjectile((game.listProjectiles));
+        //printf("DEBUT JEU \n");
+>>>>>>> master
         /////////////////////////////////////////////////////////////////////////
        // game.player->x=i;
 
@@ -110,6 +132,7 @@ int img_width, img_height;
 
 
           Backgound texturing code
+<<<<<<< HEAD
 
 */
           glColor3ub(255,255,255);
@@ -118,6 +141,15 @@ int img_width, img_height;
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
 
+=======
+          */
+        glColor3ub(255,255,255);
+        //loadPictures(textureID, image);
+        drawEntite(game.listObstacle); // rouge
+        drawEntite(game.listEnnemi); // vert
+        drawEntite(game.listProjectiles); //noir
+        drawEntite(game.player); // bleu
+>>>>>>> master
           //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
       		//drawSquare(1,0,0); // Dessin d'un carré pour tester

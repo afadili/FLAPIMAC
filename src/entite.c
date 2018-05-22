@@ -1,4 +1,4 @@
-#include <entite.h>
+#include "entite.h"
 
 /* Fichier de gestion du jeu dans la mémoire */
 
@@ -134,7 +134,7 @@ int collision(Entite e1, Entite e2) {
 	{
 		return 1;
 	}
-	else 
+	else
 		return 0;
 
 }
