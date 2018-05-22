@@ -173,6 +173,7 @@ char * textureDir="img/";
 			printf("GAME OVER\n");
 			break;
 		}
+
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
 			printf("enemy dead\n");
 		}
@@ -188,6 +189,7 @@ char * textureDir="img/";
 		
 			moveEnnemiUp(game.listEnnemi);
 		
+
 
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
