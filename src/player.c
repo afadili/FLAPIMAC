@@ -58,6 +58,49 @@ void moveProjectile(Projectiles projectile)
 
 }
 
+void moveEnnemiUp(Ennemi ennemi){
+	/*if((*ennemi)->y<= MIN_HEIGHT)// si le mouvement fait sortir le joueur en bas de la fenêtre
+	{
+		(*ennemi)->y=MIN_HEIGHT; // le joueur reste à sa position verticale minimum
+	}
+	else {
+		(*ennemi)->y-=(*ennemi)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
+	}*/
+
+	while (ennemi != NULL)
+  {
+  	if((ennemi->y>=15))
+	{
+		moveEnnemiDown(ennemi);
+	}
+    else {
+
+    	ennemi->y+=0.01;
+    }
+    ennemi = ennemi->nextEntite;
+}
+}
+
+
+void moveEnnemiDown(Ennemi ennemi){
+
+	while (ennemi != NULL)
+  {
+  	if((ennemi->y<=MIN_HEIGHT))
+	{
+		ennemi->y=MIN_HEIGHT; 
+		moveEnnemiUp(ennemi);
+	}
+    else {
+
+    	ennemi->y-=0.01;
+    }
+    ennemi = ennemi->nextEntite;
+}
+}
+
+
+
 // Déplacement des Bonus ( à rajouter plus tard)
 /*void moveBonus(listEntite* Bonus){
 	listEntite tmpBonus = Bonus;

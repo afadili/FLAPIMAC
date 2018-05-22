@@ -153,6 +153,10 @@ int img_width, img_height;
 			break;
 		}
 
+		
+			moveEnnemiUp(game.listEnnemi);
+		
+
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
 			printf("Niveau terminé !\n");
