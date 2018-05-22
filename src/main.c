@@ -1,6 +1,5 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -12,14 +11,11 @@
 #include <dirent.h>
 
 int img_width, img_height;
-<<<<<<< HEAD
-=======
 int mode =0;
 char * textureDir="img/";
- GLuint textures[NBTEXTURES];
->>>>>>> master
+GLuint textures[NBTEXTURES];
 
- int main ()
+int main ()
  {
    /* Initialisation des entités */
    Game game;
@@ -30,13 +26,14 @@ char * textureDir="img/";
    //game.listEnnemi = allocEntite(2,'E',5,5,0,0); // ennemi
    //game.listProjectiles = allocEntite(10,'P',5.30,5,0,0);// projectiles
    /* test de chargement de la ppm */
-
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map2.ppm", &game)) {
+
+    if (!ReadPPM("map2.ppm", &game))
+    {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
-    };
+    }
    // height 128
    // width 24
    //printf("entite de type : %c\n",game.player->type);
@@ -58,17 +55,19 @@ char * textureDir="img/";
   		fprintf(stderr, "Impossible d'ouvrir la fenetre. Fin du programme.\n");
   		return EXIT_FAILURE;
   	}
-	SDL_WM_SetCaption("Flapimac", NULL);
-	resizeViewport();
+	    SDL_WM_SetCaption("Flapimac", NULL);
+	    resizeViewport();
 
-	glClearColor(1., 1., 1., 1);
-  /* Initialisation des entités du jeu */
+      glClearColor(1., 1., 1., 1);
 
-  /* code */
+      /* Initialisation des entités du jeu */
 
-  /* Récupération du temps au début de la boucle */
-  Uint32 startTime = SDL_GetTicks();
-  /* Boucle d'affichage */
+                      /* code */
+
+      /* Récupération du temps au début de la boucle */
+
+      Uint32 startTime = SDL_GetTicks();
+        /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
     //int playerMove =0;
@@ -79,45 +78,45 @@ char * textureDir="img/";
 
 
     /* chargement de l'image d'après le fichier */
+
     SDL_Surface* image = IMG_Load(filename);
     if (image == NULL)
     {
       printf("Erreur de chargement de l'image\n");
       return 0;
     }
-    loadTexture(textureDir,textures);
+    //loadTexture(textureDir,textures);
     loadPictures(textureID, image);
-	while(loop) {
-    	glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
 
-<<<<<<< HEAD
+  while(loop)
+  {
+    glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
+
+
     moveProjectile((game.listProjectiles));
-    if (mode == 0)
-=======
 
-  while(loop) {
-    game.player->x=i;
+
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     if (mode==0)
->>>>>>> master
+
     {
       //printf("MENU PRINCIPAL\n");
       texturedMenu(textureID, image);
     }
     else
     {
-<<<<<<< HEAD
+
 
             //printf("DEBUT JEU \n");
 
-=======
+            game.player->x=i;
       moveProjectile((game.listProjectiles));
         //printf("DEBUT JEU \n");
->>>>>>> master
+
         /////////////////////////////////////////////////////////////////////////
        // game.player->x=i;
 
-         // moveRight(&game.player);
+       // moveRight(&game.player);
 
 
         /* Code de dessin */
@@ -132,7 +131,7 @@ char * textureDir="img/";
 
 
           Backgound texturing code
-<<<<<<< HEAD
+
 
 */
           glColor3ub(255,255,255);
@@ -141,16 +140,13 @@ char * textureDir="img/";
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
           drawEntite(game.listLine); // jaune
-
-=======
-          */
         glColor3ub(255,255,255);
         //loadPictures(textureID, image);
         drawEntite(game.listObstacle); // rouge
         drawEntite(game.listEnnemi); // vert
         drawEntite(game.listProjectiles); //noir
         drawEntite(game.player); // bleu
->>>>>>> master
+
           //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
       		//drawSquare(1,0,0); // Dessin d'un carré pour tester
@@ -165,49 +161,52 @@ char * textureDir="img/";
 		else if (playerMove == -1)
 			moveDown(&game.player);
 
-    /* Boucle traitant les evenements */
-    i+=0.03;
+     Boucle traitant les evenements */
+    i+=0.01;
 /* Gestion des collisions */
-		
-		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
+
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
 			printf("GAME OVER\n");
 			break;
 		}
 
-		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
 			printf("enemy dead\n");
 		}
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
 			printf("projectile crashed\n");
 		}
 
-		if (checkCollision(game.player, &(game.listLine))) { 
+		if (checkCollision(game.player, &(game.listLine))) {
 			printf("YOU WON\n");
 			break;
 		}
 
-		
+
 			moveEnnemiUp(game.listEnnemi);
-		
 
 
 
-  /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
+
+  /*  if (checkCollision(game.player, game.listEnnemi)==1) {
 			printf("Niveau terminé !\n");
 			loop=0;
 			break;
 		}*/
 
   SDL_Event e;
-  while(SDL_PollEvent(&e)) {
+  while(SDL_PollEvent(&e))
+  {
 
     /* L'utilisateur ferme la fenêtre */
-    if(e.type == SDL_QUIT) {
+    if(e.type == SDL_QUIT)
+    {
       loop = 0;
       break;
     }
     /* Traitement d'evenements :*/
-    switch(e.type) {
+    switch(e.type)
+    {
 
        /*Touche clavier*/
       case SDL_KEYDOWN:
@@ -280,7 +279,8 @@ char * textureDir="img/";
   Uint32 elapsedTime = SDL_GetTicks() - startTime;
 
   /* Si trop peu de temps s'est écoulé, on met en pause le programme */
-  if(elapsedTime < FRAMERATE_MILLISECONDS) {
+  if(elapsedTime < FRAMERATE_MILLISECONDS)
+  {
     SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
   }
 }
@@ -289,4 +289,4 @@ char * textureDir="img/";
   SDL_Quit();
 
    return EXIT_SUCCESS;
- }
+}

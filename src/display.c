@@ -218,8 +218,8 @@ void drawEntite(listEntite entite)
        }
       //printf("%d,%d,%d\n",r,g,b );
        glColor3ub(r, g, b);
-       //drawSquare(1,entite->x,entite->y);
-       drawTexturedSquare(01);
+       drawSquare(1,entite->x,entite->y);
+       //drawTexturedSquare(01);
        //glPopMatrix();
        entite = entite->nextEntite;
    }
