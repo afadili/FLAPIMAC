@@ -143,6 +143,9 @@ int img_width, img_height;
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
 			printf("enemy dead\n");
 		}
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+			printf("projectile crashed\n");
+		}
 
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
