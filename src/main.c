@@ -8,9 +8,12 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <assert.h>
+#include <dirent.h>
 
 int img_width, img_height;
 int mode =0;
+char * textureDir="img/";
+ GLuint textures[NBTEXTURES];
 
  int main ()
  {
@@ -65,6 +68,7 @@ int mode =0;
     //int playerMove =0;
 
     GLuint textureID=0;
+
     const char* filename = "background.png";
     //int move = 0;
     /* chargement de l'image d'après le fichier */
@@ -74,20 +78,22 @@ int mode =0;
       printf("Erreur de chargement de l'image\n");
       return 0;
     }
+    loadTexture(textureDir,textures);
     loadPictures(textureID, image);
+
 
   while(loop) {
     game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     if (mode==0)
     {
-      printf("MENU PRINCIPAL\n");
+      //printf("MENU PRINCIPAL\n");
       texturedMenu(textureID, image);
     }
     else if (mode==1)
     {
       moveProjectile((game.listProjectiles));
-        printf("DEBUT JEU \n");
+        //printf("DEBUT JEU \n");
         /////////////////////////////////////////////////////////////////////////
 
         /* Code de dessin */
@@ -100,6 +106,7 @@ int mode =0;
           Backgound texturing code
           */
         glColor3ub(255,255,255);
+        //loadPictures(textureID, image);
         drawEntite(game.listObstacle); // rouge
         drawEntite(game.listEnnemi); // vert
         drawEntite(game.listProjectiles); //noir

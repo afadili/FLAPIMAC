@@ -7,9 +7,12 @@
 #include "entite.h"
 #include "display.h"
 #include "player.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 800
-
+#define NBTEXTURES 50
+extern GLuint textures[NBTEXTURES];
 
 /* Nombre de bits par pixel de la fenêtre */
 static const unsigned int BIT_PER_PIXEL = 32;
@@ -32,6 +35,17 @@ void drawBG();
 
  void loadPictures(GLuint textureID, SDL_Surface* image);
 
+
+  //void drawSquareTexture(int full, char* filename);
+
+  void drawPlayer(Hero player);
+
+//  void loadTexture(int full, char* filename);
+
+  int getImgId(char* filename);
+  int loadTexture(char* directory, GLuint textureID[]);
+  int loaded(SDL_Surface* image);
+  void drawTexturedSquare(GLuint textureID) ;
   void texturedMenu(GLuint textureID, SDL_Surface* image);
 
 #endif
