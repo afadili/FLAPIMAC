@@ -141,6 +141,7 @@ int img_width, img_height;
 			printf("GAME OVER\n");
 			break;
 		}
+
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
 			printf("enemy dead\n");
 		}
@@ -156,6 +157,7 @@ int img_width, img_height;
 		
 			moveEnnemiUp(game.listEnnemi);
 		
+
 
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
