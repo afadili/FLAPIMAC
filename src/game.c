@@ -11,6 +11,7 @@ void drawGame(Game game)
   drawEntite(game.listObstacle); // rouge
   drawEntite(game.listEnnemi); // vert
   drawEntite(game.listProjectiles); //noir
+  drawEntite(game.listLine); //noir
 }
 // fonction qui initialise les listes du game
 void initializeGame(Game *game)
@@ -19,6 +20,7 @@ void initializeGame(Game *game)
   game->listObstacle = NULL;
   game->listEnnemi = NULL;
   game->listProjectiles = NULL;
+  game->listLine = NULL;
 }
 
 // fonction qui libère le Game
@@ -28,13 +30,31 @@ void freeGame(Game *game)
   freeObstacleList(&(*game).listObstacle);
   freeEnnemiList(&(*game).listEnnemi);
   freeProjectilesList(&(*game).listProjectiles);
+  freeLineList(&(*game).listLine);
+
 }
 
+void addLineToList(Entite* entite, Line *liste)
+{
+  Line tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
+  tmp = *liste; // le début de la chaine est gardé dans tmp
+  if (tmp == NULL) // si la chaine est vide on ajoute l'entité
+    {
+      tmp = entite;
+    }
+  else // sinon on ajoute l'entite au début de la chaine
+    {
+      entite->nextEntite = tmp;
+      tmp = entite;
+    }
+    *liste = tmp;
+}
 // fonction qui ajoute une entité au Game
 void addEntiteToGame(Game *game, Entite entite)
 {
 
 }
+
 
 // fonction qui supprime une entité du game
 void removeEntiteFromGame(Game *game, Entite *entite)
@@ -98,6 +118,12 @@ int ReadPPM(char * filename, Game *game)
               {
                       printf("adding projectile from ppm !!!!!! \n");
                     addProjectilesToList(allocEntite(1,'P',x,y,0,0), &(game->listProjectiles));
+
+              }
+               if (r == 255 && g == 255 && b == 0) /* si c'est jaune on crée la ligne d'arrivée */
+              {
+                      printf("adding final line from ppm !!!!!! \n");
+                      addLineToList(allocEntite(1,'L',x,y,0,0), &(game->listLine));
 
               }
         }

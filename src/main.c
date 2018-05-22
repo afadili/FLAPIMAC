@@ -26,7 +26,7 @@ int img_width, img_height;
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map.ppm", &game)) {
+    if (!ReadPPM("map2.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     };
@@ -117,6 +117,7 @@ int img_width, img_height;
           drawEntite(game.listEnnemi); // vert
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
+          drawEntite(game.listLine); // jaune
 
           //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
@@ -145,6 +146,11 @@ int img_width, img_height;
 		}
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
 			printf("projectile crashed\n");
+		}
+
+		if (checkCollision(game.player, &(game.listLine))) { 
+			printf("YOU WON\n");
+			break;
 		}
 
 
