@@ -95,6 +95,7 @@ void addProjectilesToList(Entite* entite, Projectiles *liste)
 
 
 
+
 /* fonction de gestion des collisions
 int checkCollision(listEntite entityOne, listEntite entityTwo)
 {
@@ -228,6 +229,31 @@ void removeProjectilesFromList(Entite* entite, Projectiles *liste)
       }
 }
 
+void removeLineFromList(Entite* entite, Line *liste)
+{
+      if (liste != NULL) // si la liste n'est pas déjà vide
+      {
+        if (entite == *liste)// si l'entite est à la tête de la liste
+        {
+          Entite *tmp = *liste; // on garde la tête de la liste dans un tmp
+          *liste = (*liste)->nextEntite; // on pointe vers l'élement suivant de la chaine
+          free(tmp); // on libère la mémoire du premier élement qui est notre entité
+        }
+        else // si l'entite est au milieu de la liste
+        {
+          Entite *tmp = (*liste)->nextEntite; // on garde un tmp pour parcourir la chaine
+          Entite *prev = *liste; // on garde un pointeur vers l'élement pécédant le tmp
+          while (entite != tmp) // tant qu'on n'a pas trouvé notre entité
+          {
+            prev = tmp; // on passe à l'entité suivante en gardant le précédant du tmp
+            tmp = tmp->nextEntite;
+          }
+          prev->nextEntite = tmp->nextEntite;
+          free(tmp); // on libère la mémoire allouée à l'entité qu'on veut supprimer
+        }
+      }
+}
+
 void freeObstacleList(Obstacle *liste)
 {
 		while (*liste) // tant que la liste n'est pas vide
@@ -257,4 +283,13 @@ void freeProjectilesList(Projectiles *liste)
 			*liste = next; // on passe à l'élement suivant
 		}
 }
-// fonction de gestion des collisions
+
+void freeLineList(Line *liste)
+{
+		while (*liste) // tant que la liste n'est pas vide
+    {
+			Line next = (*liste)->nextEntite; // on garde l'élement suivant de la chaine dans un tmp
+			free(*liste); // on libère le premier élement
+			*liste = next; // on passe à l'élement suivant
+		}
+}

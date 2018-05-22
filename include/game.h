@@ -9,7 +9,7 @@
 
 typedef struct game
 {
-  listEntite player, listObstacle, listEnnemi, listProjectiles;
+  listEntite player, listObstacle, listEnnemi, listProjectiles, listLine;
 }Game;
 
 /* fonctions de gestion du game */
@@ -23,6 +23,7 @@ void freeGame(Game *game);
 
 // fonction qui ajoute une entité au Game
 void addEntiteToGame(Game *game, Entite entite);
+
 
 // fonction qui supprime une entite du game
 void removeEntiteFromGame(Game *game, Entite *entite);

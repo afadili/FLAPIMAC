@@ -97,19 +97,24 @@ void drawEntite(listEntite entite)
                g = 0;
                b = 255;
                break;
-           case 'E': //ennemi
+        	case 'E': //ennemi
                r = 0;
                g = 255;
                b = 0;
                break;
-           case 'O': // obstacle
+        	case 'O': // obstacle
                r = 255;
                g = 0;
                b = 0;
                break;
-          case 'P': //projectile
+        	case 'P': //projectile
                r = 0;
                g = 0;
+               b = 0;
+               break;
+        	case 'L': //ligne de fin
+               r = 255;
+               g = 255;
                b = 0;
                break;
            default:
