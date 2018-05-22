@@ -140,6 +140,10 @@ int img_width, img_height;
 			printf("GAME OVER\n");
 			break;
 		}
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+			printf("enemy dead\n");
+		}
+
 
   /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
 			printf("Niveau terminé !\n");

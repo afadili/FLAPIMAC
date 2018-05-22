@@ -115,6 +115,7 @@ int checkCollision(listEntite e1, listEntite* e2) {
 		while (e1) {
 			if (collision(*e1, *tmp2) == 1) {
 				//une fois les bonus ajoutés : on les supprimes à la collision removeBonusFromList(tmp2, list2);
+				removeEnnemiFromList(tmp2, &((*e2)));
 				return 1;
 			}
 			e1 = e1->nextEntite;

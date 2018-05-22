@@ -5,9 +5,9 @@
 
 // déplacement vers le bas
 void moveDown(listEntite* hero){
-	if((*hero)->y<= MIN_HEIGHT+1)// si le mouvement fait sortir le joueur en bas de la fenêtre
+	if((*hero)->y<= MIN_HEIGHT)// si le mouvement fait sortir le joueur en bas de la fenêtre
 	{
-		(*hero)->y=MIN_HEIGHT+1; // le joueur reste à sa position verticale minimum
+		(*hero)->y=MIN_HEIGHT; // le joueur reste à sa position verticale minimum
 	}
 	else {
 		(*hero)->y-=(*hero)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
