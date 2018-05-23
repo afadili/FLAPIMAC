@@ -25,6 +25,7 @@ void freeGame(Game *game);
 void addEntiteToGame(Game *game, Entite entite);
 
 
+
 // fonction qui supprime une entite du game
 void removeEntiteFromGame(Game *game, Entite *entite);
 

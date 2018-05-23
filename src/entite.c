@@ -95,6 +95,29 @@ void addProjectilesToList(Entite* entite, Projectiles *liste)
 
 
 
+void moveEnnemiUp(Entite* ennemi){
+  /*if((*ennemi)->y<= MIN_HEIGHT)// si le mouvement fait sortir le joueur en bas de la fenêtre
+  {
+    (*ennemi)->y=MIN_HEIGHT; // le joueur reste à sa position verticale minimum
+  }
+  else {
+    (*ennemi)->y-=(*ennemi)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
+  }*/
+  /*listEntite tmp = *ennemi;
+  while (tmp != NULL)
+  {
+    if((tmp->y<=0) || tmp->y>=MAX_HEIGHT-1)
+  {
+    //moveEnnemiDown(ennemi);
+    tmp->speedMove_y = -tmp->speedMove_y;
+  }
+    tmp->y += tmp->speedMove_y;
+    tmp = tmp->nextEntite;
+}*/
+  ennemi->speedMove_y = -ennemi->speedMove_y;
+  ennemi->y += ennemi->speedMove_y;
+}
+
 
 /* fonction de gestion des collisions
 int checkCollision(listEntite entityOne, listEntite entityTwo)
@@ -116,10 +139,18 @@ int checkCollision(listEntite e1, listEntite* e2) {
 		while (e1) {
 			if (collision(*e1, *tmp2) == 1) {
 				//une fois les bonus ajoutés : on les supprimes à la collision removeBonusFromList(tmp2, list2);
-				if((*e2)->type == 'E')
+				if(((*e2)->type == 'E') && e1->type == 'P')
 				{
 					removeEnnemiFromList(tmp2, &((*e2)));
 				}
+        if(((*e2)->type == 'E') && e1->type == 'O')
+        {
+
+          //printf("c'est un test");
+          moveEnnemiUp(&((*tmp2)));
+
+        }
+
 				if((e1->type == 'O') && ((*e2)->type == 'P'))
 				{
 					removeProjectilesFromList(tmp2, &((*e2)));

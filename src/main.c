@@ -123,7 +123,7 @@ int img_width, img_height;
             //printf("DEBUT JEU \n");
 
         /////////////////////////////////////////////////////////////////////////
-       // game.player->x=i;
+       //game.player->x=i;
 
          // moveRight(&game.player);
 
@@ -185,8 +185,13 @@ int img_width, img_height;
 			break;
 		}
 
-		
-			moveEnnemiUp(game.listEnnemi);
+    if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
+      moveEnnemi(&(game.listEnnemi));
+    }
+
+
+			//moveEnnemiUp(&(game.listEnnemi));
+
 		
 
 

@@ -111,7 +111,7 @@ int ReadPPM(char * filename, Game *game)
 				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert on crée un ennemi*/
 				    	{
                         printf("adding ennemi from ppm !!!!!! \n");
-				    	        addEnnemiToList(allocEntite(3,'E',x,y,0,0), &(game->listEnnemi));
+				    	        addEnnemiToList(allocEntite(3,'E',x,y,0.1,0.1), &(game->listEnnemi));
 
 				    	}
               if (r == 0 && g == 0 && b == 0) /* si c'est noir on crée un projectile */
