@@ -23,9 +23,8 @@ void moveLeft(listEntite* hero);
 
 void moveRight(listEntite* hero);
 
-void moveEnnemiUp(Ennemi ennemi);
+void moveEnnemi(listEntite* ennemi);
 
-void moveEnnemiDown(Ennemi ennemi);
 
 // Déplacement des projectiles
 void moveProjectile(Projectiles projectile);

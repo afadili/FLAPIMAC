@@ -41,8 +41,6 @@ void drawEntite(listEntite entite);
 /* Fonction qui dessine le backgroud du jeu */
 void drawBG();
 
-
-
   //void drawSquareTexture(int full, char* filename);
 
   void drawPlayer(Hero player);
@@ -58,5 +56,10 @@ void drawBG();
   int loaded(SDL_Surface* image);
   void drawTexturedSquare(GLuint textureID) ;
   void texturedMenu();
+
+ //void loadPictures(GLuint textureID, SDL_Surface* image);
+
+ //void texturedMenu(GLuint textureID, SDL_Surface* image);
+
 
 #endif

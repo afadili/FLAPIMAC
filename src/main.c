@@ -1,6 +1,13 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+<<<<<<< HEAD
 
+=======
+#include <SDL/SDL_mixer.h>
+
+#include "main.h"
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -17,7 +24,10 @@ char * textureDir="img/";
  GLuint textures[NBTEXTURES];
 
  int main ()
+
  {
+
+
    /* Initialisation des entités */
    Game game;
    initializeGame(&game);
@@ -30,8 +40,8 @@ char * textureDir="img/";
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map2.ppm", &game))
-    {
+
+    if (!ReadPPM("map6.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     }
@@ -57,6 +67,33 @@ char * textureDir="img/";
   		return EXIT_FAILURE;
   	}
 	SDL_WM_SetCaption("Flapimac", NULL);
+
+
+
+// musique de fond
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+    {
+       printf("%s", Mix_GetError()); // si problème d'ouverture de son, on affiche les erreurs
+    }
+  Mix_AllocateChannels(10);
+  Mix_Chunk *sound1;
+  Mix_Chunk *sound2;
+  Mix_Chunk *sound3;
+  Mix_Chunk *sound4;
+  sound1 = Mix_LoadWAV("./sound/shoot.wav");
+  sound2 = Mix_LoadWAV("./sound/explosion.wav");
+  sound3 = Mix_LoadWAV("./sound/deadenemy.wav");
+  sound4 = Mix_LoadWAV("./sound/bonus.wav");
+  Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);  
+  Mix_VolumeChunk(sound2, MIX_MAX_VOLUME*10);
+  Mix_Music *music;
+  music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
+  Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
+
+
+
+
+
 	resizeViewport();
 
 	glClearColor(1., 1., 1., 1);
@@ -83,6 +120,7 @@ char * textureDir="img/";
       printf("Erreur de chargement de l'image\n");
       return 0;
     }
+
     loadTexture(textureDir,textures);
     printf("Pictures loaded success ! \n");
 
@@ -93,16 +131,19 @@ char * textureDir="img/";
     {
       //printf("MENU PRINCIPAL\n");
       texturedMenu();
+
+    loadPictures(textureID, image);
     }
     else
     {
 
             //printf("DEBUT JEU \n");
+<<<<<<< HEAD
 
       moveProjectile((game.listProjectiles));
         //printf("DEBUT JEU \n");
         /////////////////////////////////////////////////////////////////////////
-       // game.player->x=i;
+       game.player->x=i;
 
          // moveRight(&game.player);
 
@@ -115,25 +156,15 @@ char * textureDir="img/";
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
           //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-          /*
+          */
 
-
-          Backgound texturing code
-
-*/
           glColor3ub(255,255,255);
           drawEntite(game.listObstacle); // rouge
           drawEntite(game.listEnnemi); // vert
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
           drawEntite(game.listLine); // jaune
-
-        glColor3ub(255,255,255);
-        //loadPictures(textureID, image);
-        drawEntite(game.listObstacle); // rouge
-        drawEntite(game.listEnnemi); // vert
-        drawEntite(game.listProjectiles); //noir
-        drawEntite(game.player); // bleu
+          drawEntite(game.listBonus); // magenta
 
           //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
@@ -153,28 +184,44 @@ char * textureDir="img/";
     i+=0.03;
 /* Gestion des collisions */
 
-		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
+		
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
 			printf("GAME OVER\n");
 			break;
 		}
-		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+      Mix_PlayChannel(3, sound3, 0);
 			printf("enemy dead\n");
 		}
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+      Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
 
-		if (checkCollision(game.player, &(game.listLine))) {
+    if (checkCollision(game.player, &(game.listBonus))) { 
+      // effet du bonusgame.player
+      Mix_PlayChannel(4, sound4, 0);
+      printf("bonus added!\n");
+    }
+
+		if (checkCollision(game.player, &(game.listLine))) { 
+
 			printf("YOU WON\n");
 			break;
 		}
 
+    if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
+      moveEnnemi(&(game.listEnnemi));
+    }
 
-			moveEnnemiUp(game.listEnnemi);
+
+			//moveEnnemiUp(&(game.listEnnemi));
+
+		
 
 
-
-  /*  if (checkCollision(game.player, game.listEnnemi)==1) {
+  /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
+>>>>>>> laurine
 			printf("Niveau terminé !\n");
 			loop=0;
 			break;
@@ -214,25 +261,25 @@ char * textureDir="img/";
             printf("posY : %f\n",  game.player->y );
             break;
 
-            case SDLK_LEFT:
-            /* le player bouge en bas*/
+            // déplacement du joueur non automatisé
+            /*case SDLK_LEFT:
+            /* le player bouge en bas
             moveLeft(&game.player);
             //playerMove = -1;
             printf("posX : %f\n",  game.player->x );
             break;
 
             case SDLK_RIGHT:
-            /* le player bouge en bas*/
             moveRight(&game.player);
             //playerMove = -1;
             printf("posX : %f\n",  game.player->x );
-            break;
+            break;*/
 
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
+           Mix_PlayChannel(1, sound1, 0);
           addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
           //game.listProjectiles->x++;
-
             // Déclenchement du tir
             break;
 
@@ -268,6 +315,11 @@ char * textureDir="img/";
 }
 
   /* Liberation des ressources associées à la SDL */
+  Mix_FreeMusic(music); //Libération de la musique
+  Mix_FreeChunk(sound1);
+  Mix_FreeChunk(sound2);
+  Mix_FreeChunk(sound3);
+  Mix_CloseAudio();
   SDL_Quit();
 
    return EXIT_SUCCESS;

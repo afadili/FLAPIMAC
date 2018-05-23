@@ -3,7 +3,6 @@
 /* Fichier de gestion de l'affichage avec OpenGL */
  // les fonctions de texturing
 
-
 // fonction qui retourne l'id de l 'image à partie de son nom de fichier
 // les fichiers sont nommés avec ID_nomdufichier cette fonction prend l'id et le retourne
 int getImgId(char* filename)
@@ -99,8 +98,53 @@ return 1;
    glPopMatrix();
    // Fin du code de dessin
 
+ void loadPictures(GLuint textureID, SDL_Surface* image)
+ {
+   // TODO: Chargement et traitement de la texture
+   // charger toutes les images
+   glGenTextures(1,&textureID);
+   glBindTexture(GL_TEXTURE_2D,textureID);
+   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   // Envoi des données à la carte graphique
+   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,image->w,image->h,0,GL_RGBA,GL_UNSIGNED_BYTE,image->pixels);
+   // Détachement de la texture de son point de bind
+   glBindTexture(GL_TEXTURE_2D,0);
 
+
+
+       SDL_FreeSurface(image);
+
+           glClear(GL_COLOR_BUFFER_BIT);
+
+
+                   glEnable(GL_TEXTURE_2D);
+                   glBindTexture(GL_TEXTURE_2D,textureID);
  }
+/* pas sûre de cette partie du merge
+ void texturedMenu(GLuint textureID, SDL_Surface* image)
+ {
+   // Code de dessin
+   glPushMatrix();
+   glScalef(10,10,1);
+   glBegin(GL_QUADS);
+       glTexCoord2f(0,0);
+       glVertex2f(-1,1);
+       glTexCoord2f(1,0);
+       glVertex2f(1,1);
+       glTexCoord2f(1,1);
+       glVertex2f(1,-1);
+       glTexCoord2f(0,1);
+       glVertex2f(-1,-1);
+   glEnd();
+   glPopMatrix();
+   // Fin du code de dessin
+
+   //glDisable(GL_TEXTURE_2D);
+   //glBindTexture(GL_TEXTURE_2D,0);
+   glDeleteTextures(1,&textureID);
+
+
+ }*/
 
 
  // fonction qui dessine un carré
@@ -186,6 +230,17 @@ void drawEntite(listEntite entite)
                drawLine(entite);
 
                break;
+        	case 'L': //ligne de fin
+               r = 255;
+               g = 255;
+               b = 0;
+               break;
+
+          case 'B': //bonus
+               r = 255;
+               g = 0;
+               b = 255;
+               break;
            default:
                break;
        }
@@ -193,6 +248,7 @@ void drawEntite(listEntite entite)
        //glColor3ub(r, g, b);
        //drawSquare(1,entite->x,entite->y);
        //drawTexturedSquare(02);
+
        //glPopMatrix();
        entite = entite->nextEntite;
    }

@@ -95,20 +95,14 @@ void addProjectilesToList(Entite* entite, Projectiles *liste)
 
 
 
+void moveEnnemiUpDown(Entite* ennemi){
+ 
+  ennemi->speedMove_y = -ennemi->speedMove_y;
+  ennemi->y += ennemi->speedMove_y;
+}
 
 /* fonction de gestion des collisions
-int checkCollision(listEntite entityOne, listEntite entityTwo)
-{
-
-   if((entityOne->x >= entityTwo->x + 1)      // trop à droite
-	|| (entityOne->x + 1<= entityTwo->x) // trop à gauche
-	|| (entityOne->y >= entityTwo->y + 1) // trop en bas
-	|| (entityOne->y + 1 <= entityTwo->y))  // trop en haut
-          return 0;
-   else
-          return 1; // collision
-}*/
-/* Vérifie si il n'y a pas de collisions entre les élémentsde deux listes différentes, si oui supprime l'élément de la 2ème liste */
+ Vérifie si il n'y a pas de collisions entre les élémentsde deux listes différentes, si oui supprime l'élément de la 2ème liste */
 int checkCollision(listEntite e1, listEntite* e2) {
 	listEntite tmp1 = e1;
 	listEntite tmp2 = *e2;
@@ -116,6 +110,28 @@ int checkCollision(listEntite e1, listEntite* e2) {
 		while (e1) {
 			if (collision(*e1, *tmp2) == 1) {
 				//une fois les bonus ajoutés : on les supprimes à la collision removeBonusFromList(tmp2, list2);
+
+				if(((*e2)->type == 'E') && e1->type == 'P')
+				{
+					removeEnnemiFromList(tmp2, &((*e2)));
+				}
+        if(((*e2)->type == 'B') && e1->type == 'H')
+        {
+          removeBonusFromList(tmp2, &((*e2)));
+        }
+
+        if(((*e2)->type == 'E') && e1->type == 'O')
+        {
+
+          //printf("c'est un test");
+          moveEnnemiUpDown(&((*tmp2)));
+
+        }
+
+				if((e1->type == 'O') && ((*e2)->type == 'P'))
+				{
+					removeProjectilesFromList(tmp2, &((*e2)));
+				}
 				return 1;
 			}
 			e1 = e1->nextEntite;
@@ -129,15 +145,16 @@ int checkCollision(listEntite e1, listEntite* e2) {
 /* Renvoie 1 si les deux éléments entrent en collision, 0 sinon */
 int collision(Entite e1, Entite e2) {
 
-	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2))
+	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2)) 
+
 	// étant donné qu'on a des carrés de 1x1, on vérifie que les deux carrés passés en paramètre ne se chevauchent pas
 	// si le résultat est inférieur à 2, cela signife que les deux carrés se partagent au moins une coordonnée, et donc qu'il y a collision
 	{
 		return 1;
 	}
+
 	else
 		return 0;
-
 }
 
 // on supprime le bonus une fois que le joueur l'a touché
@@ -243,6 +260,33 @@ void removeLineFromList(Entite* entite, Line *liste)
           prev->nextEntite = tmp->nextEntite;
           free(tmp); // on libère la mémoire allouée à l'entité qu'on veut supprimer
         }
+
+   
+   }
+}
+
+void removeBonusFromList(Entite* entite, Bonus *liste)
+{
+      if (liste != NULL) // si la liste n'est pas déjà vide
+      {
+        if (entite == *liste)// si l'entite est à la tête de la liste
+        {
+          Entite *tmp = *liste; // on garde la tête de la liste dans un tmp
+          *liste = (*liste)->nextEntite; // on pointe vers l'élement suivant de la chaine
+          free(tmp); // on libère la mémoire du premier élement qui est notre entité
+        }
+        else // si l'entite est au milieu de la liste
+        {
+          Entite *tmp = (*liste)->nextEntite; // on garde un tmp pour parcourir la chaine
+          Entite *prev = *liste; // on garde un pointeur vers l'élement pécédant le tmp
+          while (entite != tmp) // tant qu'on n'a pas trouvé notre entité
+          {
+            prev = tmp; // on passe à l'entité suivante en gardant le précédant du tmp
+            tmp = tmp->nextEntite;
+          }
+          prev->nextEntite = tmp->nextEntite;
+          free(tmp); // on libère la mémoire allouée à l'entité qu'on veut supprimer
+        }
       }
 }
 
@@ -285,3 +329,15 @@ void freeLineList(Line *liste)
 			*liste = next; // on passe à l'élement suivant
 		}
 }
+
+
+void freeBonusList(Line *liste)
+{
+    while (*liste) // tant que la liste n'est pas vide
+    {
+      Line next = (*liste)->nextEntite; // on garde l'élement suivant de la chaine dans un tmp
+      free(*liste); // on libère le premier élement
+      *liste = next; // on passe à l'élement suivant
+    }
+}
+

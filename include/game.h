@@ -9,7 +9,7 @@
 
 typedef struct game
 {
-  listEntite player, listObstacle, listEnnemi, listProjectiles, listLine;
+  listEntite player, listObstacle, listEnnemi, listProjectiles, listLine, listBonus;
 }Game;
 
 /* fonctions de gestion du game */

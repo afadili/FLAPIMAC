@@ -47,6 +47,18 @@ void moveRight(listEntite* hero){
 }
 
 
+// déplacement vers le haut
+void moveRight(listEntite* hero){
+	if((*hero)->x>= WINDOW_WIDTH) 
+	{
+		(*hero)->x=WINDOW_WIDTH-1; 
+	}
+	else {
+		(*hero)->x+=(*hero)->speedMove_x; 
+}
+}
+
+
 // Déplacement des projectiles
 void moveProjectile(Projectiles projectile)
 {
@@ -58,46 +70,24 @@ void moveProjectile(Projectiles projectile)
 
 }
 
-void moveEnnemiUp(Ennemi ennemi){
-	/*if((*ennemi)->y<= MIN_HEIGHT)// si le mouvement fait sortir le joueur en bas de la fenêtre
-	{
-		(*ennemi)->y=MIN_HEIGHT; // le joueur reste à sa position verticale minimum
-	}
-	else {
-		(*ennemi)->y-=(*ennemi)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
-	}*/
 
-	while (ennemi != NULL)
+void moveEnnemi(listEntite* ennemi){
+  
+  listEntite tmp = *ennemi;
+  while (tmp != NULL)
   {
-  	if((ennemi->y>=15))
-	{
-		moveEnnemiDown(ennemi);
-	}
-    else {
-
-    	ennemi->y+=0.01;
-    }
-    ennemi = ennemi->nextEntite;
-}
-}
-
-
-void moveEnnemiDown(Ennemi ennemi){
-
-	while (ennemi != NULL)
+    if((tmp->y<=0) || tmp->y>=MAX_HEIGHT-1)
   {
-  	if((ennemi->y<=MIN_HEIGHT))
-	{
-		ennemi->y=MIN_HEIGHT; 
-		moveEnnemiUp(ennemi);
-	}
-    else {
+    //moveEnnemiDown(ennemi);
+    tmp->speedMove_y = -tmp->speedMove_y;
+  }
+    tmp->y += tmp->speedMove_y;
+    tmp = tmp->nextEntite;
+}
+ 
+}
 
-    	ennemi->y-=0.01;
-    }
-    ennemi = ennemi->nextEntite;
-}
-}
+
 
 
 
