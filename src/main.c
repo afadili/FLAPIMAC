@@ -62,12 +62,21 @@ int img_width, img_height;
 
 // musique de fond
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
-{
-   printf("%s", Mix_GetError()); // si problème d'ouverture de son, on affiche les erreurs
-}
-Mix_Music *music;
-music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
-Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
+    {
+       printf("%s", Mix_GetError()); // si problème d'ouverture de son, on affiche les erreurs
+    }
+  Mix_AllocateChannels(10);
+  Mix_Chunk *sound1;
+  Mix_Chunk *sound2;
+  Mix_Chunk *sound3;
+  sound1 = Mix_LoadWAV("./sound/shoot.wav");
+  sound2 = Mix_LoadWAV("./sound/explosion.wav");
+  sound3 = Mix_LoadWAV("./sound/deadenemy.wav");
+  Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);  
+  Mix_VolumeChunk(sound2, MIX_MAX_VOLUME*10);
+  Mix_Music *music;
+  music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
+  Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
 
 
 
@@ -163,9 +172,11 @@ Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
 			break;
 		}
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+      Mix_PlayChannel(3, sound3, 0);
 			printf("enemy dead\n");
 		}
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+      Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
 
@@ -235,6 +246,7 @@ Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
 
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
+           Mix_PlayChannel(1, sound1, 0);
           addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
           //game.listProjectiles->x++;
 
@@ -274,6 +286,9 @@ Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
 
   /* Liberation des ressources associées à la SDL */
   Mix_FreeMusic(music); //Libération de la musique
+  Mix_FreeChunk(sound1);
+  Mix_FreeChunk(sound2);
+  Mix_FreeChunk(sound3);
   Mix_CloseAudio();
   SDL_Quit();
 
