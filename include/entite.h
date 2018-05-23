@@ -77,8 +77,8 @@ int checkCollision(listEntite e1, listEntite* e2);
 
 int collision(Entite a, Entite b) ;
 
-void moveEnnemiUp(Entite* ennemi);
-void moveEnnemi(listEntite* ennemi);
+void moveEnnemiUpDown(Entite* ennemi);
+
   
 
 #endif

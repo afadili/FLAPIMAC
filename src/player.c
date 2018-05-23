@@ -76,23 +76,6 @@ void moveEnnemi(listEntite* ennemi){
 }
 
 
-void moveEnnemiDown(Ennemi ennemi){
-
-	while (ennemi != NULL)
-  {
-  	if((ennemi->y<=MIN_HEIGHT))
-	{
-		ennemi->y=MIN_HEIGHT; 
-		//moveEnnemiUp(ennemi);
-	}
-    else {
-
-    	ennemi->y-=0.01;
-    }
-    ennemi = ennemi->nextEntite;
-}
-}
-
 
 
 // Déplacement des Bonus ( à rajouter plus tard)

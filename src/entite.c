@@ -95,25 +95,8 @@ void addProjectilesToList(Entite* entite, Projectiles *liste)
 
 
 
-void moveEnnemiUp(Entite* ennemi){
-  /*if((*ennemi)->y<= MIN_HEIGHT)// si le mouvement fait sortir le joueur en bas de la fenêtre
-  {
-    (*ennemi)->y=MIN_HEIGHT; // le joueur reste à sa position verticale minimum
-  }
-  else {
-    (*ennemi)->y-=(*ennemi)->speedMove_y; //sinon on bouge vers le bas le joueur de sa vitesse
-  }*/
-  /*listEntite tmp = *ennemi;
-  while (tmp != NULL)
-  {
-    if((tmp->y<=0) || tmp->y>=MAX_HEIGHT-1)
-  {
-    //moveEnnemiDown(ennemi);
-    tmp->speedMove_y = -tmp->speedMove_y;
-  }
-    tmp->y += tmp->speedMove_y;
-    tmp = tmp->nextEntite;
-}*/
+void moveEnnemiUpDown(Entite* ennemi){
+ 
   ennemi->speedMove_y = -ennemi->speedMove_y;
   ennemi->y += ennemi->speedMove_y;
 }
@@ -147,7 +130,7 @@ int checkCollision(listEntite e1, listEntite* e2) {
         {
 
           //printf("c'est un test");
-          moveEnnemiUp(&((*tmp2)));
+          moveEnnemiUpDown(&((*tmp2)));
 
         }
 
