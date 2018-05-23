@@ -3,6 +3,12 @@
 #include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <dirent.h>
+#include <time.h>
+#include <math.h>
 #include "game.h"
 #include "entite.h"
 #include "display.h"
@@ -13,6 +19,8 @@
 #define WINDOW_HEIGHT 800
 #define NBTEXTURES 50
 extern GLuint textures[NBTEXTURES];
+
+
 
 /* Nombre de bits par pixel de la fenêtre */
 static const unsigned int BIT_PER_PIXEL = 32;
@@ -33,12 +41,15 @@ void drawEntite(listEntite entite);
 /* Fonction qui dessine le backgroud du jeu */
 void drawBG();
 
- void loadPictures(GLuint textureID, SDL_Surface* image);
 
 
   //void drawSquareTexture(int full, char* filename);
 
   void drawPlayer(Hero player);
+  void drawObstacle(Obstacle obstacle);
+  void drawEnnemi(Ennemi ennemi);
+  void drawProj(Projectiles proj);
+  void drawLine(Line line);
 
 //  void loadTexture(int full, char* filename);
 
@@ -46,6 +57,6 @@ void drawBG();
   int loadTexture(char* directory, GLuint textureID[]);
   int loaded(SDL_Surface* image);
   void drawTexturedSquare(GLuint textureID) ;
-  void texturedMenu(GLuint textureID, SDL_Surface* image);
+  void texturedMenu();
 
 #endif

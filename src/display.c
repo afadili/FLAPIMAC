@@ -90,51 +90,15 @@ return 1;
 }
 
 
- void loadPictures(GLuint textureID, SDL_Surface* image)
- {
-   // TODO: Chargement et traitement de la texture
-   // charger toutes les images
-   glGenTextures(1,&textureID);
-   glBindTexture(GL_TEXTURE_2D,textureID);
-   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   // Envoi des données à la carte graphique
-   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,image->w,image->h,0,GL_RGBA,GL_UNSIGNED_BYTE,image->pixels);
-   // Détachement de la texture de son point de bind
-   glBindTexture(GL_TEXTURE_2D,0);
-
-
-
-       SDL_FreeSurface(image);
-
-           glClear(GL_COLOR_BUFFER_BIT);
-
-
-                   glEnable(GL_TEXTURE_2D);
-                   glBindTexture(GL_TEXTURE_2D,textureID);
- }
-
- void texturedMenu(GLuint textureID, SDL_Surface* image)
+ void texturedMenu()
  {
    // Code de dessin
    glPushMatrix();
-   glScalef(10,10,1);
-   glBegin(GL_QUADS);
-       glTexCoord2f(0,0);
-       glVertex2f(-1,1);
-       glTexCoord2f(1,0);
-       glVertex2f(1,1);
-       glTexCoord2f(1,1);
-       glVertex2f(1,-1);
-       glTexCoord2f(0,1);
-       glVertex2f(-1,-1);
-   glEnd();
+   glScalef(20,20,1);
+    drawTexturedSquare(01);
    glPopMatrix();
    // Fin du code de dessin
 
-
-   //glDisable(GL_TEXTURE_2D);
-   //glBindTexture(GL_TEXTURE_2D,0);
-   glDeleteTextures(1,&textureID);
 
  }
 
@@ -184,6 +148,7 @@ void drawEntite(listEntite entite)
                r = 0;
                g = 0;
                b = 255;
+               drawPlayer(entite);
                //printf("dessin de la texture dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
@@ -191,6 +156,8 @@ void drawEntite(listEntite entite)
                r = 0;
                g = 255;
                b = 0;
+               drawEnnemi(entite);
+
                //printf("dessin de la texture ENNEMI dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
@@ -198,6 +165,8 @@ void drawEntite(listEntite entite)
                r = 255;
                g = 0;
                b = 0;
+               drawObstacle(entite);
+
                //printf("dessin de la texture OBSTACLE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
@@ -205,6 +174,8 @@ void drawEntite(listEntite entite)
                r = 0;
                g = 0;
                b = 0;
+               drawProj(entite);
+
                //printf("dessin de la texture PROJECTILE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
@@ -212,14 +183,16 @@ void drawEntite(listEntite entite)
                r = 255;
                g = 255;
                b = 0;
+               drawLine(entite);
+
                break;
            default:
                break;
        }
       //printf("%d,%d,%d\n",r,g,b );
-       glColor3ub(r, g, b);
-       drawSquare(1,entite->x,entite->y);
-       //drawTexturedSquare(01);
+       //glColor3ub(r, g, b);
+       //drawSquare(1,entite->x,entite->y);
+       //drawTexturedSquare(02);
        //glPopMatrix();
        entite = entite->nextEntite;
    }
@@ -244,6 +217,46 @@ void drawTexturedSquare(GLuint textureID)
         glEnd();
     glDisable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void drawPlayer(Hero player)
+{
+    glPushMatrix();
+    glTranslatef(player->x, player->y, 0);
+    drawTexturedSquare(02);
+    glPopMatrix();
+}
+
+void drawObstacle(Obstacle obstacle)
+{
+    glPushMatrix();
+    glTranslatef(obstacle->x, obstacle->y, 0);
+    drawTexturedSquare(03);
+    glPopMatrix();
+}
+
+void drawEnnemi(Ennemi ennemi)
+{
+    glPushMatrix();
+    glTranslatef(ennemi->x, ennemi->y, 0);
+    drawTexturedSquare(03);
+    glPopMatrix();
+}
+
+void drawProj(Projectiles proj)
+{
+    glPushMatrix();
+    glTranslatef(proj->x, proj->y, 0);
+    drawTexturedSquare(03);
+    glPopMatrix();
+}
+
+void drawLine(Line line)
+{
+    glPushMatrix();
+    glTranslatef(line->x, line->y, 0);
+    drawTexturedSquare(02);
+    glPopMatrix();
 }
 
 

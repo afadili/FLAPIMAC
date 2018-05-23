@@ -1,5 +1,6 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -13,9 +14,9 @@
 int img_width, img_height;
 int mode =0;
 char * textureDir="img/";
-GLuint textures[NBTEXTURES];
+ GLuint textures[NBTEXTURES];
 
-int main ()
+ int main ()
  {
    /* Initialisation des entités */
    Game game;
@@ -26,9 +27,9 @@ int main ()
    //game.listEnnemi = allocEntite(2,'E',5,5,0,0); // ennemi
    //game.listProjectiles = allocEntite(10,'P',5.30,5,0,0);// projectiles
    /* test de chargement de la ppm */
+
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-
     if (!ReadPPM("map2.ppm", &game))
     {
       printf("err en lisant le ppm\n" );
@@ -55,19 +56,17 @@ int main ()
   		fprintf(stderr, "Impossible d'ouvrir la fenetre. Fin du programme.\n");
   		return EXIT_FAILURE;
   	}
-	    SDL_WM_SetCaption("Flapimac", NULL);
-	    resizeViewport();
+	SDL_WM_SetCaption("Flapimac", NULL);
+	resizeViewport();
 
-      glClearColor(1., 1., 1., 1);
+	glClearColor(1., 1., 1., 1);
+  /* Initialisation des entités du jeu */
 
-      /* Initialisation des entités du jeu */
+  /* code */
 
-                      /* code */
-
-      /* Récupération du temps au début de la boucle */
-
-      Uint32 startTime = SDL_GetTicks();
-        /* Boucle d'affichage */
+  /* Récupération du temps au début de la boucle */
+  Uint32 startTime = SDL_GetTicks();
+  /* Boucle d'affichage */
   	int loop = 1;
     float i = 0;
     //int playerMove =0;
@@ -78,45 +77,34 @@ int main ()
 
 
     /* chargement de l'image d'après le fichier */
-
     SDL_Surface* image = IMG_Load(filename);
     if (image == NULL)
     {
       printf("Erreur de chargement de l'image\n");
       return 0;
     }
-    //loadTexture(textureDir,textures);
-    loadPictures(textureID, image);
+    loadTexture(textureDir,textures);
+    printf("Pictures loaded success ! \n");
 
-  while(loop)
-  {
-    glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
-
-
-    moveProjectile((game.listProjectiles));
-
-
+  while(loop) {
+    //game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     if (mode==0)
-
     {
       //printf("MENU PRINCIPAL\n");
-      texturedMenu(textureID, image);
+      texturedMenu();
     }
     else
     {
 
-
             //printf("DEBUT JEU \n");
 
-            game.player->x=i;
       moveProjectile((game.listProjectiles));
         //printf("DEBUT JEU \n");
-
         /////////////////////////////////////////////////////////////////////////
        // game.player->x=i;
 
-       // moveRight(&game.player);
+         // moveRight(&game.player);
 
 
         /* Code de dessin */
@@ -132,7 +120,6 @@ int main ()
 
           Backgound texturing code
 
-
 */
           glColor3ub(255,255,255);
           drawEntite(game.listObstacle); // rouge
@@ -140,6 +127,7 @@ int main ()
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
           drawEntite(game.listLine); // jaune
+
         glColor3ub(255,255,255);
         //loadPictures(textureID, image);
         drawEntite(game.listObstacle); // rouge
@@ -161,15 +149,14 @@ int main ()
 		else if (playerMove == -1)
 			moveDown(&game.player);
 
-     Boucle traitant les evenements */
-    i+=0.01;
+    /* Boucle traitant les evenements */
+    i+=0.03;
 /* Gestion des collisions */
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
 			printf("GAME OVER\n");
 			break;
 		}
-
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
 			printf("enemy dead\n");
 		}
@@ -187,7 +174,6 @@ int main ()
 
 
 
-
   /*  if (checkCollision(game.player, game.listEnnemi)==1) {
 			printf("Niveau terminé !\n");
 			loop=0;
@@ -195,18 +181,15 @@ int main ()
 		}*/
 
   SDL_Event e;
-  while(SDL_PollEvent(&e))
-  {
+  while(SDL_PollEvent(&e)) {
 
     /* L'utilisateur ferme la fenêtre */
-    if(e.type == SDL_QUIT)
-    {
+    if(e.type == SDL_QUIT) {
       loop = 0;
       break;
     }
     /* Traitement d'evenements :*/
-    switch(e.type)
-    {
+    switch(e.type) {
 
        /*Touche clavier*/
       case SDL_KEYDOWN:
@@ -279,8 +262,7 @@ int main ()
   Uint32 elapsedTime = SDL_GetTicks() - startTime;
 
   /* Si trop peu de temps s'est écoulé, on met en pause le programme */
-  if(elapsedTime < FRAMERATE_MILLISECONDS)
-  {
+  if(elapsedTime < FRAMERATE_MILLISECONDS) {
     SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
   }
 }
@@ -289,4 +271,4 @@ int main ()
   SDL_Quit();
 
    return EXIT_SUCCESS;
-}
+ }
