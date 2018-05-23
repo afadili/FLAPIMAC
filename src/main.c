@@ -31,7 +31,7 @@ int img_width, img_height;
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map4.ppm", &game)) {
+    if (!ReadPPM("map5.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     };
@@ -123,7 +123,10 @@ int img_width, img_height;
             //printf("DEBUT JEU \n");
 
         /////////////////////////////////////////////////////////////////////////
-       //game.player->x=i;
+      
+        game.player->x=i;
+      
+       
 
          // moveRight(&game.player);
 
@@ -135,10 +138,10 @@ int img_width, img_height;
           glPushMatrix();
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
-          //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-          /*
+          //glTranslatef(2 - game.player->x, 0, 0); Translation du monde pour suivre le joueur
+        
 
-
+/*
           Backgound texturing code
 
 */
@@ -235,19 +238,21 @@ int img_width, img_height;
             printf("posY : %f\n",  game.player->y );
             break;
 
-            case SDLK_LEFT:
-            /* le player bouge en bas*/
+
+            // déplacement du joueur non automatisé
+            /*case SDLK_LEFT:
+            /* le player bouge en bas
             moveLeft(&game.player);
             //playerMove = -1;
             printf("posX : %f\n",  game.player->x );
             break;
 
             case SDLK_RIGHT:
-            /* le player bouge en bas*/
+            /* le player bouge en bas
             moveRight(&game.player);
             //playerMove = -1;
             printf("posX : %f\n",  game.player->x );
-            break;
+            break;*/
 
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
