@@ -31,7 +31,7 @@ int img_width, img_height;
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map5.ppm", &game)) {
+    if (!ReadPPM("map6.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     };
@@ -69,9 +69,11 @@ int img_width, img_height;
   Mix_Chunk *sound1;
   Mix_Chunk *sound2;
   Mix_Chunk *sound3;
+  Mix_Chunk *sound4;
   sound1 = Mix_LoadWAV("./sound/shoot.wav");
   sound2 = Mix_LoadWAV("./sound/explosion.wav");
   sound3 = Mix_LoadWAV("./sound/deadenemy.wav");
+  sound4 = Mix_LoadWAV("./sound/bonus.wav");
   Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);  
   Mix_VolumeChunk(sound2, MIX_MAX_VOLUME*10);
   Mix_Music *music;
@@ -151,6 +153,7 @@ int img_width, img_height;
           drawEntite(game.listProjectiles); //noir
           drawEntite(game.player); // bleu
           drawEntite(game.listLine); // jaune
+          drawEntite(game.listBonus); // magenta
 
           //glClear(GL_COLOR_BUFFER_BIT);
           //glPushMatrix();
@@ -182,6 +185,12 @@ int img_width, img_height;
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
+
+    if (checkCollision(game.player, &(game.listBonus))) { 
+      // effet du bonusgame.player
+      Mix_PlayChannel(4, sound4, 0);
+      printf("bonus added!\n");
+    }
 
 		if (checkCollision(game.player, &(game.listLine))) { 
 			printf("YOU WON\n");

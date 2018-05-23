@@ -117,6 +117,12 @@ void drawEntite(listEntite entite)
                g = 255;
                b = 0;
                break;
+
+          case 'B': //bonus
+               r = 255;
+               g = 0;
+               b = 255;
+               break;
            default:
                break;
        }
