@@ -231,7 +231,7 @@ void drawObstacle(Obstacle obstacle)
 {
     glPushMatrix();
     glTranslatef(obstacle->x, obstacle->y, 0);
-    drawTexturedSquare(03);
+    drawTexturedSquare(04);
     glPopMatrix();
 }
 
