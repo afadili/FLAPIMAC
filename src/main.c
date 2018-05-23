@@ -1,6 +1,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
 
+#include "main.h"
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -13,7 +15,10 @@
 int img_width, img_height;
 
  int main ()
+
  {
+
+
    /* Initialisation des entités */
    Game game;
    initializeGame(&game);
@@ -52,6 +57,22 @@ int img_width, img_height;
   		return EXIT_FAILURE;
   	}
 	SDL_WM_SetCaption("Flapimac", NULL);
+
+
+
+// musique de fond
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+{
+   printf("%s", Mix_GetError()); // si problème d'ouverture de son, on affiche les erreurs
+}
+Mix_Music *music;
+music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
+Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
+
+
+
+
+
 	resizeViewport();
 
 	glClearColor(1., 1., 1., 1);
@@ -252,6 +273,8 @@ int img_width, img_height;
 }
 
   /* Liberation des ressources associées à la SDL */
+  Mix_FreeMusic(music); //Libération de la musique
+  Mix_CloseAudio();
   SDL_Quit();
 
    return EXIT_SUCCESS;
