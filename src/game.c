@@ -70,21 +70,6 @@ void addBonusToList(Entite* entite, Bonus *liste)
     *liste = tmp;
 }
 
-void addLineToList(Entite* entite, Line *liste)
-{
-  Line tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
-  tmp = *liste; // le début de la chaine est gardé dans tmp
-  if (tmp == NULL) // si la chaine est vide on ajoute l'entité
-    {
-      tmp = entite;
-    }
-  else // sinon on ajoute l'entite au début de la chaine
-    {
-      entite->nextEntite = tmp;
-      tmp = entite;
-    }
-    *liste = tmp;
-}
 // fonction qui ajoute une entité au Game
 void addEntiteToGame(Game *game, Entite entite)
 {

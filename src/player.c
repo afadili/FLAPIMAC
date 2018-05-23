@@ -47,17 +47,6 @@ void moveRight(listEntite* hero){
 }
 
 
-// déplacement vers le haut
-void moveRight(listEntite* hero){
-	if((*hero)->x>= WINDOW_WIDTH) 
-	{
-		(*hero)->x=WINDOW_WIDTH-1; 
-	}
-	else {
-		(*hero)->x+=(*hero)->speedMove_x; 
-}
-}
-
 
 // Déplacement des projectiles
 void moveProjectile(Projectiles projectile)

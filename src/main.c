@@ -1,10 +1,4 @@
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-<<<<<<< HEAD
-
-=======
-#include <SDL/SDL_mixer.h>
-
 #include "main.h"
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
@@ -132,13 +126,12 @@ char * textureDir="img/";
       //printf("MENU PRINCIPAL\n");
       texturedMenu();
 
-    loadPictures(textureID, image);
+    //loadPictures(textureID, image);
     }
     else
     {
 
             //printf("DEBUT JEU \n");
-<<<<<<< HEAD
 
       moveProjectile((game.listProjectiles));
         //printf("DEBUT JEU \n");
@@ -156,7 +149,7 @@ char * textureDir="img/";
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
           //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-          */
+          
 
           glColor3ub(255,255,255);
           drawEntite(game.listObstacle); // rouge

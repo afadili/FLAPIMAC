@@ -145,7 +145,7 @@ return 1;
 
 
  }*/
-
+}
 
  // fonction qui dessine un carré
 
@@ -228,12 +228,6 @@ void drawEntite(listEntite entite)
                g = 255;
                b = 0;
                drawLine(entite);
-
-               break;
-        	case 'L': //ligne de fin
-               r = 255;
-               g = 255;
-               b = 0;
                break;
 
           case 'B': //bonus
