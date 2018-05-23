@@ -31,7 +31,7 @@ int img_width, img_height;
 
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
-    if (!ReadPPM("map2.ppm", &game)) {
+    if (!ReadPPM("map4.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     };
