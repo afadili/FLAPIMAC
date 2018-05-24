@@ -80,7 +80,7 @@ GLuint textures[NBTEXTURES];
   sound2 = Mix_LoadWAV("./sound/explosion.wav");
   sound3 = Mix_LoadWAV("./sound/deadenemy.wav");
   sound4 = Mix_LoadWAV("./sound/bonus.wav");
-  Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);  
+  Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);
   Mix_VolumeChunk(sound2, MIX_MAX_VOLUME*10);
   Mix_Music *music;
   music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
@@ -106,16 +106,16 @@ GLuint textures[NBTEXTURES];
     int mode =0;
     GLuint textureID=0;
 
-    const char* filename = "background.png";
+    /*const char* filename = "00_background.png";
 
 
-    /* chargement de l'image d'après le fichier */
+    /* chargement de l'image d'après le fichier
     SDL_Surface* image = IMG_Load(filename);
     if (image == NULL)
     {
       printf("Erreur de chargement de l'image\n");
       return 0;
-    }
+    }*/
 
     loadTexture(textureDir,textures);
     printf("Pictures loaded success ! \n");
@@ -163,7 +163,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
           //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-          
+
 
           glColor3ub(255,255,255);
           drawEntite(game.listObstacle); // rouge
@@ -191,16 +191,24 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     i+=0.03;
 /* Gestion des collisions */
 
+<<<<<<< HEAD
+
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
+=======
 		
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
+>>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
 			printf("GAME OVER\n");
 			break;
 		}
-		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy touched\n");
 		}
+<<<<<<< HEAD
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
+=======
 
     if(game.player->bonus != 0)
     {
@@ -211,12 +219,17 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       }   
     }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+>>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
 
+<<<<<<< HEAD
+    if (checkCollision(game.player, &(game.listBonus))) {
+=======
 
     if (checkCollision(game.player, &(game.listBonus))) { 
+>>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
       // effet du bonusgame.player
       Mix_PlayChannel(4, sound4, 0);
       game.player->bonus += 3;
@@ -224,7 +237,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       printf("nb bonus: %d\n", game.player->bonus);
     }
 
-		if (checkCollision(game.player, &(game.listLine))) { 
+		if (checkCollision(game.player, &(game.listLine))) {
 
 			printf("YOU WON\n");
 			break;
@@ -237,10 +250,10 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
 			//moveEnnemiUp(&(game.listEnnemi));
 
-		
 
 
-  /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
+
+  /*  if (checkCollision(game.player, game.listEnnemi)==1) {
 >>>>>>> laurine
 			printf("Niveau terminé !\n");
 			loop=0;

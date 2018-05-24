@@ -1,4 +1,4 @@
-#ifndef DISPLAY__H
+  #ifndef DISPLAY__H
 #define DISPLAY__H
 #include <SDL/SDL.h>
 #include <GL/gl.h>
@@ -17,7 +17,7 @@
 #include <SDL/SDL_image.h>
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 800
-#define NBTEXTURES 50
+#define NBTEXTURES 11
 extern GLuint textures[NBTEXTURES];
 
 
