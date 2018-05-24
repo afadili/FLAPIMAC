@@ -2,64 +2,64 @@
 
 /* Fichier de gestion du jeu dans la mémoire */
 
-// fonctions de gestion de l'entité
-// Fonction qui alloue la mémoire nécessaire d'une entité,
-// on initialise les champs avec les valeurs x,y,type,life,bBox passées en paramètre
+// fonctions de gestion de chaque entité
+// fonctions qui alloue la mémoire d'une entité,
+// on initialise les champs avec les valeurs passées en paramètre
 
 
- Entite* allocEntite(int life, int bonus, char type, float x, float y, float speedMove_y, float speedMove_x/*, bBox box*/)
+Entite* allocEntite(int life, int bonus, char type, float x, float y, float speedMove_y, float speedMove_x)
  {
-   Entite* entite;
-   entite = malloc(sizeof(Entite));
-     if (entite == NULL)
+  Entite* entite;
+  entite = malloc(sizeof(Entite));
+    if (entite == NULL)
      {
-       printf("Allocation error !\n");
+      printf("Allocation error !\n");
      }
-     entite->life = life;
-     entite->bonus = bonus;
-     entite->type = type;
-     entite->x = x;
-     entite->y = y;
-     //entite->box = NULL;
-     entite->speedMove_x = speedMove_x;
-     entite->speedMove_y = speedMove_y;
-     entite->nextEntite=NULL;
-     return entite;
+    entite->life = life;
+    entite->bonus = bonus;
+    entite->type = type;
+    entite->x = x;
+    entite->y = y;
+    entite->speedMove_x = speedMove_x;
+    entite->speedMove_y = speedMove_y;
+    entite->nextEntite=NULL;
+    return entite;
    }
- // à debuger et à tester et rajouter x et y dans une autre fonction qui s'en occupe plus tard
+
 
  // Fonction qui ajoute une entité player à la liste
- void addPlayerTolist(Entite* entite, Hero* liste)
- {
-   printf("entre dans la fonction add player to list\n");
-   Hero tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
+void addPlayerTolist(Entite* entite, Hero* liste)
+{
+  printf("entre dans la fonction add player to list\n");
+  Hero tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
   tmp = *liste; // le début de la chaine est gardé dans tmp
   if (tmp == NULL) // si la chaine est vide on ajoute l'entité
-     {
-      tmp = entite;
-    }
-   else // sinon on ajoute l'entite au début de la chaine
-     {
-      entite->nextEntite = tmp;
-      tmp = entite;
-    }
-    *liste = tmp;
- }
+  {
+    tmp = entite;
+  }
+  else // sinon on ajoute l'entite au début de la chaine
+  {
+    entite->nextEntite = tmp;
+    tmp = entite;
+  }
+*liste = tmp;
+}
+
 void addObstacleToList(Entite* entite, Obstacle *liste)
 {
 
   Obstacle tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
 	tmp = *liste; // le début de la chaine est gardé dans tmp
 	if (tmp == NULL) // si la chaine est vide on ajoute l'entité
-    {
-  		tmp = entite;
-  	}
+  {
+  	tmp = entite;
+  }
   else // sinon on ajoute l'entite au début de la chaine
     {
-  		entite->nextEntite = tmp;
-  		tmp = entite;
+  	entite->nextEntite = tmp;
+  	tmp = entite;
   	}
-  	*liste = tmp;
+  *liste = tmp;
 }
 
 void addEnnemiToList(Entite* entite, Ennemi *liste)
@@ -67,15 +67,15 @@ void addEnnemiToList(Entite* entite, Ennemi *liste)
   Ennemi tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
 	tmp = *liste; // le début de la chaine est gardé dans tmp
 	if (tmp == NULL) // si la chaine est vide on ajoute l'entité
-    {
-  		tmp = entite;
-  	}
+  {
+  	tmp = entite;
+  }
   else // sinon on ajoute l'entite au début de la chaine
-    {
-  		entite->nextEntite = tmp;
-  		tmp = entite;
-  	}
-  	*liste = tmp;
+  {
+  	entite->nextEntite = tmp;
+  	tmp = entite;
+  }
+  *liste = tmp;
 }
 
 void addProjectilesToList(Entite* entite, Projectiles *liste)
@@ -83,75 +83,72 @@ void addProjectilesToList(Entite* entite, Projectiles *liste)
  	Projectiles tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
 	tmp = *liste; // le début de la chaine est gardé dans tmp
 	if (tmp == NULL) // si la chaine est vide on ajoute l'entité
-    {
-  		tmp = entite;
-  	}
+  {
+  	tmp = entite;
+  }
   else // sinon on ajoute l'entite au début de la chaine
-    {
-  		entite->nextEntite = tmp;
-  		tmp = entite;
-  	}
-  	*liste = tmp;
+  {
+  	entite->nextEntite = tmp;
+  	tmp = entite;
+  }
+  *liste = tmp;
 }
 
-
-
+/*dans la fonction de collision, si l'ennemi entre en collision avec un obstacle, on inverse sa valeur de déplacement pour changer sa direction*/
 void moveEnnemiUpDown(Entite* ennemi){
- 
   ennemi->speedMove_y = -ennemi->speedMove_y;
   ennemi->y += ennemi->speedMove_y;
 }
 
-/* fonction de gestion des collisions
- Vérifie si il n'y a pas de collisions entre les élémentsde deux listes différentes, si oui supprime l'élément de la 2ème liste */
+/* gestion des collisions
+on parcourt nos deux listes pour vérifier si deux éléments de chaque liste entrent en collision 
+on parcourt d'abord la liste passée en premier paramètre, puis celle passée en second paramètre
+*/
 int checkCollision(listEntite e1, listEntite* e2) {
 	listEntite tmp1 = e1;
 	listEntite tmp2 = *e2;
 	while (tmp2) {
 		while (e1) {
 			if (collision(*e1, *tmp2) == 1) {
-				//une fois les bonus ajoutés : on les supprimes à la collision removeBonusFromList(tmp2, list2);
-
+        //on enlève de la vie à un ennemi s'il est touché par un projectile, si sa vie tombe à 0 on le retire de la liste
 				if(((*e2)->type == 'E') && e1->type == 'P')
 				{
           tmp2->life = (tmp2->life)-1;
           printf("VIE ENNEMI%d\n", tmp2->life);
-
           if(tmp2->life == 0)
           {
             removeEnnemiFromList(tmp2, &((*e2)));
             printf("ennemy dead!\n");
           }	
 				}
+        // si le joueur percute une entité de type bonus, celle-ci est retirée de la liste
         if(((*e2)->type == 'B') && e1->type == 'H')
         {
           removeBonusFromList(tmp2, &((*e2)));
         }
-
+        //si l'ennemi rencontre un obstacle, il change de trajectoire
         if(((*e2)->type == 'E') && e1->type == 'O')
         {
-
-          //printf("c'est un test");
           moveEnnemiUpDown(&((*tmp2)));
-
         }
-
+        //on supprime le projectile s'il touche un obstacle sans que le joueur ait de bonus
 				if((e1->type == 'O') && ((*e2)->type == 'P'))
 				{
 					removeProjectilesFromList(tmp2, &((*e2)));
 				}
+        // si le joueur a un bonus, on enlève de la vie à l'obstacle qui est supprimé s'il n'a plus de vie
         if((e1->type == 'P') && ((*e2)->type == 'O'))
         {
           tmp2->life-=1;
           if(tmp2->life == 0)
           {
-            //removeProjectilesFromList(e1, &(tmp1));
             removeObstacleFromList(tmp2, &((*e2)));
-          }
-          
+          } 
         }
+        // s'il y a eu une action suite à une collision, on renvoie 1, voir main.c
 				return 1;
 			}
+      //on passe à l'entité suivante si aucune collision détectée
 			e1 = e1->nextEntite;
 		}
 		e1 = tmp1;
@@ -162,25 +159,18 @@ int checkCollision(listEntite e1, listEntite* e2) {
 
 /* Renvoie 1 si les deux éléments entrent en collision, 0 sinon */
 int collision(Entite e1, Entite e2) {
-
 	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2)) 
-
 	// étant donné qu'on a des carrés de 1x1, on vérifie que les deux carrés passés en paramètre ne se chevauchent pas
 	// si le résultat est inférieur à 2, cela signife que les deux carrés se partagent au moins une coordonnée, et donc qu'il y a collision
 	{
 		return 1;
 	}
-
 	else
-		return 0;
+    return 0;
 }
 
-// on supprime le bonus une fois que le joueur l'a touché
-//void collidedElements(Entite* entite, Bonus *liste);
-
-
-// faire les mêmes fonctions avec RemoveEntiteFromList
-
+/**************FONCTIONS DE SUPPRESSION*********************/
+// fonctions classiques qui supprime une entité passée en premier paramètre d'une liste passée en deuxième paramètre
 void removeObstacleFromList(Entite* entite, Obstacle* liste)
 {
     if (liste != NULL) // si la liste n'est pas déjà vide
@@ -307,6 +297,10 @@ void removeBonusFromList(Entite* entite, Bonus *liste)
         }
       }
 }
+
+
+/******************FONCTIONS DE LIBERATION************************/
+// on libère la mémoire de nos listes
 
 void freeObstacleList(Obstacle *liste)
 {

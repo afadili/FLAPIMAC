@@ -248,7 +248,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 			//break;
 		}
 
-    if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
+   if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
      moveEnnemi(&(game.listEnnemi), &(game.listProjectiles));
     }
 
