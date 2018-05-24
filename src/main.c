@@ -78,7 +78,7 @@ char * textureDir="img/";
   sound2 = Mix_LoadWAV("./sound/explosion.wav");
   sound3 = Mix_LoadWAV("./sound/deadenemy.wav");
   sound4 = Mix_LoadWAV("./sound/bonus.wav");
-  Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);  
+  Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);
   Mix_VolumeChunk(sound2, MIX_MAX_VOLUME*10);
   Mix_Music *music;
   music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
@@ -104,16 +104,16 @@ char * textureDir="img/";
     int mode =0;
     GLuint textureID=0;
 
-    const char* filename = "background.png";
+    /*const char* filename = "00_background.png";
 
 
-    /* chargement de l'image d'après le fichier */
+    /* chargement de l'image d'après le fichier
     SDL_Surface* image = IMG_Load(filename);
     if (image == NULL)
     {
       printf("Erreur de chargement de l'image\n");
       return 0;
-    }
+    }*/
 
     loadTexture(textureDir,textures);
     printf("Pictures loaded success ! \n");
@@ -149,7 +149,7 @@ char * textureDir="img/";
           glScalef(20/(float)img_height, 20/(float)img_height,0);
           glTranslatef(-i,-img_height/2+0.5,0);
           //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
-          
+
 
           glColor3ub(255,255,255);
           drawEntite(game.listObstacle); // rouge
@@ -177,27 +177,27 @@ char * textureDir="img/";
     i+=0.03;
 /* Gestion des collisions */
 
-		
-		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
+
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
 			printf("GAME OVER\n");
 			break;
 		}
-		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy dead\n");
 		}
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
 
-    if (checkCollision(game.player, &(game.listBonus))) { 
+    if (checkCollision(game.player, &(game.listBonus))) {
       // effet du bonusgame.player
       Mix_PlayChannel(4, sound4, 0);
       printf("bonus added!\n");
     }
 
-		if (checkCollision(game.player, &(game.listLine))) { 
+		if (checkCollision(game.player, &(game.listLine))) {
 
 			printf("YOU WON\n");
 			break;
@@ -210,10 +210,10 @@ char * textureDir="img/";
 
 			//moveEnnemiUp(&(game.listEnnemi));
 
-		
 
 
-  /*  if (checkCollision(game.player, game.listEnnemi)==1) { 
+
+  /*  if (checkCollision(game.player, game.listEnnemi)==1) {
 >>>>>>> laurine
 			printf("Niveau terminé !\n");
 			loop=0;

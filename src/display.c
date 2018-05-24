@@ -66,7 +66,8 @@ int loadTexture(char* directory, GLuint textureID[])
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glBindTexture(GL_TEXTURE_2D, textureID[i]);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
+            printf("segfault \n");
+            printf("%d\n", textures[i]);
             // Envoie des données texture à la carte graphique
             glTexImage2D(
                 GL_TEXTURE_2D,
@@ -78,7 +79,7 @@ int loadTexture(char* directory, GLuint textureID[])
                 GL_RGBA,
                 GL_UNSIGNED_BYTE,
                 textures[i]->pixels);
-
+                printf("segggggg\n");
             // Libération des données CPU
             SDL_FreeSurface(textures[i]);
             glBindTexture(GL_TEXTURE_2D, 0);
@@ -94,11 +95,11 @@ return 1;
    // Code de dessin
    glPushMatrix();
    glScalef(20,20,1);
-    drawTexturedSquare(01);
+    drawTexturedSquare(1);
    glPopMatrix();
    // Fin du code de dessin
 
- void loadPictures(GLuint textureID, SDL_Surface* image)
+ /*void loadPictures(GLuint textureID, SDL_Surface* image)
  {
    // TODO: Chargement et traitement de la texture
    // charger toutes les images
@@ -120,7 +121,7 @@ return 1;
                    glEnable(GL_TEXTURE_2D);
                    glBindTexture(GL_TEXTURE_2D,textureID);
  }
-/* pas sûre de cette partie du merge
+ pas sûre de cette partie du merge
  void texturedMenu(GLuint textureID, SDL_Surface* image)
  {
    // Code de dessin
@@ -273,7 +274,7 @@ void drawPlayer(Hero player)
 {
     glPushMatrix();
     glTranslatef(player->x, player->y, 0);
-    drawTexturedSquare(02);
+    drawTexturedSquare(2);
     glPopMatrix();
 }
 
@@ -281,7 +282,7 @@ void drawObstacle(Obstacle obstacle)
 {
     glPushMatrix();
     glTranslatef(obstacle->x, obstacle->y, 0);
-    drawTexturedSquare(04);
+    drawTexturedSquare(4);
     glPopMatrix();
 }
 
@@ -297,7 +298,7 @@ void drawProj(Projectiles proj)
 {
     glPushMatrix();
     glTranslatef(proj->x, proj->y, 0);
-    drawTexturedSquare(03);
+    drawTexturedSquare(05);
     glPopMatrix();
 }
 
@@ -305,10 +306,17 @@ void drawLine(Line line)
 {
     glPushMatrix();
     glTranslatef(line->x, line->y, 0);
-    drawTexturedSquare(02);
+    drawTexturedSquare(07);
     glPopMatrix();
 }
 
+void drawBonus(Bonus bonus)
+{
+    glPushMatrix();
+    glTranslatef(bonus->x, bonus->y, 0);
+    drawTexturedSquare(6);
+    glPopMatrix();
+}
 
 /* glPushMatrix();
  printf("entite %f \n",entite->y);
