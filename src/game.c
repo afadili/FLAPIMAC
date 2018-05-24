@@ -28,7 +28,7 @@ void initializeGame(Game *game)
 // fonction qui libère le Game
 void freeGame(Game *game)
 {
-  free((*game).player);
+ // free((*game).player);
   freeObstacleList(&(*game).listObstacle);
   freeEnnemiList(&(*game).listEnnemi);
   freeProjectilesList(&(*game).listProjectiles);
@@ -133,7 +133,8 @@ int ReadPPM(char * filename, Game *game)
 				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert on crée un ennemi*/
 				    	{
                         printf("adding ennemi from ppm !!!!!! \n");
-				    	        addEnnemiToList(allocEntite(5,0,'E',x,y,0.03,0.03), &(game->listEnnemi));
+				    	        addEnnemiToList(allocEntite(3,0,'E',x,y,0.03,0.03), &(game->listEnnemi));
+                      
 
 				    	}
               if (r == 0 && g == 0 && b == 0) /* si c'est noir on crée un projectile */

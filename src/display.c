@@ -220,6 +220,11 @@ void drawEntite(listEntite entite)
                g = 0;
                b = 0;*/
                drawProj(entite);
+          case 'M': //projectile ennemi
+               /*r = 0;
+               g = 0;
+               b = 0;*/
+               drawProj(entite);
 
                //printf("dessin de la texture PROJECTILE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);

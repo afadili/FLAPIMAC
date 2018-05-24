@@ -78,6 +78,7 @@ void addEnnemiToList(Entite* entite, Ennemi *liste)
   *liste = tmp;
 }
 
+
 void addProjectilesToList(Entite* entite, Projectiles *liste)
 {
  	Projectiles tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
@@ -111,16 +112,17 @@ int checkCollision(listEntite e1, listEntite* e2) {
 		while (e1) {
 			if (collision(*e1, *tmp2) == 1) {
         //on enlève de la vie à un ennemi s'il est touché par un projectile, si sa vie tombe à 0 on le retire de la liste
-				if(((*e2)->type == 'E') && e1->type == 'P')
-				{
-          tmp2->life = (tmp2->life)-1;
-          printf("VIE ENNEMI%d\n", tmp2->life);
-          if(tmp2->life == 0)
+        if((e1->type == 'P') && ((*e2)->type == 'E'))
+        {
+          tmp2->life-=1;
+          printf("VIE ENNEMI : %d\n", tmp2->life);
+          if(tmp2->life <= 0)
           {
             removeEnnemiFromList(tmp2, &((*e2)));
-            printf("ennemy dead!\n");
-          }	
-				}
+            printf("he's dead :(\n");
+          } 
+        }
+
         // si le joueur percute une entité de type bonus, celle-ci est retirée de la liste
         if(((*e2)->type == 'B') && e1->type == 'H')
         {

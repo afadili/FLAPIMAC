@@ -15,8 +15,15 @@
 
 int img_width, img_height;
 int mode =0;
+int score = 0;
 char * textureDir="img/";
 GLuint textures[NBTEXTURES];
+Mix_Chunk *sound1;
+Mix_Chunk *sound2;
+Mix_Chunk *sound3;
+Mix_Chunk *sound4;
+Mix_Chunk *sound5;
+Mix_Music *music;
 //SDL_Surface *text = NULL;
 
  int main ()
@@ -72,11 +79,6 @@ GLuint textures[NBTEXTURES];
        printf("%s", Mix_GetError()); // si problème d'ouverture de son, on affiche les erreurs
     }
   Mix_AllocateChannels(10);
-  Mix_Chunk *sound1;
-  Mix_Chunk *sound2;
-  Mix_Chunk *sound3;
-  Mix_Chunk *sound4;
-  Mix_Chunk *sound5;
   sound1 = Mix_LoadWAV("./sound/shoot.wav");
   sound2 = Mix_LoadWAV("./sound/explosion.wav");
   sound3 = Mix_LoadWAV("./sound/deadenemy.wav");
@@ -84,10 +86,8 @@ GLuint textures[NBTEXTURES];
   sound5 = Mix_LoadWAV("./sound/gameover.wav");
   Mix_VolumeChunk(sound1, MIX_MAX_VOLUME/2);
   Mix_VolumeChunk(sound2, MIX_MAX_VOLUME*10);
-  Mix_Music *music;
   music = Mix_LoadMUS("./sound/spongebobtheme.mp3");
-
- Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
+  Mix_PlayMusic(music, -1); // -1 pour jouer en boucle
 
 
 	resizeViewport();
@@ -107,7 +107,7 @@ GLuint textures[NBTEXTURES];
 
 
     loadTexture(textureDir,textures);
-    printf("Pictures loaded success ! \n");
+    //printf("Pictures loaded success ! \n");
 
 
    /* if(TTF_Init() == -1)
@@ -123,6 +123,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
   while(loop)
   {
+    
     //game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     if (mode == 0)
@@ -137,13 +138,11 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     else if (mode == 2)
     {
       drawYouWin();
-      
     }
     else if (mode == -1)
     {
+
       drawYouLose();
-      
-  
       
     }
       else
@@ -186,15 +185,15 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
           i+=0.03;
       }
 
-
+  //game over si le perso touche un ennemi ou un obstacle
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
-			printf("GAME OVER\n");
         mode = -1;
 		
 		}
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy touched\n");
+      score+=20;
 		}
 
 
@@ -204,6 +203,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
         Mix_PlayChannel(2, sound2, 0);
         game.player->bonus-=1;
         printf("nb bonus: %d\n", game.player->bonus);
+        score+=10;
       }
     }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
