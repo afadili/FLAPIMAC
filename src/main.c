@@ -15,7 +15,7 @@
 
 int img_width, img_height;
 int mode =0;
-int score = 0;
+float score = 0;
 char * textureDir="img/";
 GLuint textures[NBTEXTURES];
 Mix_Chunk *sound1;
@@ -195,7 +195,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy touched\n");
       score+=20;
-      printf("score : %d", score);
+      printf("score : %f", score);
 
 		}
 
@@ -207,7 +207,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
         game.player->bonus-=1;
         printf("nb bonus: %d\n", game.player->bonus);
         score+=10;
-        printf("score : %d", score);
+        printf("score : %f", score);
 
       }
     }
@@ -220,6 +220,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       Mix_PlayChannel(4, sound4, 0);
       game.player->bonus += 3;
       printf("bonus added!\n");
+      score+=5;
       printf("nb bonus: %d\n", game.player->bonus);
     }
 
@@ -227,7 +228,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     {
 
 			printf("YOU WON\n");
-      printf("score : %d\n", score);
+      printf("score : %f\n", score);
 
       mode = 2;
 			//break;
@@ -287,6 +288,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
+          score-=0.5;
            Mix_PlayChannel(1, sound1, 0);
           addProjectilesToList(allocEntite(1,0,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
           //game.listProjectiles->x++;
