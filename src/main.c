@@ -190,10 +190,10 @@ char * textureDir="img/";
 
     if(game.player->bonus != 0)
     {
-       if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
-      Mix_PlayChannel(2, sound2, 0);
-    }
-   
+      if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
+        Mix_PlayChannel(2, sound2, 0);
+        game.player->bonus-=1;
+      }   
     }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
       Mix_PlayChannel(2, sound2, 0);

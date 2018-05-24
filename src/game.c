@@ -119,7 +119,7 @@ int ReadPPM(char * filename, Game *game)
 				    	if (r == 0 && g == 0 && b == 255) /* si c'est bleu on crée un joueur */
 				    	{
                 printf("adding player from ppm !!!!!! \n");
-                addPlayerTolist(allocEntite(3,1,'H',x,y,1,1),&(game->player));;
+                addPlayerTolist(allocEntite(3,6,'H',x,y,1,1),&(game->player));;
 
               }
 
@@ -127,7 +127,7 @@ int ReadPPM(char * filename, Game *game)
 				    	{
                       printf("adding obstacle from ppm !!!!!! \n");
                       printf("x : %d, y : %d\n", x, y);
-				    	       addObstacleToList(allocEntite(3,0,'O',x,y,0,0),  &(game->listObstacle));
+				    	       addObstacleToList(allocEntite(2,0,'O',x,y,0,0),  &(game->listObstacle));
                       printf("adding obstacle done ........\n" );
 				    	}
 				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert on crée un ennemi*/
