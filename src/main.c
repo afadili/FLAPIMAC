@@ -104,12 +104,12 @@ GLuint textures[NBTEXTURES];
     float i = 0;
     //int playerMove =0;
     int mode =0;
-    GLuint textureID=0;
+//GLuint textureID=0;
 
     /*const char* filename = "00_background.png";
 
 
-    /* chargement de l'image d'après le fichier
+     chargement de l'image d'après le fichier
     SDL_Surface* image = IMG_Load(filename);
     if (image == NULL)
     {
@@ -132,53 +132,54 @@ SDL_Color colorBlack = {0, 0, 0};
 text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
 
-  while(loop) {
+  while(loop)
+  {
     //game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
     if (mode==0)
-    {
-      //printf("MENU PRINCIPAL\n");
-      texturedMenu();
+      {
+        //printf("MENU PRINCIPAL\n");
+        texturedMenu();
 
-    //loadPictures(textureID, image);
-    }
-    else
-    {
+      //loadPictures(textureID, image);
+      }
+      else
+      {
 
-            //printf("DEBUT JEU \n");
+              //printf("DEBUT JEU \n");
 
-      moveProjectile((game.listProjectiles));
-        //printf("DEBUT JEU \n");
-        /////////////////////////////////////////////////////////////////////////
-       game.player->x=i;
+        moveProjectile((game.listProjectiles));
+          //printf("DEBUT JEU \n");
+          /////////////////////////////////////////////////////////////////////////
+         game.player->x=i;
 
-         // moveRight(&game.player);
-
-
-        /* Code de dessin */
-
-        glDisable(GL_TEXTURE_2D);
-
-          glPushMatrix();
-          glScalef(20/(float)img_height, 20/(float)img_height,0);
-          glTranslatef(-i,-img_height/2+0.5,0);
-          //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
+           // moveRight(&game.player);
 
 
-          glColor3ub(255,255,255);
-          drawEntite(game.listObstacle); // rouge
-          drawEntite(game.listEnnemi); // vert
-          drawEntite(game.listProjectiles); //noir
-          drawEntite(game.player); // bleu
-          drawEntite(game.listLine); // jaune
-          drawEntite(game.listBonus); // magenta
+          /* Code de dessin */
 
-          //glClear(GL_COLOR_BUFFER_BIT);
-          //glPushMatrix();
-      		//drawSquare(1,0,0); // Dessin d'un carré pour tester
-        glPopMatrix();
-        //////////////////////////////////////////////////////////////////////////
-    }
+          glDisable(GL_TEXTURE_2D);
+
+            glPushMatrix();
+            glScalef(20/(float)img_height, 20/(float)img_height,0);
+            glTranslatef(-i,-img_height/2+0.5,0);
+            //glTranslatef(2 - game.player->x, 0, 0); // Translation du monde pour suivre le joueur
+
+
+            glColor3ub(255,255,255);
+            drawEntite(game.listObstacle); // rouge
+            drawEntite(game.listEnnemi); // vert
+            drawEntite(game.listProjectiles); //noir
+            drawEntite(game.player); // bleu
+            drawEntite(game.listLine); // jaune
+            drawEntite(game.listBonus); // magenta
+
+            //glClear(GL_COLOR_BUFFER_BIT);
+            //glPushMatrix();
+        		//drawSquare(1,0,0); // Dessin d'un carré pour tester
+          glPopMatrix();
+          //////////////////////////////////////////////////////////////////////////
+      }
 
 
     /* Déplacement du joueur
@@ -187,96 +188,88 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 		else if (playerMove == -1)
 			moveDown(&game.player);
 
-    /* Boucle traitant les evenements */
+     Boucle traitant les evenements */
     i+=0.03;
-/* Gestion des collisions */
+    /* Gestion des collisions */
 
-<<<<<<< HEAD
 
-		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
-=======
-		
-
-		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
->>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
-			printf("GAME OVER\n");
-			break;
-		}
-		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
-      Mix_PlayChannel(3, sound3, 0);
-			printf("enemy dead\n");
-		}
-<<<<<<< HEAD
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
-=======
-
-    if(game.player->bonus != 0)
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle)))
     {
-      if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
-        Mix_PlayChannel(2, sound2, 0);
-        game.player->bonus-=1;
-        printf("nb bonus: %d\n", game.player->bonus);
-      }   
-    }
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
->>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
-      Mix_PlayChannel(2, sound2, 0);
-			printf("projectile crashed\n");
-		}
+  		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle)))
+      {
+    			printf("GAME OVER\n");
+    			break;
+  		}
+  		if (checkCollision(game.listProjectiles, &(game.listEnnemi)))
+      {
+          Mix_PlayChannel(3, sound3, 0);
+    			printf("enemy dead\n");
+    	}
 
-<<<<<<< HEAD
-    if (checkCollision(game.player, &(game.listBonus))) {
-=======
+  		if (checkCollision(game.listObstacle, &(game.listProjectiles)))
+      {
+        if(game.player->bonus != 0)
+        {
+          if (checkCollision(game.listProjectiles, &(game.listObstacle)))
+          {
+            Mix_PlayChannel(2, sound2, 0);
+            game.player->bonus-=1;
+            printf("nb bonus: %d\n", game.player->bonus);
+          }
+        }
+		      if (checkCollision(game.listObstacle, &(game.listProjectiles)))
+          {
+            Mix_PlayChannel(2, sound2, 0);
+			      printf("projectile crashed\n");
+		      }
+          if (checkCollision(game.player, &(game.listBonus)))
+          {
+            if (checkCollision(game.player, &(game.listBonus)))
+            {
+              // effet du bonusgame.player
+              Mix_PlayChannel(4, sound4, 0);
+              game.player->bonus += 5;
+              printf("bonus added!\n");
+              printf("nb bonus: %d\n", game.player->bonus);
+            }
+		        if (checkCollision(game.player, &(game.listLine)))
+            {
+			        printf("YOU WON\n");
+			        break;
+		        }
+            if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1)
+            {
+              moveEnnemi(&(game.listEnnemi), &(game.listProjectiles));
+            }
 
-    if (checkCollision(game.player, &(game.listBonus))) { 
->>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
-      // effet du bonusgame.player
-      Mix_PlayChannel(4, sound4, 0);
-      game.player->bonus += 5;
-      printf("bonus added!\n");
-      printf("nb bonus: %d\n", game.player->bonus);
-    }
 
-		if (checkCollision(game.player, &(game.listLine))) {
-
-			printf("YOU WON\n");
-			break;
-		}
-
-    if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
-     moveEnnemi(&(game.listEnnemi), &(game.listProjectiles));
-    }
-
-
-			//moveEnnemiUp(&(game.listEnnemi));
-
-
-
-
-  /*  if (checkCollision(game.player, game.listEnnemi)==1) {
->>>>>>> laurine
-			printf("Niveau terminé !\n");
-			loop=0;
-			break;
-		}*/
-
+			         //moveEnnemiUp(&(game.listEnnemi));
+               /*  if (checkCollision(game.player, game.listEnnemi)==1) {
+                >>>>>>> laurine
+                			printf("Niveau terminé !\n");
+                			loop=0;
+                			break;
+                		}*/
+          }
+        }
+      }
   SDL_Event e;
-  while(SDL_PollEvent(&e)) {
-
+  while(SDL_PollEvent(&e))
+  {
     /* L'utilisateur ferme la fenêtre */
-    if(e.type == SDL_QUIT) {
+    if(e.type == SDL_QUIT)
+    {
       loop = 0;
       break;
     }
     /* Traitement d'evenements :*/
-    switch(e.type) {
-
+    switch(e.type)
+    {
        /*Touche clavier*/
       case SDL_KEYDOWN:
         // printf("touche pressée (code = %d)\n", e.key.keysym.sym);
         switch(e.key.keysym.sym)
         {
-
           case SDLK_q:
             loop = 0;
             break;
@@ -296,7 +289,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
             // déplacement du joueur non automatisé
             /*case SDLK_LEFT:
-            /* le player bouge en bas
+             le player bouge en bas
             moveLeft(&game.player);
             //playerMove = -1;
             printf("posX : %f\n",  game.player->x );
@@ -342,18 +335,18 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
   Uint32 elapsedTime = SDL_GetTicks() - startTime;
 
   /* Si trop peu de temps s'est écoulé, on met en pause le programme */
-  if(elapsedTime < FRAMERATE_MILLISECONDS) {
+  if(elapsedTime < FRAMERATE_MILLISECONDS)
+  {
     SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
   }
 }
-
   /* Liberation des ressources associées à la SDL */
   Mix_FreeMusic(music); //Libération de la musique
   Mix_FreeChunk(sound1);
   Mix_FreeChunk(sound2);
   Mix_FreeChunk(sound3);
   Mix_CloseAudio();
-  /*TTF_CloseFont(police); 
+  /*TTF_CloseFont(police);
   TTF_Quit();*/
   SDL_Quit();
 

@@ -1,4 +1,4 @@
-  #ifndef DISPLAY__H
+#ifndef DISPLAY__H
 #define DISPLAY__H
 #include <SDL/SDL.h>
 #include <GL/gl.h>
