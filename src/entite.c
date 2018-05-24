@@ -7,7 +7,7 @@
 // on initialise les champs avec les valeurs x,y,type,life,bBox passées en paramètre
 
 
- Entite* allocEntite(int life, char type, float x, float y, float speedMove_y, float speedMove_x/*, bBox box*/)
+ Entite* allocEntite(int life, int bonus, char type, float x, float y, float speedMove_y, float speedMove_x/*, bBox box*/)
  {
    Entite* entite;
    entite = malloc(sizeof(Entite));
@@ -16,6 +16,7 @@
        printf("Allocation error !\n");
      }
      entite->life = life;
+     entite->bonus = bonus;
      entite->type = type;
      entite->x = x;
      entite->y = y;
@@ -113,7 +114,11 @@ int checkCollision(listEntite e1, listEntite* e2) {
 
 				if(((*e2)->type == 'E') && e1->type == 'P')
 				{
-					removeEnnemiFromList(tmp2, &((*e2)));
+          tmp2->life-=1;
+          if(tmp2->life <= 0)
+          {
+            removeEnnemiFromList(tmp2, &((*e2)));
+          }	
 				}
         if(((*e2)->type == 'B') && e1->type == 'H')
         {
@@ -132,6 +137,16 @@ int checkCollision(listEntite e1, listEntite* e2) {
 				{
 					removeProjectilesFromList(tmp2, &((*e2)));
 				}
+        if((e1->type == 'P') && ((*e2)->type == 'O'))
+        {
+          tmp2->life-=1;
+          if(tmp2->life == 0)
+          {
+            //removeProjectilesFromList(e1, &(tmp1));
+            removeObstacleFromList(tmp2, &((*e2)));
+          }
+          
+        }
 				return 1;
 			}
 			e1 = e1->nextEntite;

@@ -2,6 +2,7 @@
 #include "main.h"
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -15,7 +16,8 @@
 int img_width, img_height;
 int mode =0;
 char * textureDir="img/";
- GLuint textures[NBTEXTURES];
+GLuint textures[NBTEXTURES];
+//SDL_Surface *text = NULL;
 
  int main ()
 
@@ -118,6 +120,18 @@ char * textureDir="img/";
     loadTexture(textureDir,textures);
     printf("Pictures loaded success ! \n");
 
+
+   /* if(TTF_Init() == -1)
+{
+    fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+    exit(EXIT_FAILURE);
+}
+TTF_Font *police = NULL;
+police = TTF_OpenFont("./ttf/KrabbyPatty.ttf", 65);
+SDL_Color colorBlack = {0, 0, 0};
+text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
+
+
   while(loop) {
     //game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
@@ -177,8 +191,14 @@ char * textureDir="img/";
     i+=0.03;
 /* Gestion des collisions */
 
+<<<<<<< HEAD
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
+=======
+		
+
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
+>>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
 			printf("GAME OVER\n");
 			break;
 		}
@@ -186,15 +206,35 @@ char * textureDir="img/";
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy dead\n");
 		}
+<<<<<<< HEAD
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
+=======
+
+    if(game.player->bonus != 0)
+    {
+      if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
+        Mix_PlayChannel(2, sound2, 0);
+        game.player->bonus-=1;
+        printf("nb bonus: %d\n", game.player->bonus);
+      }   
+    }
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+>>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
 
+<<<<<<< HEAD
     if (checkCollision(game.player, &(game.listBonus))) {
+=======
+
+    if (checkCollision(game.player, &(game.listBonus))) { 
+>>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
       // effet du bonusgame.player
       Mix_PlayChannel(4, sound4, 0);
+      game.player->bonus += 5;
       printf("bonus added!\n");
+      printf("nb bonus: %d\n", game.player->bonus);
     }
 
 		if (checkCollision(game.player, &(game.listLine))) {
@@ -204,7 +244,7 @@ char * textureDir="img/";
 		}
 
     if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
-      moveEnnemi(&(game.listEnnemi));
+     moveEnnemi(&(game.listEnnemi), &(game.listProjectiles));
     }
 
 
@@ -271,7 +311,7 @@ char * textureDir="img/";
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
            Mix_PlayChannel(1, sound1, 0);
-          addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
+          addProjectilesToList(allocEntite(1,0,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
           //game.listProjectiles->x++;
             // Déclenchement du tir
             break;
@@ -313,6 +353,8 @@ char * textureDir="img/";
   Mix_FreeChunk(sound2);
   Mix_FreeChunk(sound3);
   Mix_CloseAudio();
+  /*TTF_CloseFont(police); 
+  TTF_Quit();*/
   SDL_Quit();
 
    return EXIT_SUCCESS;

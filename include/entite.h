@@ -20,6 +20,7 @@ typedef struct boundingBox{
 typedef struct entite
 {
   int life; // nombre de vies
+  int bonus;
   char type; // (H pour hero, E pour ennemi, O pour obstacle, P pour projectile, L pour line)
   float x,y; // position de l'entité
   float speedMove_x, speedMove_y; // vitesse de l'entité par rapport à l'axe des x et celui des y
@@ -29,7 +30,7 @@ typedef struct entite
 
 
 // fonctions de gestion de l'entité
- Entite* allocEntite(int life, char type, float x, float y, float speedMove_x, float speedMove_y/*, bBox box*/);
+ Entite* allocEntite(int life, int bonus, char type, float x, float y, float speedMove_x, float speedMove_y/*, bBox box*/);
 
 
 // Fonction qui ajoute une entité de type obstacle à la liste d'obstacles

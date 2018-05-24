@@ -53,14 +53,21 @@ void moveProjectile(Projectiles projectile)
 {
   while (projectile != NULL)
   {
-    projectile->x+=1;
-    projectile = projectile->nextEntite;
+  	if(projectile->type == 'P')
+    {
+    	projectile->x+=1;
+	}
+	else 
+	{
+		projectile->x-=1;
+	}
+	projectile = projectile->nextEntite;
   }
 
 }
 
 
-void moveEnnemi(listEntite* ennemi){
+void moveEnnemi(listEntite* ennemi, listEntite* projectile){
   
   listEntite tmp = *ennemi;
   while (tmp != NULL)
@@ -69,8 +76,11 @@ void moveEnnemi(listEntite* ennemi){
   {
     //moveEnnemiDown(ennemi);
     tmp->speedMove_y = -tmp->speedMove_y;
+   
   }
+  // addProjectilesToList(allocEntite(1,'M',tmp->x,tmp->y,0,0), projectile);
     tmp->y += tmp->speedMove_y;
+
     tmp = tmp->nextEntite;
 }
  
