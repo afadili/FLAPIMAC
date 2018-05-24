@@ -191,14 +191,8 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     i+=0.03;
 /* Gestion des collisions */
 
-<<<<<<< HEAD
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
-=======
-		
-
-		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
->>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
 			printf("GAME OVER\n");
 			break;
 		}
@@ -206,9 +200,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy touched\n");
 		}
-<<<<<<< HEAD
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
-=======
+
 
     if(game.player->bonus != 0)
     {
@@ -219,18 +211,11 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       }   
     }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
->>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
 
-<<<<<<< HEAD
     if (checkCollision(game.player, &(game.listBonus))) {
-=======
-
-    if (checkCollision(game.player, &(game.listBonus))) { 
->>>>>>> 02978b474761d5a7f42396d9b59486b73fe22b0a
-      // effet du bonusgame.player
       Mix_PlayChannel(4, sound4, 0);
       game.player->bonus += 3;
       printf("bonus added!\n");
