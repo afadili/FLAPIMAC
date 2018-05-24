@@ -178,6 +178,7 @@ char * textureDir="img/";
 /* Gestion des collisions */
 
 		
+
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) { 
 			printf("GAME OVER\n");
 			break;
@@ -186,10 +187,19 @@ char * textureDir="img/";
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy dead\n");
 		}
+
+    if(game.player->bonus != 0)
+    {
+       if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
+      Mix_PlayChannel(2, sound2, 0);
+    }
+   
+    }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
+
 
     if (checkCollision(game.player, &(game.listBonus))) { 
       // effet du bonusgame.player
@@ -204,7 +214,7 @@ char * textureDir="img/";
 		}
 
     if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
-      moveEnnemi(&(game.listEnnemi));
+     moveEnnemi(&(game.listEnnemi), &(game.listProjectiles));
     }
 
 
@@ -271,7 +281,7 @@ char * textureDir="img/";
           case SDLK_SPACE:
           printf("Déclenchement des tirs !!! \n");
            Mix_PlayChannel(1, sound1, 0);
-          addProjectilesToList(allocEntite(1,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
+          addProjectilesToList(allocEntite(1,0,'P',game.player->x,game.player->y,0,0),&(game.listProjectiles));
           //game.listProjectiles->x++;
             // Déclenchement du tir
             break;

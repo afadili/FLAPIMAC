@@ -119,7 +119,7 @@ int ReadPPM(char * filename, Game *game)
 				    	if (r == 0 && g == 0 && b == 255) /* si c'est bleu on crée un joueur */
 				    	{
                 printf("adding player from ppm !!!!!! \n");
-                addPlayerTolist(allocEntite(3,'H',x,y,1,1),&(game->player));;
+                addPlayerTolist(allocEntite(3,1,'H',x,y,1,1),&(game->player));;
 
               }
 
@@ -127,32 +127,32 @@ int ReadPPM(char * filename, Game *game)
 				    	{
                       printf("adding obstacle from ppm !!!!!! \n");
                       printf("x : %d, y : %d\n", x, y);
-				    	       addObstacleToList(allocEntite(1,'O',x,y,0,0),  &(game->listObstacle));
+				    	       addObstacleToList(allocEntite(3,0,'O',x,y,0,0),  &(game->listObstacle));
                       printf("adding obstacle done ........\n" );
 				    	}
 				    	if (r == 0 && g == 255 && b == 0) /* si c'est vert on crée un ennemi*/
 				    	{
                         printf("adding ennemi from ppm !!!!!! \n");
-				    	        addEnnemiToList(allocEntite(3,'E',x,y,0.1,0.1), &(game->listEnnemi));
+				    	        addEnnemiToList(allocEntite(3,0,'E',x,y,0.1,0.1), &(game->listEnnemi));
 
 				    	}
               if (r == 0 && g == 0 && b == 0) /* si c'est noir on crée un projectile */
               {
                       printf("adding projectile from ppm !!!!!! \n");
-                    addProjectilesToList(allocEntite(1,'P',x,y,0,0), &(game->listProjectiles));
+                    addProjectilesToList(allocEntite(1,0,'P',x,y,0,0), &(game->listProjectiles));
 
               }
                if (r == 255 && g == 255 && b == 0) /* si c'est jaune on crée la ligne d'arrivée */
               {
                       printf("adding final line from ppm !!!!!! \n");
-                      addLineToList(allocEntite(1,'L',x,y,0,0), &(game->listLine));
+                      addLineToList(allocEntite(1,0,'L',x,y,0,0), &(game->listLine));
 
               }
 
               if (r == 255 && g == 0 && b == 255) /* si c'est magenta on crée un bonus */
               {
                       printf("adding bonus from ppm !!!!!! \n");
-                      addBonusToList(allocEntite(1,'B',x,y,0,0), &(game->listBonus));
+                      addBonusToList(allocEntite(1,0,'B',x,y,0,0), &(game->listBonus));
 
               }
         }
