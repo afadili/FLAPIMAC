@@ -2,6 +2,7 @@
 #include "main.h"
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
 #include "entite.h"
 #include "display.h"
 #include "game.h"
@@ -15,7 +16,8 @@
 int img_width, img_height;
 int mode =0;
 char * textureDir="img/";
- GLuint textures[NBTEXTURES];
+GLuint textures[NBTEXTURES];
+//SDL_Surface *text = NULL;
 
  int main ()
 
@@ -118,6 +120,18 @@ char * textureDir="img/";
     loadTexture(textureDir,textures);
     printf("Pictures loaded success ! \n");
 
+
+   /* if(TTF_Init() == -1)
+{
+    fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+    exit(EXIT_FAILURE);
+}
+TTF_Font *police = NULL;
+police = TTF_OpenFont("./ttf/KrabbyPatty.ttf", 65);
+SDL_Color colorBlack = {0, 0, 0};
+text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
+
+
   while(loop) {
     //game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
@@ -193,6 +207,7 @@ char * textureDir="img/";
       if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
         Mix_PlayChannel(2, sound2, 0);
         game.player->bonus-=1;
+        printf("nb bonus: %d\n", game.player->bonus);
       }   
     }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
@@ -204,7 +219,9 @@ char * textureDir="img/";
     if (checkCollision(game.player, &(game.listBonus))) { 
       // effet du bonusgame.player
       Mix_PlayChannel(4, sound4, 0);
+      game.player->bonus += 1;
       printf("bonus added!\n");
+      printf("nb bonus: %d\n", game.player->bonus);
     }
 
 		if (checkCollision(game.player, &(game.listLine))) { 
@@ -323,6 +340,8 @@ char * textureDir="img/";
   Mix_FreeChunk(sound2);
   Mix_FreeChunk(sound3);
   Mix_CloseAudio();
+  /*TTF_CloseFont(police); 
+  TTF_Quit();*/
   SDL_Quit();
 
    return EXIT_SUCCESS;
