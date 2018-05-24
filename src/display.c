@@ -234,6 +234,7 @@ void drawEntite(listEntite entite)
                r = 255;
                g = 0;
                b = 255;
+               drawBonus(entite);
                break;
            default:
                break;
@@ -306,6 +307,14 @@ void drawLine(Line line)
     glPushMatrix();
     glTranslatef(line->x, line->y, 0);
     drawTexturedSquare(02);
+    glPopMatrix();
+}
+
+void drawBonus(Bonus bonus)
+{
+    glPushMatrix();
+    glTranslatef(bonus->x, bonus->y, 0);
+    drawTexturedSquare(05);
     glPopMatrix();
 }
 

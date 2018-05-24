@@ -48,6 +48,8 @@ void drawBG();
   void drawEnnemi(Ennemi ennemi);
   void drawProj(Projectiles proj);
   void drawLine(Line line);
+  void drawBonus(Bonus bonus);
+
 
 //  void loadTexture(int full, char* filename);
 
