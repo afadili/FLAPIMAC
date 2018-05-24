@@ -37,7 +37,7 @@ GLuint textures[NBTEXTURES];
    //addPlayerTolist(allocEntite(3,'H',0,0,0,0),&(game.player));
    //addObstacleToList(allocEntite(1,'O',1,1,0,0),  &(game.listObstacle));
 
-    if (!ReadPPM("map6.ppm", &game)) {
+    if (!ReadPPM("ppm/map6.ppm", &game)) {
       printf("err en lisant le ppm\n" );
       return EXIT_FAILURE;
     }
@@ -62,7 +62,7 @@ GLuint textures[NBTEXTURES];
   		fprintf(stderr, "Impossible d'ouvrir la fenetre. Fin du programme.\n");
   		return EXIT_FAILURE;
   	}
-	SDL_WM_SetCaption("Flapimac", NULL);
+	SDL_WM_SetCaption("Bobimac", NULL);
 
 
 
@@ -146,10 +146,13 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     else if (mode == 2)
     {
       drawYouWin();
+      
     }
     else if (mode == -1)
     {
       drawYouLose();
+  
+      
     }
       else
       {
@@ -209,7 +212,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
 			printf("GAME OVER\n");
         mode = -1;
-			//break;
+		
 		}
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
       Mix_PlayChannel(3, sound3, 0);
@@ -373,7 +376,16 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
             //game.listProjectiles->x+=10;
           case SDLK_ESCAPE:
-          mode = 1;
+          if(mode== -1){
+            mode = -1;
+          }
+          else {
+            if(mode== 2){
+            mode = 2;
+          }
+          else
+              mode = 1;
+          }
           break;
 
           default:

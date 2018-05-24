@@ -291,7 +291,7 @@ void drawEnnemi(Ennemi ennemi)
 {
     glPushMatrix();
     glTranslatef(ennemi->x, ennemi->y, 0);
-    drawTexturedSquare(03);
+    drawTexturedSquare(3);
     glPopMatrix();
 }
 
@@ -299,7 +299,7 @@ void drawProj(Projectiles proj)
 {
     glPushMatrix();
     glTranslatef(proj->x, proj->y, 0);
-    drawTexturedSquare(05);
+    drawTexturedSquare(5);
     glPopMatrix();
 }
 
@@ -307,7 +307,7 @@ void drawLine(Line line)
 {
     glPushMatrix();
     glTranslatef(line->x, line->y, 0);
-    drawTexturedSquare(07);
+    drawTexturedSquare(7);
     glPopMatrix();
 }
 
@@ -317,7 +317,7 @@ void drawBonus(Bonus bonus)
 {
     glPushMatrix();
     glTranslatef(bonus->x, bonus->y, 0);
-    drawTexturedSquare(06);
+    drawTexturedSquare(6);
     glPopMatrix();
 }
 
