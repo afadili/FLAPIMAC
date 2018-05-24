@@ -199,7 +199,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 		}
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) { 
       Mix_PlayChannel(3, sound3, 0);
-			printf("enemy dead\n");
+			printf("enemy touched\n");
 		}
 
     if(game.player->bonus != 0)
@@ -219,7 +219,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     if (checkCollision(game.player, &(game.listBonus))) { 
       // effet du bonusgame.player
       Mix_PlayChannel(4, sound4, 0);
-      game.player->bonus += 5;
+      game.player->bonus += 3;
       printf("bonus added!\n");
       printf("nb bonus: %d\n", game.player->bonus);
     }
