@@ -41,8 +41,7 @@ void drawEntite(listEntite entite);
 /* Fonction qui dessine le backgroud du jeu */
 void drawBG();
 
-  //void drawSquareTexture(int full, char* filename);
-
+// Les fonctions qui dessinent chaque entité du jeu avec sa texture correspondante
   void drawPlayer(Hero player);
   void drawObstacle(Obstacle obstacle);
   void drawEnnemi(Ennemi ennemi);
@@ -52,17 +51,19 @@ void drawBG();
   void drawYouWin();
   void drawYouLose();
 
-//  void loadTexture(int full, char* filename);
-
+  // Fonction qui retourne l'ID d'un fichier d'après son nom
   int getImgId(char* filename);
+
+  // Fonction qui charge toutes les textures d'un dossier donné et retourne un tableau de ces textures
   int loadTexture(char* directory, GLuint textureID[]);
+
+  // Fonction qui vérifie si une surface SDL est bien chargée
   int loaded(SDL_Surface* image);
+
+  // Fonction qui dessine une texture sur un carré
   void drawTexturedSquare(GLuint textureID) ;
+
+  // Fonction qui dessine le menu du jeu
   void texturedMenu();
-
- //void loadPictures(GLuint textureID, SDL_Surface* image);
-
- //void texturedMenu(GLuint textureID, SDL_Surface* image);
-
 
 #endif

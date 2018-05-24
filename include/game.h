@@ -13,20 +13,21 @@ typedef struct game
 }Game;
 
 /* fonctions de gestion du game */
+
 // fonction qui dessine le game
 void drawGame(Game game);
+
 // fonction qui initialise les listes du game
 void initializeGame(Game *game);
 
 // fonction qui libère le Game
 void freeGame(Game *game);
 
-// fonction qui ajoute une entité au Game
-void addEntiteToGame(Game *game, Entite entite);
+// Fonction qui ajoute la ligne d'arrivée à une liste
+void addLineToList(Entite* entite, Line *liste);
 
-
-// fonction qui supprime une entite du game
-void removeEntiteFromGame(Game *game, Entite *entite);
+// Fonction qui ajoute un bonus à une liste
+void addBonusToList(Entite* entite, Bonus *liste);
 
 // fonction de chargement du level avec la PPM
 int ReadPPM(char * filename,Game *game);

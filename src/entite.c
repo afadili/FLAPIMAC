@@ -30,7 +30,6 @@ Entite* allocEntite(int life, int bonus, char type, float x, float y, float spee
  // Fonction qui ajoute une entité player à la liste
 void addPlayerTolist(Entite* entite, Hero* liste)
 {
-  printf("entre dans la fonction add player to list\n");
   Hero tmp;// on crée une liste tmp pour ne pas perdre le début de la chaine
   tmp = *liste; // le début de la chaine est gardé dans tmp
   if (tmp == NULL) // si la chaine est vide on ajoute l'entité
@@ -102,7 +101,7 @@ void moveEnnemiUpDown(Entite* ennemi){
 }
 
 /* gestion des collisions
-on parcourt nos deux listes pour vérifier si deux éléments de chaque liste entrent en collision 
+on parcourt nos deux listes pour vérifier si deux éléments de chaque liste entrent en collision
 on parcourt d'abord la liste passée en premier paramètre, puis celle passée en second paramètre
 */
 int checkCollision(listEntite e1, listEntite* e2) {
@@ -120,7 +119,7 @@ int checkCollision(listEntite e1, listEntite* e2) {
           {
             removeEnnemiFromList(tmp2, &((*e2)));
             printf("he's dead :(\n");
-          } 
+          }
         }
 
         // si le joueur percute une entité de type bonus, celle-ci est retirée de la liste
@@ -145,7 +144,7 @@ int checkCollision(listEntite e1, listEntite* e2) {
           if(tmp2->life == 0)
           {
             removeObstacleFromList(tmp2, &((*e2)));
-          } 
+          }
         }
         // s'il y a eu une action suite à une collision, on renvoie 1, voir main.c
 				return 1;
@@ -161,7 +160,7 @@ int checkCollision(listEntite e1, listEntite* e2) {
 
 /* Renvoie 1 si les deux éléments entrent en collision, 0 sinon */
 int collision(Entite e1, Entite e2) {
-	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2)) 
+	if((abs(e1.x-e2.x)*2 < 2) && (abs(e1.y-e2.y)*2 < 2))
 	// étant donné qu'on a des carrés de 1x1, on vérifie que les deux carrés passés en paramètre ne se chevauchent pas
 	// si le résultat est inférieur à 2, cela signife que les deux carrés se partagent au moins une coordonnée, et donc qu'il y a collision
 	{
@@ -271,7 +270,7 @@ void removeLineFromList(Entite* entite, Line *liste)
           free(tmp); // on libère la mémoire allouée à l'entité qu'on veut supprimer
         }
 
-   
+
    }
 }
 
@@ -354,4 +353,3 @@ void freeBonusList(Line *liste)
       *liste = next; // on passe à l'élement suivant
     }
 }
-

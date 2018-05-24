@@ -18,9 +18,9 @@ typedef struct boundingBox{
 
 
 /* typiquement, chaque entité possède :
--un nombre de points de vie 
+-un nombre de points de vie
 -un compteur de bonus : 3 points par bonus récupéré qui vont permettre de détruire des obstacles
--un type 
+-un type
 -une position x et y
 -speedMove_x et speedMove_y qui détermine l'ampleur du déplacement de chaque entité
 
@@ -35,11 +35,11 @@ on plusieurs type d'entités :
 */
 typedef struct entite
 {
-  int life; 
+  int life;
   int bonus;
   char type; // (H pour hero, E pour ennemi, O pour obstacle, P pour projectile, L pour line)
   float x,y; // position de l'entité
-  float speedMove_x, speedMove_y; 
+  float speedMove_x, speedMove_y;
   struct entite *nextEntite; // liste chainée d'entitée pour la gestion du Jeu
 }Entite, *listEntite, *Hero, *Obstacle, *Ennemi, *Projectiles, *Line, *Bonus;
 
@@ -109,10 +109,6 @@ int collision(Entite a, Entite b) ;
 
 //on effectue des actions en fonction du type d'éléments entrant en collision
 int checkCollision(listEntite e1, listEntite* e2);
-
-
-
-
 
 
 #endif
