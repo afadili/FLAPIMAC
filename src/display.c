@@ -274,7 +274,8 @@ void drawPlayer(Hero player)
 {
     glPushMatrix();
     glTranslatef(player->x, player->y, 0);
-    drawTexturedSquare(2);
+    drawTexturedSquare(03);
+
     glPopMatrix();
 }
 
@@ -290,7 +291,7 @@ void drawEnnemi(Ennemi ennemi)
 {
     glPushMatrix();
     glTranslatef(ennemi->x, ennemi->y, 0);
-    drawTexturedSquare(03);
+    drawTexturedSquare(07);
     glPopMatrix();
 }
 
@@ -313,12 +314,23 @@ void drawLine(Line line)
 /*void drawBonus(Bonus bonus)
 {
     glPushMatrix();
+<<<<<<< HEAD
     glTranslatef(bonus->x, line->y, 0);
     drawTexturedSquare(07);
     glPopMatrix();
 }
 
  glPushMatrix();
+=======
+    glTranslatef(bonus->x, bonus->y, 0);
+    drawTexturedSquare(6);
+    glPopMatrix();
+
+}
+
+
+/* glPushMatrix();
+>>>>>>> 74fd7db0b28180cfa06ef5ade34a01db3c91206d
  printf("entite %f \n",entite->y);
      glTranslatef(1 + entite->x, 1 + entite->y, 0);
      if (entite->type == 0)

@@ -114,10 +114,13 @@ int checkCollision(listEntite e1, listEntite* e2) {
 
 				if(((*e2)->type == 'E') && e1->type == 'P')
 				{
-          tmp2->life-=1;
-          if(tmp2->life <= 0)
+          tmp2->life = (tmp2->life)-1;
+          printf("VIE ENNEMI%d\n", tmp2->life);
+
+          if(tmp2->life == 0)
           {
             removeEnnemiFromList(tmp2, &((*e2)));
+            printf("ennemy dead!\n");
           }	
 				}
         if(((*e2)->type == 'B') && e1->type == 'H')

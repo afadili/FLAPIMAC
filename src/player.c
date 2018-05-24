@@ -55,11 +55,11 @@ void moveProjectile(Projectiles projectile)
   {
   	if(projectile->type == 'P')
     {
-    	projectile->x+=1;
+    	projectile->x+=0.2;
 	}
 	else 
 	{
-		projectile->x-=1;
+		projectile->x-=0.2;
 	}
 	projectile = projectile->nextEntite;
   }

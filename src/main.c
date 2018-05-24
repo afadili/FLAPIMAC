@@ -190,7 +190,55 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
      Boucle traitant les evenements */
     i+=0.03;
+<<<<<<< HEAD
     /* Gestion des collisions */
+=======
+/* Gestion des collisions */
+
+
+		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
+			printf("GAME OVER\n");
+			break;
+		}
+		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
+      Mix_PlayChannel(3, sound3, 0);
+			printf("enemy touched\n");
+		}
+
+
+    if(game.player->bonus != 0)
+    {
+      if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
+        Mix_PlayChannel(2, sound2, 0);
+        game.player->bonus-=1;
+        printf("nb bonus: %d\n", game.player->bonus);
+      }   
+    }
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+      Mix_PlayChannel(2, sound2, 0);
+			printf("projectile crashed\n");
+		}
+
+    if (checkCollision(game.player, &(game.listBonus))) {
+      Mix_PlayChannel(4, sound4, 0);
+      game.player->bonus += 3;
+      printf("bonus added!\n");
+      printf("nb bonus: %d\n", game.player->bonus);
+    }
+
+		if (checkCollision(game.player, &(game.listLine))) {
+
+			printf("YOU WON\n");
+			break;
+		}
+
+    if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
+     moveEnnemi(&(game.listEnnemi), &(game.listProjectiles));
+    }
+
+
+			//moveEnnemiUp(&(game.listEnnemi));
+>>>>>>> 74fd7db0b28180cfa06ef5ade34a01db3c91206d
 
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle)))
