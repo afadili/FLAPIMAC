@@ -151,6 +151,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
           drawBG();
           //printf("DEBUT JEU \n");
 
+
         moveProjectile((game.listProjectiles));
           //printf("DEBUT JEU \n");
           /////////////////////////////////////////////////////////////////////////
@@ -194,6 +195,8 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       Mix_PlayChannel(3, sound3, 0);
 			printf("enemy touched\n");
       score+=20;
+      printf("score : %d", score);
+
 		}
 
 
@@ -204,6 +207,8 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
         game.player->bonus-=1;
         printf("nb bonus: %d\n", game.player->bonus);
         score+=10;
+        printf("score : %d", score);
+
       }
     }
 		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
@@ -222,6 +227,8 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
     {
 
 			printf("YOU WON\n");
+      printf("score : %d\n", score);
+
       mode = 2;
 			//break;
 		}
