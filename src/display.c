@@ -182,59 +182,60 @@ return 1;
 
 void drawEntite(listEntite entite)
 {
-   int r, g, b;
+  /* int r, g, b;
    r = 0;
    g = 0;
-   b = 0;
+   b = 0;*/
    while (entite != NULL)
     {
        switch (entite->type){
            case 'H': // hero
-               r = 0;
+              /* r = 0;
                g = 0;
-               b = 255;
+               b = 255;*/
                drawPlayer(entite);
                //printf("dessin de la texture dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
         	case 'E': //ennemi
-               r = 0;
+               /*r = 0;
                g = 255;
-               b = 0;
+               b = 0;*/
                drawEnnemi(entite);
 
                //printf("dessin de la texture ENNEMI dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
         	case 'O': // obstacle
-               r = 255;
+               /*r = 255;
                g = 0;
-               b = 0;
+               b = 0;*/
                drawObstacle(entite);
 
                //printf("dessin de la texture OBSTACLE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
         	case 'P': //projectile
-               r = 0;
+               /*r = 0;
                g = 0;
-               b = 0;
+               b = 0;*/
                drawProj(entite);
 
                //printf("dessin de la texture PROJECTILE dans le game !!!!!!!!!!!!!!!!\n");
                //drawTexturedSquare(01);
                break;
         	case 'L': //ligne de fin
-               r = 255;
+               /*r = 255;
                g = 255;
-               b = 0;
+               b = 0;*/
                drawLine(entite);
                break;
 
           case 'B': //bonus
-               r = 255;
+               /*r = 255;
                g = 0;
-               b = 255;
+               b = 255;*/
+               drawBonus(entite);
                break;
            default:
                break;
@@ -274,8 +275,7 @@ void drawPlayer(Hero player)
 {
     glPushMatrix();
     glTranslatef(player->x, player->y, 0);
-    drawTexturedSquare(03);
-
+    drawTexturedSquare(2);
     glPopMatrix();
 }
 
@@ -291,7 +291,7 @@ void drawEnnemi(Ennemi ennemi)
 {
     glPushMatrix();
     glTranslatef(ennemi->x, ennemi->y, 0);
-    drawTexturedSquare(07);
+    drawTexturedSquare(03);
     glPopMatrix();
 }
 
@@ -311,26 +311,50 @@ void drawLine(Line line)
     glPopMatrix();
 }
 
-/*void drawBonus(Bonus bonus)
+
+
+void drawBonus(Bonus bonus)
 {
     glPushMatrix();
-<<<<<<< HEAD
-    glTranslatef(bonus->x, line->y, 0);
-    drawTexturedSquare(07);
-    glPopMatrix();
-}
-
- glPushMatrix();
-=======
     glTranslatef(bonus->x, bonus->y, 0);
-    drawTexturedSquare(6);
+    drawTexturedSquare(06);
     glPopMatrix();
-
 }
 
+void drawBG()
+{
+  // Code de dessin
+  glPushMatrix();
+  //glTranslatef(WINDOW_WIDTH,WINDOW_HEIGHT,0);
+  glScalef(20,20,1);
+   drawTexturedSquare(8);
+  glPopMatrix();
+  // Fin du code de dessin
+}
 
-/* glPushMatrix();
->>>>>>> 74fd7db0b28180cfa06ef5ade34a01db3c91206d
+void drawYouWin()
+{
+  // Code de dessin
+  glPushMatrix();
+  //glTranslatef(WINDOW_WIDTH,WINDOW_HEIGHT,0);
+  glScalef(20,20,1);
+   drawTexturedSquare(10);
+  glPopMatrix();
+  // Fin du code de dessin
+}
+
+void drawYouLose()
+{
+  // Code de dessin
+  glPushMatrix();
+  //glTranslatef(WINDOW_WIDTH,WINDOW_HEIGHT,0);
+  glScalef(20,20,1);
+   drawTexturedSquare(9);
+  glPopMatrix();
+  // Fin du code de dessin
+}
+
+ /*glPushMatrix();
  printf("entite %f \n",entite->y);
      glTranslatef(1 + entite->x, 1 + entite->y, 0);
      if (entite->type == 0)

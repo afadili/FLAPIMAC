@@ -49,7 +49,8 @@ void drawBG();
   void drawProj(Projectiles proj);
   void drawLine(Line line);
   void drawBonus(Bonus bonus);
-
+  void drawYouWin();
+  void drawYouLose();
 
 //  void loadTexture(int full, char* filename);
 

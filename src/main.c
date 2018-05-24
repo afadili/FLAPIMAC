@@ -136,17 +136,25 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
   {
     //game.player->x=i;
     glClear(GL_COLOR_BUFFER_BIT); // Toujours commencer par clear le buffer
-    if (mode==0)
+    if (mode == 0)
       {
         //printf("MENU PRINCIPAL\n");
         texturedMenu();
 
       //loadPictures(textureID, image);
       }
+    else if (mode == 2)
+    {
+      drawYouWin();
+    }
+    else if (mode == -1)
+    {
+      drawYouLose();
+    }
       else
       {
-
-              //printf("DEBUT JEU \n");
+          drawBG();
+          printf("DEBUT JEU \n");
 
         moveProjectile((game.listProjectiles));
           //printf("DEBUT JEU \n");
@@ -179,6 +187,7 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
         		//drawSquare(1,0,0); // Dessin d'un carré pour tester
           glPopMatrix();
           //////////////////////////////////////////////////////////////////////////
+          i+=0.03;
       }
 
 
@@ -189,16 +198,18 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 			moveDown(&game.player);
 
      Boucle traitant les evenements */
-    i+=0.03;
-<<<<<<< HEAD
+
+
     /* Gestion des collisions */
-=======
+
 /* Gestion des collisions */
 
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle))) {
+
 			printf("GAME OVER\n");
-			break;
+        mode = -1;
+			//break;
 		}
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
       Mix_PlayChannel(3, sound3, 0);
@@ -208,13 +219,13 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
     if(game.player->bonus != 0)
     {
-      if (checkCollision(game.listProjectiles, &(game.listObstacle))) { 
+      if (checkCollision(game.listProjectiles, &(game.listObstacle))) {
         Mix_PlayChannel(2, sound2, 0);
         game.player->bonus-=1;
         printf("nb bonus: %d\n", game.player->bonus);
-      }   
+      }
     }
-		if (checkCollision(game.listObstacle, &(game.listProjectiles))) { 
+		if (checkCollision(game.listObstacle, &(game.listProjectiles))) {
       Mix_PlayChannel(2, sound2, 0);
 			printf("projectile crashed\n");
 		}
@@ -226,10 +237,12 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
       printf("nb bonus: %d\n", game.player->bonus);
     }
 
-		if (checkCollision(game.player, &(game.listLine))) {
+		if (checkCollision(game.player, &(game.listLine)))
+    {
 
 			printf("YOU WON\n");
-			break;
+      mode = 2;
+			//break;
 		}
 
     if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1){
@@ -238,7 +251,6 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 
 
 			//moveEnnemiUp(&(game.listEnnemi));
->>>>>>> 74fd7db0b28180cfa06ef5ade34a01db3c91206d
 
 
 		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle)))
@@ -246,7 +258,8 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
   		if (checkCollision(game.player, &(game.listEnnemi)) || checkCollision(game.player, &(game.listObstacle)))
       {
     			printf("GAME OVER\n");
-    			break;
+          mode = -1;
+    			//break;
   		}
   		if (checkCollision(game.listProjectiles, &(game.listEnnemi)))
       {
@@ -283,7 +296,8 @@ text = TTF_RenderText_Blended(police, "BONUS", colorBlack);*/
 		        if (checkCollision(game.player, &(game.listLine)))
             {
 			        printf("YOU WON\n");
-			        break;
+              mode = 2;
+			        //break;
 		        }
             if(checkCollision(game.listObstacle, &(game.listEnnemi))!=1)
             {
