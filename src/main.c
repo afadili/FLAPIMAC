@@ -136,7 +136,7 @@ Mix_Music *music;
 		if (checkCollision(game.listProjectiles, &(game.listEnnemi))) {
       Mix_PlayChannel(3, sound3, 0);
       score+=20;
-      printf("score : %f", score);
+      printf("score : %.2f\n", score);
 		}
 
 
@@ -147,7 +147,7 @@ Mix_Music *music;
         game.player->bonus-=1;
         printf("nb bonus: %d\n", game.player->bonus);
         score+=10;
-        printf("score : %f", score);
+        printf("score : %.2f\n", score);
 
       }
     }
@@ -165,7 +165,7 @@ Mix_Music *music;
 
 		if (checkCollision(game.player, &(game.listLine)))
     {
-      printf("score : %f\n", score);
+      printf("score : %.2f\n", score);
       mode = 2;
 		}
 
